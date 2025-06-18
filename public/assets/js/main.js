@@ -3,7 +3,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Initialize animations when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // CommonElements.init('home');
     initAnimations();
     initMagneticButtons();
 });

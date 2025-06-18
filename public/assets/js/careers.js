@@ -1,7 +1,6 @@
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', function() {
-    // CommonElements.init('careers');
     initCareersAnimations();
     initMagneticButtons();
 

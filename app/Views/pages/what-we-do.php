@@ -104,21 +104,72 @@
             
             <div class="container text-center z-10">
                 <h1 class="hero-title text-6xl md:text-8xl font-bold mb-6">
-                    What We
-                    <br />
+                    <?= esc($heroContent['title']) ?>
+                    <!-- <br /> -->
                     <span class="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
                         Do
                     </span>
                 </h1>
                 <p class="hero-subtitle text-xl text-gray-400 max-w-3xl mx-auto">
-                    We provide comprehensive digital marketing solutions that transform brands 
-                    and drive measurable business growth through strategic creativity.
+<?= esc($heroContent['description']) ?>
                 </p>
             </div>
         </section>
 
         <!-- Service Sections -->
-        <div id="services-container"></div>
+       <div id="services-container">
+    <?php foreach ($services as $index => $service): ?>
+        <section class="service-section py-20 <?= $index % 2 === 0 ? 'bg-gray-900' : 'bg-black' ?>" data-service="<?= nl2br(esc($service['id'])) ?>">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center <?= $service['isReversed'] ? 'lg:grid-flow-col-dense' : '' ?>">
+                    
+                    <!-- Content Section -->
+                    <div class="service-content <?= $service['isReversed'] ? 'lg:col-start-2' : '' ?>" data-content="<?= esc($service['id']) ?>">
+                        <div class="text-6xl mb-6 service-icon" data-icon="<?= esc($service['id']) ?>"><?= esc($service['icon']) ?></div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 service-title" data-title="<?= esc($service['id']) ?>">
+                            <?= esc($service['title']) ?>
+                        </h2>
+                        <p class="text-xl text-gray-300 mb-8 service-description" data-description="<?= esc($service['id']) ?>">
+                            <?= esc($service['description']) ?>
+                        </p>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                            <?php foreach ($service['features'] as $featureIndex => $feature): ?>
+                                <div class="service-feature flex items-center text-gray-400" data-feature="<?= esc($service['id']) ?>-<?= $featureIndex ?>">
+                                    <div class="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></div>
+                                    <span><?= esc($feature) ?></span>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <button class="service-cta bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+                            data-cta="<?= esc($service['id']) ?>">
+                            Learn More
+                        </button>
+                    </div>
+
+                    <!-- Image Section -->
+                    <div class="service-image-container <?= $service['isReversed'] ? 'lg:col-start-1' : '' ?>" data-image-container="<?= esc($service['id']) ?>">
+                        <div class="relative group">
+                            <div class="service-image-wrapper overflow-hidden rounded-2xl shadow-2xl" data-image-wrapper="<?= esc($service['id']) ?>">
+                                <img 
+                                    src="<?= esc($service['image']) ?>" 
+                                    alt="<?= esc($service['title']) ?>"
+                                    class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110"
+                                    data-image="<?= esc($service['id']) ?>"
+                                >
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </div>
+                            <div class="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-glow="<?= esc($service['id']) ?>"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    <?php endforeach; ?>
+</div>
+
 
         <!-- Process Section -->
         <section class="py-20 bg-black">
@@ -126,26 +177,15 @@
                 <h2 class="section-title text-4xl md:text-6xl font-bold text-center mb-16">Our Process</h2>
                 
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div class="process-step text-center" data-step="1">
-                        <div class="text-4xl font-bold text-blue-400 mb-4">01</div>
-                        <h3 class="text-xl font-semibold mb-4">Discovery</h3>
-                        <p class="text-gray-400">Understanding your brand, audience, and objectives</p>
+
+<?php foreach($workflow as $index =>$item) :?>
+     <div class="process-step text-center" data-step='<?= esc($index) ?>'>
+                        <div class="text-4xl font-bold text-blue-400 mb-4"><?= esc($item['step']) ?></div>
+                        <h3 class="text-xl font-semibold mb-4"><?= esc($item['title']) ?></h3>
+                        <p class="text-gray-400"><?= esc($item['description']) ?></p>
                     </div>
-                    <div class="process-step text-center" data-step="2">
-                        <div class="text-4xl font-bold text-blue-400 mb-4">02</div>
-                        <h3 class="text-xl font-semibold mb-4">Strategy</h3>
-                        <p class="text-gray-400">Developing a comprehensive roadmap for success</p>
-                    </div>
-                    <div class="process-step text-center" data-step="3">
-                        <div class="text-4xl font-bold text-blue-400 mb-4">03</div>
-                        <h3 class="text-xl font-semibold mb-4">Creation</h3>
-                        <p class="text-gray-400">Bringing ideas to life with exceptional execution</p>
-                    </div>
-                    <div class="process-step text-center" data-step="4">
-                        <div class="text-4xl font-bold text-blue-400 mb-4">04</div>
-                        <h3 class="text-xl font-semibold mb-4">Optimization</h3>
-                        <p class="text-gray-400">Continuously improving based on data and insights</p>
-                    </div>
+ <?php endforeach;?>   
+
                 </div>
             </div>
         </section>

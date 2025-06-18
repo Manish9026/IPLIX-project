@@ -4,10 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Wait for dynamic content to be rendered first
     setTimeout(() => {
         initOurWorkAnimations();
-        // initNavigation();
-    // CommonElements.init('careers');
-
-        initMobileMenu();
+        animateWorkCards();
     }, 100);
 });
 
@@ -133,64 +130,3 @@ function animateWorkCards() {
     });
 }
 
-function initNavigation() {
-    const navbar = document.getElementById('navbar');
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            gsap.to(navbar, {
-                backgroundColor: 'rgba(0, 0, 0, 0.9)',
-                backdropFilter: 'blur(10px)',
-                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                duration: 0.3
-            });
-        } else {
-            gsap.to(navbar, {
-                backgroundColor: 'transparent',
-                backdropFilter: 'none',
-                borderBottom: 'none',
-                duration: 0.3
-            });
-        }
-    });
-}
-
-function initMobileMenu() {
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    let isMenuOpen = false;
-
-    mobileMenuBtn.addEventListener('click', () => {
-        isMenuOpen = !isMenuOpen;
-        
-        if (isMenuOpen) {
-            mobileMenu.classList.remove('hidden');
-            gsap.fromTo(mobileMenu, 
-                { opacity: 0, y: -20 },
-                { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
-            );
-            
-            // Animate menu icon to X
-            gsap.to(mobileMenuBtn.querySelector('svg'), {
-                rotation: 180,
-                duration: 0.3
-            });
-        } else {
-            gsap.to(mobileMenu, {
-                opacity: 0,
-                y: -20,
-                duration: 0.3,
-                ease: 'power2.out',
-                onComplete: () => {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-            
-            // Animate menu icon back
-            gsap.to(mobileMenuBtn.querySelector('svg'), {
-                rotation: 0,
-                duration: 0.3
-            });
-        }
-    });
-}

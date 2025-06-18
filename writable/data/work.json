@@ -1,0 +1,193 @@
+{
+    "hero_content": {
+        "title": "Our",
+        "gradient_text": "Work",
+        "description": "Explore our diverse portfolio of innovative projects that showcase our expertise in brand strategy, creative campaigns, and digital growth. Each project reflects our commitment to excellence and our passion for helping brands succeed."
+    },
+  "projects": [
+    {
+      "id": "technology",
+      "name": "Technology",
+      "description": "Digital innovation and tech solutions that drive the future",
+      "icon": "💻",
+      "projectCount": 12,
+      "gradient": "from-blue-400 to-cyan-400",
+      "accentColor": "blue-400",
+      "tagColor": "blue-300",
+      "projects": [
+        {
+          "id": "tech-burner",
+          "title": "Tech Burner",
+          "description": "Transforming a tech reviewer into a digital icon with strategic brand development",
+          "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
+          "tags": ["Brand Strategy", "Content Marketing"],
+          "link": "./case-study"
+        },
+        {
+          "id": "ai-platform",
+          "title": "AI Platform Launch",
+          "description": "Building the next generation of AI-powered solutions for enterprises",
+          "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600",
+          "tags": ["Product Launch", "AI/ML"],
+          "link": "#"
+        },
+        {
+          "id": "saas-platform",
+          "title": "SaaS Platform",
+          "description": "Scaling a B2B software solution to enterprise level with strategic growth",
+          "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600",
+          "tags": ["B2B Marketing", "Lead Generation"],
+          "link": "#"
+        }
+      ]
+    },
+    {
+      "id": "fashion",
+      "name": "Fashion",
+      "description": "Style and lifestyle brands that define trends",
+      "icon": "👗",
+      "projectCount": 8,
+      "gradient": "from-purple-400 to-pink-400",
+      "accentColor": "purple-400",
+      "tagColor": "purple-300",
+      "projects": [
+        {
+          "id": "lifestyle-brand",
+          "title": "Lifestyle Brand",
+          "description": "Building a sustainable fashion brand from the ground up with conscious values",
+          "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600",
+          "tags": ["Brand Identity", "E-commerce"],
+          "link": "#"
+        },
+        {
+          "id": "luxury-fashion",
+          "title": "Luxury Accessories",
+          "description": "Elevating a premium accessories brand to global recognition and prestige",
+          "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600",
+          "tags": ["Luxury Branding", "Global Expansion"],
+          "link": "#"
+        }
+      ]
+    },
+    {
+      "id": "food-beverage",
+      "name": "Food & Beverage",
+      "description": "Culinary and restaurant brands that delight customers",
+      "icon": "🍽️",
+      "projectCount": 15,
+      "gradient": "from-orange-400 to-red-400",
+      "accentColor": "orange-400",
+      "tagColor": "orange-300",
+      "projects": [
+        {
+          "id": "food-delivery",
+          "title": "Food Delivery App",
+          "description": "Launching a hyperlocal food delivery platform with seamless UX",
+          "image": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600",
+          "tags": ["Digital Marketing", "App Marketing"],
+          "link": "#"
+        },
+        {
+          "id": "restaurant-chain",
+          "title": "Restaurant Chain",
+          "description": "Scaling a local restaurant to nationwide franchise with brand consistency",
+          "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600",
+          "tags": ["Franchise Marketing", "Brand Expansion"],
+          "link": "#"
+        },
+        {
+          "id": "craft-brewery",
+          "title": "Craft Brewery",
+          "description": "Building a premium craft beer brand from scratch with authentic storytelling",
+          "image": "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=600",
+          "tags": ["Premium Branding", "Local Marketing"],
+          "link": "#"
+        }
+      ]
+    },
+    {
+      "id": "health-wellness",
+      "name": "Health & Wellness",
+      "description": "Fitness and healthcare solutions that empower lives",
+      "icon": "🏃‍♂️",
+      "projectCount": 10,
+      "gradient": "from-green-400 to-emerald-400",
+      "accentColor": "green-400",
+      "tagColor": "green-300",
+      "projects": [
+        {
+          "id": "fitness-app",
+          "title": "Fitness Revolution",
+          "description": "Creating a community-driven fitness platform for lasting impact",
+          "image": "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600",
+          "tags": ["Community Building", "Content Strategy"],
+          "link": "#"
+        },
+        {
+          "id": "wellness-products",
+          "title": "Wellness Products",
+          "description": "Launching a holistic wellness product line with care",
+          "image": "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600",
+          "tags": ["Product Launch", "Wellness Marketing"],
+          "link": "#"
+        }
+      ]
+    },
+    {
+      "id": "fintech",
+      "name": "Financial Technology",
+      "description": "FinTech and banking solutions that innovate finance",
+      "icon": "💳",
+      "projectCount": 6,
+      "gradient": "from-yellow-400 to-amber-400",
+      "accentColor": "yellow-400",
+      "tagColor": "yellow-300",
+      "projects": [
+        {
+          "id": "fintech-startup",
+          "title": "FinTech Startup",
+          "description": "Positioning a fintech startup as the future of banking",
+          "image": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600",
+          "tags": ["Brand Positioning", "Thought Leadership"],
+          "link": "#"
+        },
+        {
+          "id": "digital-banking",
+          "title": "Digital Banking",
+          "description": "Revolutionizing traditional banking with digital solutions",
+          "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600",
+          "tags": ["Digital Transformation", "User Experience"],
+          "link": "#"
+        }
+      ]
+    },
+    {
+      "id": "sustainability",
+      "name": "Sustainability",
+      "description": "Eco-friendly and green initiatives that inspire change",
+      "icon": "🌱",
+      "projectCount": 9,
+      "gradient": "from-teal-400 to-green-500",
+      "accentColor": "teal-400",
+      "tagColor": "teal-300",
+      "projects": [
+        {
+          "id": "eco-products",
+          "title": "Eco-Friendly Products",
+          "description": "Championing environmental consciousness through brand storytelling",
+          "image": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600",
+          "tags": ["Purpose Marketing", "Sustainability"],
+          "link": "#"
+        },
+        {
+          "id": "green-energy",
+          "title": "Green Energy Solutions",
+          "description": "Promoting renewable energy adoption through strategic campaigns",
+          "image": "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600",
+          "tags": ["Renewable Energy", "Advocacy"],
+          "link": "#"
+        }
+      ]
+    }
+  ]
+}

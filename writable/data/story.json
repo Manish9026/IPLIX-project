@@ -1,0 +1,70 @@
+{
+  "timeline": [
+    {
+      "id": 1,
+      "year": "2018",
+      "color": "blue-400",
+      "title": "The Beginning",
+      "description": "Founded with a vision to revolutionize digital marketing"
+    },
+    {
+      "id": 2,
+      "year": "2019",
+      "color": "purple-400",
+      "title": "First Major Client",
+      "description": "Landed our first Fortune 500 client and grew the team"
+    },
+    {
+      "id": 3,
+      "year": "2021",
+      "color": "cyan-400",
+      "title": "Global Expansion",
+      "description": "Opened offices in London and Singapore"
+    },
+    {
+      "id": 4,
+      "year": "2023",
+      "color": "pink-400",
+      "title": "Award Recognition",
+      "description": "Won Digital Agency of the Year award"
+    },
+    {
+      "id": 5,
+      "year": "2024",
+      "color": "green-400",
+      "title": "Sustainability Initiatives",
+      "description": "Launched green marketing practices and reduced carbon footprint"
+    }
+  ],
+  "stats": [
+    {
+      "id": 1,
+      "icon": "👥",
+      "value": "50+",
+      "label": "Team Members"
+    },
+    {
+      "id": 2,
+      "icon": "🏆",
+      "value": "200+",
+      "label": "Projects Completed"
+    },
+    {
+      "id": 3,
+      "icon": "🌍",
+      "value": "15+",
+      "label": "Countries Served"
+    },
+    {
+      "id": 4,
+      "icon": "⏰",
+      "value": "6+",
+      "label": "Years of Excellence"
+    }
+  ],
+  "our_mission":{
+    "title": "Our Mission",
+    "description": "To empower businesses with innovative, data-driven digital marketing solutions\nthat fuel measurable growth and foster brand sustainability.\nWe transform challenges into opportunities in an evolving digital landscape.",
+    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600"
+  }
+}

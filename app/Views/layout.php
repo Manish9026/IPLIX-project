@@ -14,6 +14,8 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
     <?= $this->renderSection('headScripts') ?>
 
 
@@ -45,7 +47,32 @@
 
     <script>
 
+
         CommonElements.initCommonNavigation();
+        gsap.registerPlugin(ScrollToPlugin);
+document.addEventListener('DOMContentLoaded', function () {
+
+    // Scroll on anchor click
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const target = document.querySelector(this.getAttribute('href'));
+            
+            if (target) {
+                gsap.to(window, {
+                    duration: 1.5,
+                    scrollTo: {
+                        y: target,
+                        offsetY: 60 
+                    },
+                    ease: 'power2.inOut'
+                });
+            }
+        });
+    });
+});
+       
     </script>
 </body>
 

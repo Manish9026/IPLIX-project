@@ -196,26 +196,107 @@
             </div>
             
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-                <h1 class="hero-title text-6xl md:text-8xl font-bold mb-6">
-                    Our
-                    <br />
+                <h1 class="hero-title text-4xl md:text-8xl font-bold mb-6">
+                <?= $heroContent['title'] ?>
+                    <!-- <br /> -->
                     <span class="bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                        Work
+                                        <?= $heroContent['gradient_text'] ?>
+
                     </span>
                 </h1>
                 <p class="hero-subtitle text-xl text-gray-400 max-w-3xl mx-auto">
-                    Explore our portfolio of successful campaigns and transformative brand stories 
-                    that have driven real business results.
+                                  <?= $heroContent['description'] ?>
+
                 </p>
             </div>
         </section>
 
         <!-- Dynamic Category Sections -->
-        <section id="categories-container" class="py-20 bg-gray-900">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <!-- Categories will be dynamically generated here -->
+
+<div id="categories-container">
+    <div class="max-w-7xl pt-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <?php foreach ($projects as $category): ?>
+            <div class="mb-20">
+                <!-- Category Header -->
+                <div class="category-header">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="text-4xl"><?= $category['icon'] ?></span>
+                                <h2 class="text-3xl font-bold bg-gradient-to-r <?= $category['gradient'] ?> bg-clip-text text-transparent">
+                                    <?= $category['name'] ?>
+                                </h2>
+                            </div>
+                            <p class="text-gray-400 text-lg"><?= $category['description'] ?></p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold text-<?= $category['accentColor'] ?>">
+                                <?= $category['projectCount'] ?>
+                            </div>
+                            <div class="text-sm text-gray-400">Projects</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Carousel -->
+                <div class="swiper category-carousel" data-category="<?= $category['id'] ?>">
+                    <div class="swiper-wrapper">
+                        <?php foreach ($category['projects'] as $project): ?>
+                            <div class="swiper-slide p-6 md:p-0">
+                                <a href="<?= $project['link'] ?>" class="work-card block group"
+                                   data-work="<?= $project['id'] ?>"
+                                   data-category="<?= $category['name'] ?>">
+
+                                    <!-- Image -->
+                                    <div class="card-image aspect-video overflow-hidden relative">
+                                        <img src="<?= $project['image'] ?>"
+                                             alt="<?= $project['title'] ?>"
+                                             class="w-full h-full object-cover transition-transform duration-500">
+                                        <div class="card-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                            <div class="p-4 w-full">
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-white font-medium">
+                                                        <?= ($project['link'] === '#') ? 'View Project' : 'View Case Study' ?>
+                                                    </span>
+                                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                              d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Project Content -->
+                                    <div class="p-6">
+                                        <div class="category-tag text-xs font-semibold mb-3 px-3 py-1 rounded-full inline-block text-<?= $category['tagColor'] ?>">
+                                            <?= $category['name'] ?>
+                                        </div>
+                                        <h3 class="text-xl font-bold mb-3 group-hover:text-<?= $category['accentColor'] ?> transition-colors">
+                                            <?= $project['title'] ?>
+                                        </h3>
+                                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                                            <?= $project['description'] ?>
+                                        </p>
+                                        <div class="flex flex-wrap gap-2">
+                                            <?php foreach ($project['tags'] as $tag): ?>
+                                                <span class="tag-pill px-3 py-1 text-xs rounded-full text-gray-300"><?= $tag ?></span>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    </div>
+
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
-        </section>
+        <?php endforeach; ?>
+    </div>
+</div>
 
         <!-- CTA Section -->
         <section class="py-20 bg-black">
@@ -540,7 +621,7 @@
             // CommonElements.init('work');
             
             // Initialize page-specific content
-            renderCategories();
+            // renderCategories();
             initializeCarousels();
         });
     </script>

@@ -1,3 +1,4 @@
+
 // Common elements for all pages
 const COMMON_ELEMENTS = {
     navigation: `
@@ -194,3 +195,4 @@ window.CommonElements = {
     setActiveNavLink,
     initCommonNavigation
 };
+

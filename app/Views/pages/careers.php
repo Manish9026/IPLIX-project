@@ -1,5 +1,3 @@
-
-
 <?= $this->extend('layout') ?>
 
 
@@ -173,26 +171,29 @@
             </div>
 
             <div class="container text-center z-10">
-                <h1 class="hero-title text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-tight mb-6 sm:mb-8 opacity-0">
-                    Do cool
+                <h1 class="hero-title text-2xl sm:text-6xl font-bold leading-tight mb-6 sm:mb-8 opacity-0">
+
+                    <?= $heroContent['title'] ?>
+
                     <br />
-                    <span class="gradient-text">sh*t</span>
+                    <span class="gradient-text">
+                        <?= $heroContent['gradient_text'] ?>
+                    </span>
                     <br />
-                    with us.
+                    <?= $heroContent['subtitle'] ?>
                 </h1>
 
-                <p class="hero-subtitle text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 sm:mb-12 opacity-0 px-4">
-                    Join a team of creative rebels who are redefining what it means to build iconic brands.
-                    We're not just offering jobs – we're offering adventures.
+                <p class="hero-subtitle text-sm sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 sm:mb-12 opacity-0 px-4">
+                    <?= $heroContent['description'] ?>
                 </p>
 
                 <div class="hero-cta opacity-0 flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
                     <a href="mailto:careers@iplix.in" class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-200 transition-all duration-300">
                         Apply Now
                     </a>
-                    <button class="magnetic-btn border border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300">
+                    <a href="#open-positions"  class="scroll-link magnetic-btn border border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300">
                         View Openings
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>
@@ -204,129 +205,56 @@
                     Why <span class="gradient-text">Join Us</span>
                 </h2>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    <div class="perk-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-perk="1">
-                        <div class="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">🏖️</div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Unlimited Leave</h3>
-                        <p class="text-gray-400 text-sm sm:text-base">Take time off when you need it. We trust you to manage your time and deliver great work.</p>
-                    </div>
+                        <?php if (!empty($perks)) : ?>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 overflow-visible">
+                        <?php foreach ($perks as $perk) : ?>
+                            <div class="perk-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-perk="<?= $perk['id'] ?>">
+                                <div class="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300"><?= $perk['icon'] ?></div>
+                                <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4"><?= $perk['title'] ?></h3>
+                                <p class="text-gray-400 text-sm sm:text-base"><?= $perk['description'] ?></p>
+                            </div>
 
-                    <div class="perk-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-perk="2">
-                        <div class="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">🌎</div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Remote Friendly</h3>
-                        <p class="text-gray-400 text-sm sm:text-base">Work from anywhere in the world. All we need is great internet and even greater ideas.</p>
-                    </div>
-
-                    <div class="perk-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-perk="3">
-                        <div class="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">🎨</div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Creative Freedom</h3>
-                        <p class="text-gray-400 text-sm sm:text-base">Your ideas matter. We give you the space and tools to bring your wildest creative visions to life.</p>
-                    </div>
-
-                    <div class="perk-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-perk="4">
-                        <div class="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">💰</div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Equity Participation</h3>
-                        <p class="text-gray-400 text-sm sm:text-base">Everyone gets a piece of the pie. When we grow, you grow with us.</p>
-                    </div>
-
-                    <div class="perk-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-perk="5">
-                        <div class="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">📚</div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Learning Budget</h3>
-                        <p class="text-gray-400 text-sm sm:text-base">Unlimited budget for courses, conferences, and books. Keep learning, keep growing.</p>
-                    </div>
-
-                    <div class="perk-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-perk="6">
-                        <div class="text-4xl sm:text-5xl md:text-6xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">🎉</div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Epic Team Events</h3>
-                        <p class="text-gray-400 text-sm sm:text-base">Quarterly retreats, annual offsites, and spontaneous celebrations. Work hard, party harder.</p>
-                    </div>
-                </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
             </div>
         </section>
 
         <!-- Open Positions -->
-        <section class="py-16 sm:py-20 bg-gray-900">
-            <div class="container">
-                <h2 class="section-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center mb-12 sm:mb-16 opacity-0">
-                    Open <span class="gradient-text">Positions</span>
-                </h2>
+       <section class="py-16 sm:py-20 bg-gray-900" id="open-positions">
+    <div class="container">
+        <h2 class="section-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center mb-12 sm:mb-16 opacity-0">
+            Open <span class="gradient-text">Positions</span>
+        </h2>
 
-                <div class="space-y-6">
-                    <div class="position-card bg-black/50 p-6 sm:p-8 rounded-2xl border border-gray-800 hover:border-gray-600 transition-all duration-300 group opacity-0" data-position="1">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                            <div class="flex-1">
-                                <h3 class="text-xl sm:text-2xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">Senior Creative Director</h3>
-                                <p class="text-gray-400 mb-2 text-sm sm:text-base">Lead creative vision for major brand campaigns</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-2 sm:px-3 py-1 bg-blue-900/30 text-blue-400 text-xs sm:text-sm rounded-full">Full-time</span>
-                                    <span class="px-2 sm:px-3 py-1 bg-purple-900/30 text-purple-400 text-xs sm:text-sm rounded-full">Remote</span>
-                                    <span class="px-2 sm:px-3 py-1 bg-green-900/30 text-green-400 text-xs sm:text-sm rounded-full">5+ years</span>
-                                </div>
+        <div class="space-y-6">
+            <?php foreach ($openPositions as $position): ?>
+                <div class="position-card bg-black/50 p-6 sm:p-8 rounded-2xl border border-gray-800 hover:border-gray-600 transition-all duration-300 group opacity-0" data-position="<?= $position['id'] ?>">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                        <div class="flex-1">
+                            <h3 class="text-xl sm:text-2xl font-semibold mb-2 group-hover:text-blue-400 transition-colors">
+                                <?= $position['title'] ?>
+                            </h3>
+                            <p class="text-gray-400 mb-2 text-sm sm:text-base"><?= $position['description'] ?></p>
+                            <div class="flex flex-wrap gap-2">
+                                <?php foreach ($position['tags'] as $index => $tag): ?>
+                                    <span class="px-2 sm:px-3 py-1 bg-<?= $position['tag_colors'][$index] ?>-900/30 text-<?= $position['tag_colors'][$index] ?> text-xs sm:text-sm rounded-full"><?= $tag ?></span>
+                                <?php endforeach; ?>
                             </div>
-                            <a href="mailto:careers@iplix.in?subject=Senior Creative Director Application" class="magnetic-btn bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-sm sm:text-base text-center">
-                                Apply Now
-                            </a>
                         </div>
-                    </div>
-
-                    <div class="position-card bg-black/50 p-6 sm:p-8 rounded-2xl border border-gray-800 hover:border-gray-600 transition-all duration-300 group opacity-0" data-position="2">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                            <div class="flex-1">
-                                <h3 class="text-xl sm:text-2xl font-semibold mb-2 group-hover:text-purple-400 transition-colors">Brand Strategist</h3>
-                                <p class="text-gray-400 mb-2 text-sm sm:text-base">Develop winning brand strategies and positioning</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-2 sm:px-3 py-1 bg-blue-900/30 text-blue-400 text-xs sm:text-sm rounded-full">Full-time</span>
-                                    <span class="px-2 sm:px-3 py-1 bg-purple-900/30 text-purple-400 text-xs sm:text-sm rounded-full">Hybrid</span>
-                                    <span class="px-2 sm:px-3 py-1 bg-green-900/30 text-green-400 text-xs sm:text-sm rounded-full">3+ years</span>
-                                </div>
-                            </div>
-                            <a href="mailto:careers@iplix.in?subject=Brand Strategist Application" class="magnetic-btn bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-sm sm:text-base text-center">
-                                Apply Now
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="position-card bg-black/50 p-6 sm:p-8 rounded-2xl border border-gray-800 hover:border-gray-600 transition-all duration-300 group opacity-0" data-position="3">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                            <div class="flex-1">
-                                <h3 class="text-xl sm:text-2xl font-semibold mb-2 group-hover:text-cyan-400 transition-colors">Digital Marketing Manager</h3>
-                                <p class="text-gray-400 mb-2 text-sm sm:text-base">Drive growth through innovative digital campaigns</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-2 sm:px-3 py-1 bg-blue-900/30 text-blue-400 text-xs sm:text-sm rounded-full">Full-time</span>
-                                    <span class="px-2 sm:px-3 py-1 bg-purple-900/30 text-purple-400 text-xs sm:text-sm rounded-full">Remote</span>
-                                    <span class="px-2 sm:px-3 py-1 bg-green-900/30 text-green-400 text-xs sm:text-sm rounded-full">2+ years</span>
-                                </div>
-                            </div>
-                            <a href="mailto:careers@iplix.in?subject=Digital Marketing Manager Application" class="magnetic-btn bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-sm sm:text-base text-center">
-                                Apply Now
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="position-card bg-black/50 p-6 sm:p-8 rounded-2xl border border-gray-800 hover:border-gray-600 transition-all duration-300 group opacity-0" data-position="4">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                            <div class="flex-1">
-                                <h3 class="text-xl sm:text-2xl font-semibold mb-2 group-hover:text-pink-400 transition-colors">Motion Graphics Designer</h3>
-                                <p class="text-gray-400 mb-2 text-sm sm:text-base">Create stunning animations and video content</p>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="px-2 sm:px-3 py-1 bg-blue-900/30 text-blue-400 text-xs sm:text-sm rounded-full">Full-time</span>
-                                    <span class="px-2 sm:px-3 py-1 bg-purple-900/30 text-purple-400 text-xs sm:text-sm rounded-full">Remote</span>
-                                    <span class="px-2 sm:px-3 py-1 bg-green-900/30 text-green-400 text-xs sm:text-sm rounded-full">2+ years</span>
-                                </div>
-                            </div>
-                            <a href="mailto:careers@iplix.in?subject=Motion Graphics Designer Application" class="magnetic-btn bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-sm sm:text-base text-center">
-                                Apply Now
-                            </a>
-                        </div>
+                        <a href="mailto:careers@iplix.in?subject=<?= urlencode($position['mail_subject']) ?>" class="magnetic-btn bg-white text-black px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold hover:bg-gray-200 transition-colors text-sm sm:text-base text-center">
+                            Apply Now
+                        </a>
                     </div>
                 </div>
-            </div>
-        </section>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</section>
 
         <!-- Culture Section -->
         <section class="py-16 sm:py-20 bg-black">
             <div class="container">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center overflow-visible">
                     <div class="culture-content opacity-0">
                         <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">
                             Our <span class="gradient-text">Culture</span>
@@ -384,11 +312,11 @@
             </div>
         </section>
     </div>
-  
+
 </body>
 
 
 <?= $this->section('scripts') ?>
-    <script src="<?= base_url('assets/js/careers.js') ?>"></script>
+<script src="<?= base_url('assets/js/careers.js') ?>"></script>
 <?= $this->endSection() ?>
 <?= $this->endSection() ?>

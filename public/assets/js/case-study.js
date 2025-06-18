@@ -2,8 +2,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener('DOMContentLoaded', function() {
     initCaseStudyAnimations();
-    // initNavigation();
-    // CommonElements.init('work');
     initMagneticButtons();
 });
 

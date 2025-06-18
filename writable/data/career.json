@@ -1,0 +1,101 @@
+{
+    "hero_content":{
+        "title": "Join the Movement",
+        "gradient_text": "🚀 Shape the Future 🚀 ",
+        "subtitle":"Grow With Us",
+        "description": "Join a team of innovators, creators, and leaders. We're not just building careers—we're shaping the future of digital excellence."
+    },
+    
+  "perks": [
+    {
+      "id": 1,
+      "icon": "🏖️",
+      "title": "Unlimited Leave",
+      "description": "Take time off when you need it. We trust you to manage your time and deliver great work."
+    },
+    {
+      "id": 2,
+      "icon": "🌎",
+      "title": "Remote Friendly",
+      "description": "Work from anywhere in the world. All we need is great internet and even greater ideas."
+    },
+    {
+      "id": 3,
+      "icon": "🎨",
+      "title": "Creative Freedom",
+      "description": "Your ideas matter. We give you the space and tools to bring your wildest creative visions to life."
+    },
+    {
+      "id": 4,
+      "icon": "💰",
+      "title": "Equity Participation",
+      "description": "Everyone gets a piece of the pie. When we grow, you grow with us."
+    },
+    {
+      "id": 5,
+      "icon": "📚",
+      "title": "Learning Budget",
+      "description": "Unlimited budget for courses, conferences, and books. Keep learning, keep growing."
+    },
+    {
+      "id": 6,
+      "icon": "🎉",
+      "title": "Epic Team Events",
+      "description": "Quarterly retreats, annual offsites, and spontaneous celebrations. Work hard, party harder."
+    }
+  ]
+,
+  "open_positions":[
+    {
+      "id": 1,
+      "title": "Senior Creative Director",
+      "description": "Lead creative vision for major brand campaigns",
+      "tags": ["Full-time", "Remote", "5+ years"],
+      "tag_colors": ["blue-400", "purple-400", "green-400"],
+      "location": "Remote",
+      "experience": "5+ years",
+      "mail_subject": "Senior Creative Director Application"
+    },
+    {
+      "id": 2,
+      "title": "Brand Strategist",
+      "description": "Develop winning brand strategies and positioning",
+      "tags": ["Full-time", "Hybrid", "3+ years"],
+      "tag_colors": ["blue-400", "purple-400", "green-400"],
+      "location": "Hybrid",
+      "experience": "3+ years",
+      "mail_subject": "Brand Strategist Application"
+    },
+    {
+      "id": 3,
+      "title": "Digital Marketing Manager",
+      "description": "Drive growth through innovative digital campaigns",
+      "tags": ["Full-time", "Remote", "2+ years"],
+      "tag_colors": ["blue-400", "purple-400", "green-400"],
+      "location": "Remote",
+      "experience": "2+ years",
+      "mail_subject": "Digital Marketing Manager Application"
+    },
+    {
+      "id": 4,
+      "title": "Motion Graphics Designer",
+      "description": "Create stunning animations and video content",
+      "tags": ["Full-time", "Remote", "2+ years"],
+      "tag_colors": ["blue-400", "purple-400", "green-400"],
+      "location": "Remote",
+      "experience": "2+ years",
+      "mail_subject": "Motion Graphics Designer Application"
+    },
+     {
+      "id": 5,
+      "title": "UI/UX Designer",
+      "description": "Design intuitive interfaces and seamless user experiences across platforms",
+      "tags": ["Full-time", "Hybrid", "3+ years"],
+      "tag_colors": ["blue-400", "purple-400", "green-400"],
+      "location": "Hybrid",
+      "experience": "3+ years",
+      "mail_subject": "UI/UX Designer Application"
+    }
+  ]
+
+}
