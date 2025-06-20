@@ -21,6 +21,37 @@
 
     <!-- Page-Specific Styles -->
     <?= $this->renderSection('styles') ?>
+    <style>
+        /* Global Scrollbar Styling (WebKit browsers) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937; /* Tailwind: bg-gray-800 */
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #3b82f6, #8b5cf6); /* blue to purple */
+  border-radius: 8px;
+  border: 2px solid #1f2937; /* Creates padding effect */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb, #7c3aed); /* darker on hover */
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #8b5cf6 #1f2937;
+  /* border-radius: 5px; */
+  /* scrollbar-color: transparent transparent; */
+}
+
+    </style>
 </head>
 <!-- Layout: app/Views/layouts/main.php -->
 

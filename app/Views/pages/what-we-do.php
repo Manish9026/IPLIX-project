@@ -119,23 +119,23 @@
         <!-- Service Sections -->
        <div id="services-container">
     <?php foreach ($services as $index => $service): ?>
-        <section class="service-section py-20 <?= $index % 2 === 0 ? 'bg-gray-900' : 'bg-black' ?>" data-service="<?= nl2br(esc($service['id'])) ?>">
+        <section class="service-section py-20 <?= $index % 2 === 0 ? 'bg-gray-900' : 'bg-black' ?>" data-service="<?= nl2br(esc($index)) ?>" data-reversed="<?= $service['isReversed'] ? '1' : '0' ?>" data-feature='<?= count($service['features']) ?>'>
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center <?= $service['isReversed'] ? 'lg:grid-flow-col-dense' : '' ?>">
                     
                     <!-- Content Section -->
-                    <div class="service-content <?= $service['isReversed'] ? 'lg:col-start-2' : '' ?>" data-content="<?= esc($service['id']) ?>">
-                        <div class="text-6xl mb-6 service-icon" data-icon="<?= esc($service['id']) ?>"><?= esc($service['icon']) ?></div>
-                        <h2 class="text-4xl md:text-5xl font-bold mb-6 service-title" data-title="<?= esc($service['id']) ?>">
+                    <div class="service-content <?= $service['isReversed'] ? 'lg:col-start-2' : '' ?>" data-content="<?= esc($index) ?>">
+                        <div class="text-6xl mb-6 service-icon" data-icon="<?= esc($index) ?>"><?= esc($service['icon']) ?></div>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 service-title" data-title="<?= esc($index) ?>">
                             <?= esc($service['title']) ?>
                         </h2>
-                        <p class="text-xl text-gray-300 mb-8 service-description" data-description="<?= esc($service['id']) ?>">
+                        <p class="text-xl text-gray-300 mb-8 service-description" data-description="<?= esc($index) ?>">
                             <?= esc($service['description']) ?>
                         </p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                             <?php foreach ($service['features'] as $featureIndex => $feature): ?>
-                                <div class="service-feature flex items-center text-gray-400" data-feature="<?= esc($service['id']) ?>-<?= $featureIndex ?>">
+                                <div class="service-feature flex items-center text-gray-400" data-feature="<?= esc($index) ?>-<?= $featureIndex ?>">
                                     <div class="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></div>
                                     <span><?= esc($feature) ?></span>
                                 </div>
@@ -143,24 +143,24 @@
                         </div>
 
                         <button class="service-cta bg-gradient-to-r from-blue-500 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
-                            data-cta="<?= esc($service['id']) ?>">
+                            data-cta="<?= esc($index) ?>">
                             Learn More
                         </button>
                     </div>
 
                     <!-- Image Section -->
-                    <div class="service-image-container <?= $service['isReversed'] ? 'lg:col-start-1' : '' ?>" data-image-container="<?= esc($service['id']) ?>">
+                    <div class="service-image-container <?= $service['isReversed'] ? 'lg:col-start-1' : '' ?>" data-image-container="<?= esc($index) ?>">
                         <div class="relative group">
-                            <div class="service-image-wrapper overflow-hidden rounded-2xl shadow-2xl" data-image-wrapper="<?= esc($service['id']) ?>">
+                            <div class="service-image-wrapper overflow-hidden rounded-2xl shadow-2xl" data-image-wrapper="<?= esc($index) ?>">
                                 <img 
                                     src="<?= esc($service['image']) ?>" 
                                     alt="<?= esc($service['title']) ?>"
                                     class="w-full h-96 object-cover transition-transform duration-500 group-hover:scale-110"
-                                    data-image="<?= esc($service['id']) ?>"
+                                    data-image="<?= esc($index) ?>"
                                 >
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             </div>
-                            <div class="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-glow="<?= esc($service['id']) ?>"></div>
+                            <div class="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" data-glow="<?= esc($index) ?>"></div>
                         </div>
                     </div>
 

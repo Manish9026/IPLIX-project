@@ -10,8 +10,8 @@
                     <div class="footer-section" data-footer="2">
                         <h4 class="font-semibold mb-4">Company</h4>
                         <ul class="space-y-2 text-gray-400">
-                            <li><a href="./story" class="hover:text-white transition-colors">Our Story</a></li>
-                            <li><a href="./services" class="hover:text-white transition-colors">What We Do</a></li>
+                            <li><a href="./story" class="hover:text-white transition-colors">About</a></li>
+                            <li><a href="./services" class="hover:text-white transition-colors">Services</a></li>
                             <li><a href="./careers" class="hover:text-white transition-colors">Careers</a></li>
                         </ul>
                     </div>
@@ -19,7 +19,7 @@
                     <div class="footer-section" data-footer="3">
                         <h4 class="font-semibold mb-4">Work</h4>
                         <ul class="space-y-2 text-gray-400">
-                            <li><a href="./work" class="hover:text-white transition-colors">Our Work</a></li>
+                            <li><a href="./work" class="hover:text-white transition-colors">Portfolio</a></li>
                             <li><a href="./case-study" class="hover:text-white transition-colors">Case Studies</a></li>
                         </ul>
                     </div>

@@ -19,11 +19,21 @@ function initWhatWeDoAnimations() {
         { opacity: 1, y: 0, duration: 1, ease: 'power3.out' },
         '-=0.8'
     );
-
+const serviceSections = document.querySelectorAll('[data-service]');
     // Service sections animations
-    servicesData.forEach((service) => {
+    
+// serviceSections.forEach(section => {
+//     console.log(section,section.dataset);
+    
+//     const id = section.dataset.service;
+//     const isReversed = section.dataset.reversed === '1';})
+    serviceSections.forEach((section) => {
         // Icon animation
-        gsap.fromTo(`[data-icon="${service.id}"]`,
+const id = section.dataset.service;
+const isReversed = section.dataset.reversed === '1';
+const featureCount = section.dataset.feature ? parseInt(section.dataset.feature) : 0;
+        console.log(isReversed, featureCount);
+        gsap.fromTo(`[data-icon="${id}"]`,
             { opacity: 0, scale: 0.5, rotation: -180 },
             {
                 opacity: 1,
@@ -32,7 +42,7 @@ function initWhatWeDoAnimations() {
                 duration: 1,
                 ease: 'back.out(1.7)',
                 scrollTrigger: {
-                    trigger: `[data-service="${service.id}"]`,
+                    trigger: `[data-service="${id}"]`,
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 }
@@ -40,8 +50,8 @@ function initWhatWeDoAnimations() {
         );
 
         // Title animation
-        gsap.fromTo(`[data-title="${service.id}"]`,
-            { opacity: 0, x: service.isReversed ? 100 : -100 },
+        gsap.fromTo(`[data-title="${id}"]`,
+            { opacity: 0, x: isReversed ? 100 : -100 },
             {
                 opacity: 1,
                 x: 0,
@@ -49,7 +59,7 @@ function initWhatWeDoAnimations() {
                 ease: 'power3.out',
                 delay: 0.2,
                 scrollTrigger: {
-                    trigger: `[data-service="${service.id}"]`,
+                    trigger: `[data-service="${id}"]`,
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 }
@@ -57,7 +67,7 @@ function initWhatWeDoAnimations() {
         );
 
         // Description animation
-        gsap.fromTo(`[data-description="${service.id}"]`,
+        gsap.fromTo(`[data-description="${id}"]`,
             { opacity: 0, y: 30 },
             {
                 opacity: 1,
@@ -66,7 +76,7 @@ function initWhatWeDoAnimations() {
                 ease: 'power3.out',
                 delay: 0.4,
                 scrollTrigger: {
-                    trigger: `[data-service="${service.id}"]`,
+                    trigger: `[data-service="${id}"]`,
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 }
@@ -74,8 +84,8 @@ function initWhatWeDoAnimations() {
         );
 
         // Features animation
-        service.features.forEach((feature, featureIndex) => {
-            gsap.fromTo(`[data-feature="${service.id}-${featureIndex}"]`,
+        for (let featureIndex = 0; featureIndex < featureCount; featureIndex++) {
+            gsap.fromTo(`[data-feature="${id}-${featureIndex}"]`,
                 { opacity: 0, x: -20 },
                 {
                     opacity: 1,
@@ -84,16 +94,16 @@ function initWhatWeDoAnimations() {
                     ease: 'power3.out',
                     delay: 0.6 + (featureIndex * 0.1),
                     scrollTrigger: {
-                        trigger: `[data-service="${service.id}"]`,
+                        trigger: `[data-service="${id}"]`,
                         start: 'top 80%',
                         toggleActions: 'play none none reverse'
                     }
                 }
             );
-        });
+        };
 
         // CTA button animation
-        gsap.fromTo(`[data-cta="${service.id}"]`,
+        gsap.fromTo(`[data-cta="${id}"]`,
             { opacity: 0, scale: 0.8 },
             {
                 opacity: 1,
@@ -102,7 +112,7 @@ function initWhatWeDoAnimations() {
                 ease: 'back.out(1.7)',
                 delay: 1,
                 scrollTrigger: {
-                    trigger: `[data-service="${service.id}"]`,
+                    trigger: `[data-service="${id}"]`,
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 }
@@ -110,12 +120,12 @@ function initWhatWeDoAnimations() {
         );
 
         // Image animations
-        gsap.fromTo(`[data-image-wrapper="${service.id}"]`,
+        gsap.fromTo(`[data-image-wrapper="${id}"]`,
             { 
                 opacity: 0, 
-                x: service.isReversed ? -100 : 100,
+                x: isReversed ? -100 : 100,
                 scale: 0.8,
-                rotationY: service.isReversed ? -15 : 15
+                rotationY: isReversed ? -15 : 15
             },
             {
                 opacity: 1,
@@ -126,7 +136,7 @@ function initWhatWeDoAnimations() {
                 ease: 'power3.out',
                 delay: 0.3,
                 scrollTrigger: {
-                    trigger: `[data-service="${service.id}"]`,
+                    trigger: `[data-service="${id}"]`,
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 }
@@ -134,7 +144,7 @@ function initWhatWeDoAnimations() {
         );
 
         // Glow effect animation
-        gsap.fromTo(`[data-glow="${service.id}"]`,
+        gsap.fromTo(`[data-glow="${id}"]`,
             { opacity: 0, scale: 0.8 },
             {
                 opacity: 0.3,
@@ -143,7 +153,7 @@ function initWhatWeDoAnimations() {
                 ease: 'power3.out',
                 delay: 0.8,
                 scrollTrigger: {
-                    trigger: `[data-service="${service.id}"]`,
+                    trigger: `[data-service="${id}"]`,
                     start: 'top 80%',
                     toggleActions: 'play none none reverse'
                 }

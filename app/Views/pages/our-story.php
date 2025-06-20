@@ -1,3 +1,5 @@
+
+
 <?= $this->extend('layout') ?>
 
 
@@ -36,10 +38,44 @@
     /* Container fixes */
     .container {
         width: 100%;
+        flex: 1;
         margin: 0 auto;
         padding-left: 1rem;
         padding-right: 1rem;
     }
+
+    .team-track,
+    .team-card {
+        will-change: transform;
+    }
+
+    .team-scroll-container {
+
+        overflow: hidden;
+        mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+    }
+
+    .team-track {
+        display: flex;
+        gap: 2rem;
+        animation: scroll-left 30s linear infinite;
+    }
+
+    @keyframes scroll-left {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .team-card {
+        min-width: 280px;
+        flex-shrink: 0;
+    }
+
 
     @media (min-width: 640px) {
         .container {
@@ -181,6 +217,10 @@
             width: 170px;
             height: 170px;
         }
+
+        .team-card {
+            min-width: 240px;
+        }
     }
 
     /* Timeline Animation Classes */
@@ -216,6 +256,229 @@
     @media (max-width: 480px) {
         .mobile-timeline-card {
             max-width: calc(100vw - 3rem);
+        }
+    }
+
+    /* gallery css  */
+
+    /* ======= Gallery Grid ======= */
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 0.75rem;
+        aspect-ratio: 4 / 3;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover {
+        transform: scale(1.02);
+    }
+
+    .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+        transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        display: flex;
+        align-items: end;
+        padding: 1.5rem;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+    }
+
+    /* ======= Animated Gallery ======= */
+    .animated-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        transition: all 0.3s ease;
+        will-change: transform;
+    }
+
+    .gallery-card {
+         will-change: transform;
+        position: relative;
+        aspect-ratio: 1 / 1;
+        overflow: hidden;
+        border-radius: 1rem;
+        cursor: pointer;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .gallery-card:hover {
+        transform: translateY(-8px) scale(1.02);
+    }
+
+    .gallery-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: all 0.6s ease;
+        clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+    }
+
+    /* ======= Hover Shape Variants ======= */
+    .gallery-card:nth-child(1) .gallery-image:hover {
+        clip-path: circle(70% at 50% 50%);
+    }
+
+    .gallery-card:nth-child(2) .gallery-image:hover {
+        clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    }
+
+    .gallery-card:nth-child(3) .gallery-image:hover {
+        clip-path: ellipse(65% 80% at 50% 50%);
+    }
+
+    .gallery-card:nth-child(4) .gallery-image:hover {
+        clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 25% 100%);
+    }
+
+    .gallery-card:nth-child(5) .gallery-image:hover {
+        clip-path: circle(60% at 50% 50%);
+    }
+
+    .gallery-card:nth-child(6) .gallery-image:hover {
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    .gallery-card:nth-child(7) .gallery-image:hover {
+        clip-path: ellipse(80% 60% at 50% 50%);
+    }
+
+    .gallery-card:nth-child(8) .gallery-image:hover {
+        clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+    }
+
+    .gallery-card:nth-child(9) .gallery-image:hover {
+        clip-path: circle(65% at 50% 50%);
+    }
+
+    .gallery-card:hover .gallery-image {
+        transform: scale(1.15);
+    }
+
+    .gallery-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8));
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.4s ease;
+        border-radius: 1rem;
+    }
+
+    .gallery-card:hover .gallery-overlay {
+        opacity: 1;
+    }
+
+    .gallery-text {
+        text-align: center;
+        color: white;
+        transform: translateY(20px);
+        transition: transform 0.4s ease 0.1s;
+    }
+
+    .gallery-card:hover .gallery-text {
+        transform: translateY(0);
+    }
+
+    /* ======= Button Styles ======= */
+    .view-more-btn {
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        border: none;
+        color: white;
+        padding: 0.75rem 2rem;
+        border-radius: 2rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .view-more-btn::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, #1d4ed8, #7c3aed);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .view-more-btn:hover::before {
+        opacity: 1;
+    }
+
+    .view-more-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+    }
+
+    .view-more-btn span {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ======= Visibility Toggle ======= */
+    .hidden-gallery {
+        display: none;
+    }
+
+    .show-gallery {
+        display: grid;
+        animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* ======= Responsive ======= */
+    @media (max-width: 768px) {
+        .gallery-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .animated-gallery {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 500px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .gallery-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .animated-gallery {
+            grid-template-columns: 1fr;
+            max-width: 300px;
         }
     }
 
@@ -276,10 +539,10 @@
             <div class="container">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div class="story-content opacity-0">
-                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6"><?= esc($ourMission['title'])?></h2>
+                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-6"><?= esc($ourMission['title']) ?></h2>
                         <p class="text-base sm:text-lg text-gray-400 mb-6">
                             <?= nl2br(esc($ourMission['description'])) ?>
-                          
+
                         </p>
                         <p class="text-base sm:text-lg text-gray-400">
                             Our approach combines data-driven insights with creative intuition, ensuring
@@ -287,7 +550,7 @@
                         </p>
                     </div>
                     <div class="story-image opacity-0">
-                        <img src="<?= esc($ourMission['image'])?>" alt="Team collaboration" class="rounded-lg shadow-2xl w-full h-auto">
+                        <img src="<?= esc($ourMission['image']) ?>" alt="Team collaboration" class="rounded-lg shadow-2xl w-full h-auto">
                     </div>
                 </div>
             </div>
@@ -347,7 +610,7 @@
                         <div id="mobile-timeline" class="hidden">
                             <?php if (!empty($timeline)): ?>
                                 <?php foreach ($timeline as $idx => $milestone): ?>
-                                    <div class="relative flex items-start mb-14 last:mb-0"  data-milestone="<?= $idx + 1 ?>">
+                                    <div class="relative flex items-start mb-14 last:mb-0" data-milestone="<?= $idx + 1 ?>">
                                         <!-- Dot -->
                                         <div class="absolute left-[1.1rem] top-6 w-4 h-4 bg-<?= esc($milestone['color']) ?> rounded-full border-2 border-black z-10"></div>
 
@@ -380,25 +643,102 @@
                 <h2 class="section-title text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-16 opacity-0">By the Numbers</h2>
 
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-<?php if (!empty($stats)): ?>
-        <?php foreach ($stats as $index => $item): ?>
-     
-            <div class="stat-card text-center p-4 sm:p-6 md:p-8 bg-black/50 rounded-lg border border-gray-800 opacity-0"
-                 data-stat="<?= esc($index) ?>">
-                <div class="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-4"><?= esc($item['icon']) ?></div>
-                <div class="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 counter" data-target="<?= preg_replace('/\D/', '', $item['value']) ?>">
-                    0
-                </div>
-                <div class="text-gray-400 text-xs sm:text-sm md:text-base"><?= esc($item['label']) ?></div>
-            </div>
-        <?php endforeach; ?>
-    <?php else: ?>
-        <div class="col-span-full text-center text-gray-400">No stats available.</div>
-    <?php endif; ?>
-             
+                    <?php if (!empty($stats)): ?>
+                        <?php foreach ($stats as $index => $item): ?>
+
+                            <div class="stat-card text-center p-4 sm:p-6 md:p-8 bg-black/50 rounded-lg border border-gray-800 opacity-0"
+                                data-stat="<?= esc($index) ?>">
+                                <div class="text-2xl sm:text-3xl md:text-4xl mb-2 sm:mb-4"><?= esc($item['icon']) ?></div>
+                                <div class="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 counter" data-target="<?= preg_replace('/\D/', '', $item['value']) ?>">
+                                    0
+                                </div>
+                                <div class="text-gray-400 text-xs sm:text-sm md:text-base"><?= esc($item['label']) ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="col-span-full text-center text-gray-400">No stats available.</div>
+                    <?php endif; ?>
+
                 </div>
             </div>
         </section>
+
+        <!-- Team Section -->
+        <section class="py-20 bg-gradient-to-r from-black to-gray-900">
+            <div class=" m-0 md:mx-auto p-2 sm:p-4 md:p-6 lg:p-8 max-w-screen-4xl">
+                <h2 class="section-title text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-16 opacity-0">Meet Our Team</h2>
+                <p class="text-center text-gray-400  max-w-2xl mx-auto opacity-1 team-subtitle ">
+                    Behind every great project is an exceptional team. Meet the creative minds and strategic thinkers who bring your vision to life.
+                </p>
+
+                <div class="team-scroll-container pt-12">
+                    <div class="team-track" id="team-track">
+
+                        <?php
+                        // Repeat the loop twice for seamless scrolling
+                        for ($repeat = 0; $repeat < 2; $repeat++):
+                            foreach ($teamMembers as $member):
+                        ?>
+                                <div class="team-card w-[300px] will-change-transform sm:w-[400px] md:w-[600px] bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
+                                    <div class="w-20 h-20 bg-gradient-to-br <?= $member['color'] ?> rounded-full mb-4 mx-auto flex items-center justify-center">
+                                        <span class="text-2xl"><?= $member['emoji'] ?></span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-center mb-2"><?= htmlspecialchars($member['name']) ?></h3>
+                                    <p class="<?= $member['textColor'] ?> text-center mb-3"><?= htmlspecialchars($member['role']) ?></p>
+                                    <p class="text-gray-400 text-sm text-center"><?= htmlspecialchars($member['desc']) ?></p>
+                                </div>
+                        <?php
+                            endforeach;
+                        endfor;
+                        ?>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IMAGE GALLERY -->
+        <section class="py-20 bg-gray-900">
+            <div class="container">
+                <h2 class="section-title text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-16 opacity-0">Our Journey in Pictures</h2>
+                <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto opacity-0 gallery-subtitle">
+                    A visual story of our growth, achievements, and the memorable moments that define who we are.
+                </p>
+
+                <div class="animated-gallery" id="gallery-grid">
+                    <?php foreach ($galleryItems as $index => $item): ?>
+                        <div
+                            class="gallery-item <?= $item['hidden'] ? 'hidden' : '' ?>"
+                    >
+                            <img
+                                src="<?= $item['img'] ?>"
+                                alt="<?= htmlspecialchars($item['alt']) ?>"
+                                class="gallery-image"
+                                loading="lazy">
+                            <div class="gallery-overlay">
+                                <div class="gallery-text">
+                                    <h3 class="font-semibold mb-2"><?= htmlspecialchars($item['title']) ?></h3>
+                                    <p class="text-sm"><?= htmlspecialchars($item['desc']) ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <div class="text-center mt-12">
+                    <button id="view-more-btn" class="view-more-btn">
+                        <span>View More</span>
+                    </button>
+                    <button id="view-less-btn" class="view-more-btn hidden">
+                        <span>View Less</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+
+
+
     </div>
 
     <!-- Footer will be rendered by common.js -->

@@ -23,8 +23,10 @@ class Pages extends BaseController
             'description' => 'To empower businesses with innovative digital marketing solutions that drive growth and sustainability.',
             'image' => 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600'
         ];
+        $teamMembers = $decoded['team_members'] ?? [];
+        $galleryItems = $decoded['gallery_items'] ?? [];
 
-        return view('pages/our-story', compact('stats', 'timeline', 'ourMission'));
+        return view('pages/our-story', compact('stats', 'timeline', 'ourMission','teamMembers', 'galleryItems'));
         // return view('pages/our-story',);
     }
 

@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initPageLoadAnimations();
     initOrbitalAnimation();
     initStoryAnimations();
+    initTeamAnimations();
+    initGalleryAnimations();
 
 });
 
@@ -237,3 +239,222 @@ function animateCounter(counter) {
     });
 }
 
+function initTeamAnimations() {
+    // Team section title animation
+    gsap.fromTo('.section-title',
+        { opacity: 0, y: 50 },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.section-title',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            }
+        }
+    );
+
+    // Team subtitle animation
+    gsap.fromTo('.team-subtitle',
+        { opacity: 0, y: 30 },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.team-subtitle',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            }
+        }
+    );
+
+    // Team cards hover animations
+    gsap.utils.toArray('.team-card').forEach((card, index) => {
+        // Initial animation when scrolling into view
+        gsap.fromTo(card,
+            { opacity: 0, y: 50, scale: 0.9 },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.6,
+                delay: index * 0.1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 90%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+
+        // Hover animations
+        card.addEventListener('mouseenter', () => {
+            gsap.to(card, {
+                y: -10,
+                scale: 1.05,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+
+        card.addEventListener('mouseleave', () => {
+            gsap.to(card, {
+                y: 0,
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+    });
+
+    // Pause auto-scroll on hover
+    const teamTrack = document.getElementById('team-track');
+    if (teamTrack) {
+        teamTrack.addEventListener('mouseenter', () => {
+            teamTrack.style.animationPlayState = 'paused';
+        });
+
+        teamTrack.addEventListener('mouseleave', () => {
+            teamTrack.style.animationPlayState = 'running';
+        });
+    }
+}
+
+
+function initGalleryAnimations() {
+    // Gallery section title animation
+    gsap.fromTo('.gallery-subtitle',
+        { opacity: 0, y: 30 },
+        {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            delay: 0.2,
+            ease: 'power3.out',
+            scrollTrigger: {
+                trigger: '.gallery-subtitle',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            }
+        }
+    );
+
+    // Gallery items staggered animation (initial 6 items)
+    gsap.utils.toArray('.gallery-item').forEach((item, index) => {
+
+        console.log(item, index); // Debugging line to check items
+        
+        gsap.fromTo(item,
+            { 
+                opacity: 0, 
+                y: 10, 
+                x: (index % 2 === 0 ? -10 : 10), // Alternate horizontal position
+                // scale: 0.8,
+                // rotationY: 45
+            },
+            {
+                opacity: 1,
+                y: 0,
+                x: 0,
+                scale: 1,
+                rotationY: 0,
+                duration: 0.8,
+                delay: index * 0.1,
+                ease: 'power3.easeInOut',
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            }
+        );
+
+        // Enhanced hover animation
+        item.addEventListener('mouseenter', () => {
+            gsap.to(item, {
+                y: -8,
+                scale: 1.05,
+                rotationY: 5,
+                duration: 0.4,
+                ease: 'power2.out'
+            });
+        });
+
+        item.addEventListener('mouseleave', () => {
+            gsap.to(item, {
+                y: 0,
+                scale: 1,
+                rotationY: 0,
+                duration: 0.4,
+                ease: 'power2.out'
+            });
+        });
+
+        // Click animation
+        item.addEventListener('click', () => {
+            gsap.to(item, {
+                scale: 0.95,
+                duration: 0.1,
+                ease: 'power2.out',
+                yoyo: true,
+                repeat: 1
+            });
+        });
+    });
+
+    // View More/Less button functionality
+
+
+    // Intersection Observer for performance optimization
+    const galleryObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+                // Add subtle floating animation for in-view items
+                gsap.to(entry.target, {
+                    y: "+=2",
+                    duration: 3 + Math.random() * 2,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true,
+                    delay: Math.random() * 2
+                });
+            }
+        });
+    }, {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+        galleryObserver.observe(item);
+    });
+
+    // Enhanced responsive behavior
+    const updateGalleryLayout = () => {
+        const galleryGrid = document.getElementById('gallery-grid');
+        const screenWidth = window.innerWidth;
+        
+        if (screenWidth < 480) {
+            galleryGrid.style.gridTemplateColumns = '1fr';
+        } else if (screenWidth < 768) {
+            galleryGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        } else if (screenWidth < 1024) {
+            galleryGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+        } else {
+            galleryGrid.style.gridTemplateColumns = 'repeat(3, 1fr)';
+        }
+    };
+
+    // Initial layout update
+    updateGalleryLayout();
+
+    // Update layout on window resize
+    window.addEventListener('resize', updateGalleryLayout);
+}

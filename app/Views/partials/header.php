@@ -12,17 +12,17 @@
 
                 <a href="<?= base_url('story') ?>"
                     class="nav-link <?= $uri->getSegment(1) === 'story' ? 'text-white' : 'text-white/80' ?> hover:text-white transition-colors duration-300">
-                    Our Story
+                    About
                 </a>
 
                 <a href="<?= base_url('services') ?>"
                     class="nav-link <?= $uri->getSegment(1) === 'services' ? 'text-white' : 'text-white/80' ?> hover:text-white transition-colors duration-300">
-                    What We Do
+                    Services
                 </a>
 
                 <a href="<?= base_url('work') ?>"
                     class="nav-link <?= $uri->getSegment(1) === 'work' ? 'text-white' : 'text-white/80' ?> hover:text-white transition-colors duration-300">
-                    Our Work
+                    Portfolio
                 </a>
 
                 <a href="<?= base_url('careers') ?>"
@@ -50,15 +50,15 @@
 
             <a href="<?= base_url('story') ?>"
                 class="block <?= $uri->getSegment(1) === 'story' ? 'text-white' : 'text-white/80' ?> hover:text-white transition-colors"
-                data-page="story">Our Story</a>
+                data-page="story">About</a>
 
             <a href="<?= base_url('services') ?>"
                 class="block <?= $uri->getSegment(1) === 'services' ? 'text-white' : 'text-white/80' ?> hover:text-white transition-colors"
-                data-page="services">What We Do</a>
+                data-page="services">Services</a>
 
             <a href="<?= base_url('work') ?>"
                 class="block <?= $uri->getSegment(1) === 'work' ? 'text-white' : 'text-white/80' ?> hover:text-white transition-colors"
-                data-page="work">Our Work</a>
+                data-page="work">Portfolio</a>
 
             <a href="<?= base_url('careers') ?>"
                 class="block <?= $uri->getSegment(1) === 'careers' ? 'text-white' : 'text-white/80' ?> hover:text-white transition-colors"
