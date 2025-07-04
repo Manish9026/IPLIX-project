@@ -5,6 +5,7 @@ gsap.registerPlugin(ScrollTrigger);
 document.addEventListener('DOMContentLoaded', function() {
     initAnimations();
     initMagneticButtons();
+    
 });
 
 function initAnimations() {
@@ -223,6 +224,40 @@ function initAnimations() {
 
 
 
+// function initMagneticButtons() {
+//     document.querySelectorAll('.magnetic-btn').forEach(btn => {
+//         btn.addEventListener('mouseenter', (e) => {
+//             gsap.to(btn, {
+//                 scale: 1.1,
+//                 duration: 0.3,
+//                 ease: 'power2.out'
+//             });
+//         });
+
+//         btn.addEventListener('mouseleave', (e) => {
+//             gsap.to(btn, {
+//                 scale: 1,
+//                 x: 0,
+//                 y: 0,
+//                 duration: 0.3,
+//                 ease: 'power2.out'
+//             });
+//         });
+
+//         btn.addEventListener('mousemove', (e) => {
+//             const rect = btn.getBoundingClientRect();
+//             const x = e.clientX - rect.left - rect.width / 2;
+//             const y = e.clientY - rect.top - rect.height / 2;
+            
+//             gsap.to(btn, {
+//                 x: x * 0.3,
+//                 y: y * 0.3,
+//                 duration: 0.3,
+//                 ease: 'power2.out'
+//             });
+//         });
+//     });
+// }
 function initMagneticButtons() {
     document.querySelectorAll('.magnetic-btn').forEach(btn => {
         btn.addEventListener('mouseenter', (e) => {
@@ -256,7 +291,19 @@ function initMagneticButtons() {
             });
         });
     });
+
+    // Pulse animation for contact icons
+    gsap.utils.toArray('.pulse-animation').forEach(icon => {
+        gsap.to(icon, {
+            scale: 1.2,
+            duration: 1,
+            repeat: -1,
+            yoyo: true,
+            ease: 'power2.inOut'
+        });
+    });
 }
+
 
 // Smooth scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {

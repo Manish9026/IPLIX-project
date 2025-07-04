@@ -24,6 +24,10 @@
                     class="nav-link <?= $uri->getSegment(1) === 'work' ? 'text-white' : 'text-white/80' ?> hover:text-white transition-colors duration-300">
                     Portfolio
                 </a>
+                <a href="<?= base_url('contact') ?>"
+                    class="nav-link <?= $uri->getSegment(1) === 'contact' ? 'text-white' : 'text-white/80' ?> hover:text-white transition-colors capitalize duration-300">
+                    contact us
+                </a>
 
                 <a href="<?= base_url('careers') ?>"
                     class="nav-link <?= $uri->getSegment(1) === 'careers' ? 'text-white' : 'text-white/80' ?> hover:text-white transition-colors duration-300">

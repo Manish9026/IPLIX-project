@@ -1,91 +1,98 @@
 {
-    "hero_content":{
-        "title":"What We",
-        "gradient_text":"Do",
-
-        "description":"We are a full-service creative agency dedicated to helping brands connect with their audience through innovative strategies and compelling storytelling. Our team of experts combines creativity with data-driven insights to deliver exceptional results."
+    "hero_content": {
+        "title": "What We",
+        "gradient_text": "Do",
+        "description": "We are a full-service creative agency dedicated to helping brands connect with their audience through innovative strategies and compelling storytelling. Our team of experts combines creativity with data-driven insights to deliver exceptional results."
     },
-  "services": [
-    {
-      "id": 1,
-      "title": "Brand Strategy",
-      "description": "We help define your brand's core identity, positioning, and messaging strategy to create a strong foundation for all marketing efforts. Our comprehensive approach ensures your brand stands out in the competitive landscape.",
-      "icon": "🎯",
-      "image": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600&h=400&fit=crop",
-      "features": ["Brand Positioning", "Messaging Framework", "Competitive Analysis", "Brand Guidelines"],
-      "isReversed": false
-    },
-    {
-      "id": 2,
-      "title": "Creative Campaigns",
-      "description": "From concept to execution, we create innovative campaigns that capture attention, spark conversations, and drive meaningful engagement across all channels. Every campaign is crafted to tell your unique story.",
-      "icon": "💡",
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=400&fit=crop",
-      "features": ["Campaign Conceptualization", "Creative Direction", "Content Production", "Multi-channel Activation"],
-      "isReversed": true
-    },
-    {
-      "id": 3,
-      "title": "Social Media Marketing",
-      "description": "Building engaged communities and meaningful connections with your audience across all major social platforms. We create content that resonates and drives genuine interaction with your brand.",
-      "icon": "📱",
-      "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop",
-      "features": ["Content Strategy", "Community Management", "Influencer Partnerships", "Social Advertising"],
-      "isReversed": false
-    },
-    {
-      "id": 4,
-      "title": "Digital Growth",
-      "description": "Accelerating your digital presence with data-driven strategies that deliver measurable results and sustainable growth. We focus on ROI and long-term success for your business.",
-      "icon": "🚀",
-      "image": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&h=400&fit=crop",
-      "features": ["Performance Marketing", "SEO & SEM", "Conversion Optimization", "Analytics & Reporting"],
-      "isReversed": true
-    },
-    {
-      "id": 5,
-      "title": "Content Creation",
-      "description": "Crafting compelling stories and visual content that resonates with your audience and reinforces your brand message. From video to photography, we bring your vision to life.",
-      "icon": "✏️",
-      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop",
-      "features": ["Video Production", "Photography", "Copywriting", "Graphic Design"],
-      "isReversed": false
-    },
-    {
-      "id": 6,
-      "title": "Analytics & Insights",
-      "description": "Turning data into actionable insights that inform strategy and optimize performance across all touchpoints. We believe in making decisions based on solid data and measurable results.",
-      "icon": "📊",
-      "image": "https://images.unsplash.com/photo-1500673922987-e212871fec22?w=600&h=400&fit=crop",
-      "features": ["Data Analysis", "Performance Tracking", "Customer Insights", "ROI Measurement"],
-      "isReversed": true
-    }
-  ],
-  
-  "workflow": [
-    {
-      "id": 1,
-      "step": "01",
-      "title": "Discovery",
-      "description": "Understanding your brand, audience, and objectives"
-    },
-    {
-      "id": 2,
-      "step": "02",
-      "title": "Strategy",
-      "description": "Developing a comprehensive roadmap for success"
-    },
-    {
-      "id": 3,
-      "step": "03",
-      "title": "Creation",
-      "description": "Bringing ideas to life with exceptional execution"
-    },
-    {
-      "id": 4,
-      "step": "04",
-      "title": "Optimization",
-      "description": "Continuously improving based on data and insights"
-    }
-  ]
+    "services": [
+        {
+            "id": 7,
+            "title": "Brand Strategy",
+            "description": "From concept to execution, we create innovative campaigns that capture attention, spark conversations, and drive meaningful engagement across all channels. Every campaign is crafted to tell your unique story.",
+            "icon": "\ud83d\ude80",
+            "media": "uploads\/servicesmedia\/1750773236_6c61563c3c8c4cbd50d3.jpg",
+            "features": [
+                "Campaign Conceptualization",
+                "Creative Direction",
+                "Content Production",
+                "Multi-channel Activation"
+            ],
+            "gradient": "from-blue-400 to-cyan-400",
+            "accentColor": "blue-400",
+            "tagColor": "blue-300",
+            "alterColor": "cyan-400",
+            "isReversed": false,
+            "mediaType": "image\/png",
+            "created_at": "2025-06-24 10:17:42",
+            "updated_at": "2025-06-24 10:17:42",
+            "isActive": true
+        },
+        {
+            "id": 8,
+            "title": "Social Media Marketing",
+            "description": "Building engaged communities and meaningful connections with your audience across all major social platforms. We create content that resonates and drives genuine interaction with your brand.",
+            "icon": "\ud83c\udfaf",
+            "media": "uploads\/servicesmedia\/1750773326_1f06ea8b67c4e5663c47.png",
+            "features": [
+                "Content Strategy",
+                "Community Management",
+                "Influencer Partnerships",
+                "Social Advertising"
+            ],
+            "gradient": "from-green-400 to-emerald-400",
+            "accentColor": "green-400",
+            "tagColor": "green-300",
+            "alterColor": "emerald-400",
+            "isReversed": false,
+            "mediaType": "image\/png",
+            "created_at": "2025-06-24 10:30:49",
+            "updated_at": "2025-06-24 10:30:49",
+            "isActive": true
+        },
+        {
+            "id": 9,
+            "title": "DigiMart (product Selling site)",
+            "description": "helooos",
+            "icon": "\ud83d\ude80",
+            "media": "uploads\/servicesmedia\/1750785862_075a5c53ce33a225c2b4.mp4",
+            "features": [
+                "Brand awareness"
+            ],
+            "isReversed": false,
+            "mediaType": "video\/mp4",
+            "created_at": "2025-06-24 17:24:22",
+            "updated_at": "2025-06-24 17:24:22",
+            "isActive": true,
+            "gradient": "from-red-400 to-blue-400",
+            "accentColor": "red-400",
+            "tagColor": "red-300",
+            "alterColor": "blue-400"
+        }
+    ],
+    "workflow": [
+        {
+            "id": 1,
+            "step": "01",
+            "title": "Discovery",
+            "description": "Understanding your brand, audience, and objectives"
+        },
+        {
+            "id": 2,
+            "step": "02",
+            "title": "Strategy",
+            "description": "Developing a comprehensive roadmap for success"
+        },
+        {
+            "id": 3,
+            "step": "03",
+            "title": "Creation",
+            "description": "Bringing ideas to life with exceptional execution"
+        },
+        {
+            "id": 4,
+            "step": "04",
+            "title": "Optimization",
+            "description": "Continuously improving based on data and insights"
+        }
+    ]
 }

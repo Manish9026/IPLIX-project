@@ -1,4 +1,4 @@
-
+<!-- 
         <footer class="py-12 w-[100vw]  bg-gray-900 border-t border-gray-800">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -38,4 +38,170 @@
                 </div>
             </div>
         </footer>
-    
+     -->
+
+
+
+<footer class="bg-slate-900 max-w-[1400px] w-full rounded-[500px] md:mx-auto lg:my-10">
+   
+
+    <!-- Background Animation Elements -->
+
+    <div class="gradient-bg w-full border-[1px] border-purple-400  text-white relative overflow-hidden lg:rounded-[50px] rounded-t-[50px]" style="padding-top: 0px;">
+
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-10 left-10 w-20 h-20 bg-slate-600  rounded-full animate-pulse"></div>
+            <div class="absolute top-32 right-20 w-16 h-16 bg-slate-600 backdrop-blur-sm rounded-full animate-bounce"></div>
+            <div class="absolute bottom-20 left-1/4 w-12 h-12 bg-white rounded-full animate-ping"></div>
+            <div class="absolute bottom-32 right-1/3 w-8 h-8 bg-white rounded-full animate-pulse"></div>
+        </div>
+
+        <div class="container mx-auto px-6 py-16 relative z-10">
+
+            <!-- headers -->
+            <div class="flex flex-col gap-2 items-center justify-center px-6 pb-20">
+                <h2 class="text-4xl font-bold text-center text-gradient-animated ">Elevate Your Content with Orgix </h2>
+                <h5 class="text-lg">Create. Connect. Convert.</h5>
+
+                <button class="px-8 py-2 mt-8 h-14 text-white rounded-2xl font-semibold 
+                 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-purple-500 
+                 animated-gradient shadow-lg">
+                    Let Connect
+                </button>
+
+            </div>
+            <!-- Main Footer Content -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12" id="footer-content">
+
+                <!-- Company Info -->
+                <div class="footer-section">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-code text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">TechCorp</h3>
+                    </div>
+                    <p class="text-gray-200 mb-4 leading-relaxed">
+                        Leading the digital transformation with innovative solutions and cutting-edge technology.
+                    </p>
+                    <div class="flex items-center text-gray-200">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        <span>123 Tech Street, Innovation City, TC 12345</span>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h4 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-link mr-2"></i>
+                        Quick Links
+                    </h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">About Us</a></li>
+                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Services</a></li>
+                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Portfolio</a></li>
+                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Careers</a></li>
+                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div class="footer-section">
+                    <h4 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-cogs mr-2"></i>
+                        Services
+                    </h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Web Development</a></li>
+                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Mobile Apps</a></li>
+                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Cloud Solutions</a></li>
+                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">AI & ML</a></li>
+                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Consulting</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Newsletter -->
+                <div class="footer-section">
+                    <h4 class="text-xl font-semibold mb-6 flex items-center">
+                        <i class="fas fa-envelope mr-2"></i>
+                        Stay Connected
+                    </h4>
+                    <div class="space-y-4">
+                        <div class="flex items-center text-gray-200">
+                            <i class="fas fa-phone mr-3"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="flex items-center text-gray-200">
+                            <i class="fas fa-envelope mr-3"></i>
+                            <span>hello@techcorp.com</span>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="border-t border-white border-opacity-20 pt-8" id="social-section">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="mb-6 md:mb-0">
+                        <h5 class="text-lg font-semibold mb-4 flex items-center">
+                            <span class="wave mr-2">👋</span>
+                            Follow Us
+                        </h5>
+                        <div class="flex space-x-4">
+                            <a href="#" class="social-icon w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 hover:scale-110">
+                                <i class="fab fa-facebook-f text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 hover:scale-110">
+                                <i class="fab fa-twitter text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 hover:scale-110">
+                                <i class="fab fa-linkedin-in text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 hover:scale-110">
+                                <i class="fab fa-instagram text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 hover:scale-110">
+                                <i class="fab fa-youtube text-xl"></i>
+                            </a>
+                            <a href="#" class="social-icon w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-900 hover:scale-110">
+                                <i class="fab fa-github text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Awards/Certifications -->
+                    <div class="hidden  text-center md:text-right">
+                        <p class="text-gray-200 mb-2">Certified & Trusted</p>
+                        <div class="flex space-x-3">
+                            <div class="glass-effect rounded-lg p-3">
+                                <i class="fas fa-award text-yellow-400 text-2xl"></i>
+                            </div>
+                            <div class="glass-effect rounded-lg p-3">
+                                <i class="fas fa-shield-alt text-green-400 text-2xl"></i>
+                            </div>
+                            <div class="glass-effect rounded-lg p-3">
+                                <i class="fas fa-star text-yellow-400 text-2xl"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="border-t border-white border-opacity-20 mt-8 pt-6 text-center" id="copyright">
+                <div class="flex flex-col md:flex-row justify-between items-center text-gray-200">
+                    <p>&copy; 2024 TechCorp. All rights reserved. Made with <i class="fas fa-heart text-red-400 mx-1"></i> by our amazing team.</p>
+                    <div class="flex space-x-6 mt-4 md:mt-0">
+                        <a href="#" class="footer-link hover:text-white">Privacy Policy</a>
+                        <a href="#" class="footer-link hover:text-white">Terms of Service</a>
+                        <a href="#" class="footer-link hover:text-white">Sitemap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</footer>

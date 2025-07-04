@@ -2,8 +2,24 @@
 
 namespace App\Controllers;
 
+use App\Helpers\Utils;
+
 class Pages extends BaseController
 {
+    public function heroData($section)
+    {
+
+        helper('utils');
+
+        $result = \App\Helpers\Utils::getHeroData($section);
+
+        return ['hero' => $result['data'] ?? []];
+    }
+
+    public function index(): string
+    {
+        return view('pages/index', $this->heroData("home"));
+    }
     public function story()
     {
         $file = WRITEPATH . 'data/story.json';
@@ -26,7 +42,13 @@ class Pages extends BaseController
         $teamMembers = $decoded['team_members'] ?? [];
         $galleryItems = $decoded['gallery_items'] ?? [];
 
-        return view('pages/our-story', compact('stats', 'timeline', 'ourMission','teamMembers', 'galleryItems'));
+        return view(
+            'pages/our-story',
+            array_merge(
+                compact('stats', 'timeline', 'ourMission', 'teamMembers', 'galleryItems'),
+                $this->heroData("story")
+            )
+        );
         // return view('pages/our-story',);
     }
 
@@ -39,18 +61,18 @@ class Pages extends BaseController
         }
         $decoded = json_decode(file_get_contents($file), true);
 
-        $heroContent= $decoded['hero_content'] ?? [
+        $heroContent = $decoded['hero_content'] ?? [
             'title' => 'What We Do',
             'description' => 'We are a full-service creative agency dedicated to helping brands connect with their audience through innovative strategies and compelling storytelling. Our team of experts combines creativity with data-driven insights to deliver exceptional results.'
         ];
         $services = $decoded['services'] ?? [];
-        $workflow=$decoded['workflow'] ?? [];
+        $workflow = $decoded['workflow'] ?? [];
 
-        return view('pages/what-we-do', compact('services','workflow','heroContent'));
+        return view('pages/what-we-do', array_merge(compact('services', 'workflow', 'heroContent'), $this->heroData("services")));
     }
     public function work()
     {
-         $file = WRITEPATH . 'data/work.json';
+        $file = WRITEPATH . 'data/work.json';
         if (!file_exists($file)) {
             throw new \RuntimeException("File not found: $file");
         }
@@ -62,12 +84,12 @@ class Pages extends BaseController
         ];
         $projects = $decoded['projects'] ?? [];
 
-        return view("pages/our-work",compact('projects','heroContent'));
+        return view("pages/our-work", array_merge(compact('projects', 'heroContent'), $this->heroData("work")));
     }
 
     public function careers()
     {
-          $file = WRITEPATH . 'data/career.json';
+        $file = WRITEPATH . 'data/career.json';
 
         if (!file_exists($file)) {
             throw new \RuntimeException("File not found: $file");
@@ -75,13 +97,34 @@ class Pages extends BaseController
 
         $json = file_get_contents($file);
         $decoded = json_decode($json, true);
-        $heroContent=$decoded['hero_content'] ?? [
+        $heroContent = $decoded['hero_content'] ?? [
             'title' => 'Your Future Starts Here',
             'gradient_text' => 'Work',
             'description' => 'Join a team of innovators, creators, and leaders. We\'re not just building careers—we\'re shaping the future of digital excellence.'
         ];
         $perks = $decoded['perks'] ?? [];
         $openPositions = $decoded['open_positions'] ?? [];
-        return view('pages/careers',compact('heroContent', 'perks', 'openPositions'));
+        return view('pages/careers', array_merge(compact('heroContent', 'perks', 'openPositions'), $this->heroData("career")));
+    }
+
+    public function contact()
+    {
+
+         $file = WRITEPATH . 'data/services.json';
+        if (!file_exists($file)) {
+            throw new \RuntimeException("File not found: $file");
+        }
+        $decoded = json_decode(file_get_contents($file), true);
+
+        return view('pages/contact',array_merge($this->heroData("contact"),[
+            "services"=> $decoded['services'] ?? []
+        ]));
+    }
+
+    public function dashboard()
+    {
+        // This is a placeholder for the dashboard view
+        // You can add your dashboard logic here
+        return view('dashboard/index');
     }
 }

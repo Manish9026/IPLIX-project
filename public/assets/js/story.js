@@ -5,6 +5,11 @@ document.addEventListener('DOMContentLoaded', function() {
     initStoryAnimations();
     initTeamAnimations();
     initGalleryAnimations();
+    gsap.to('.hero-cta',
+            { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+            '-=0.3'
+        );
+
 
 });
 

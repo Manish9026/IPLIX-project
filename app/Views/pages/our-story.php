@@ -1,5 +1,3 @@
-
-
 <?= $this->extend('layout') ?>
 
 
@@ -99,14 +97,7 @@
         }
     }
 
-    .gradient-text {
-        background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
-        background-size: 300% 300%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        animation: gradientShift 4s ease infinite;
-    }
+
 
     @keyframes gradientShift {
 
@@ -286,7 +277,7 @@
     .gallery-item img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        /* object-fit: cover; */
         transition: transform 0.3s ease;
     }
 
@@ -322,7 +313,7 @@
     }
 
     .gallery-card {
-         will-change: transform;
+        will-change: transform;
         position: relative;
         aspect-ratio: 1 / 1;
         overflow: hidden;
@@ -338,7 +329,7 @@
     .gallery-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: fill;
         transition: all 0.6s ease;
         clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
     }
@@ -520,19 +511,57 @@
                 <div class="planet planet-3" id="planet-3"></div>
             </div>
 
-            <div class="relative z-10 container text-center">
-                <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 opacity-0">
-                    We're here to build
-                    <br />
-                    <span class="gradient-text">icons</span>
-                </h1>
-                <p class="hero-subtitle text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto opacity-0 px-4">
-                    Our journey began with a simple belief: every brand has the potential to become iconic.
-                    Through strategic thinking, creative excellence, and relentless execution, we transform
-                    ordinary businesses into extraordinary brands.
-                </p>
+            <div class="relative z-10 container text-center capitalize">
+
+                <?php if (!empty($hero['title'])) : ?>
+                    <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 opacity-0">
+                        <?= esc($hero['title'] ?? "about title") ?>
+                        <br />
+                        <?php if (!empty($hero['gradientTitle'])) : ?>
+                            <span class="gradient-text"> <?= esc($hero['gradientTitle'] ?? "gradient content title") ?></span>
+                        <?php endif; ?>
+
+                        <br />
+                        <?php if (!empty($hero['subTitle'])) : ?>
+                            <?= esc($hero['subTitle'] ?? "gradient content title") ?>
+                        <?php endif; ?>
+                    </h1>
+                <?php endif; ?>
+
+
+                <?php if (!empty($hero['description'])) : ?>
+                    <p class="hero-subtitle text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto opacity-0 px-4">
+                        <?= esc($hero['description'] ?? "description about page") ?>
+                    </p>
+                <?php endif; ?>
+
+
+
+
+
+                <?php if (!empty($hero['btn']) && count($hero['btn']) > 0 && is_array($hero['btn'])) : ?>
+                    <div class="mt-10 sm:gap-4 gap-2 hero-cta opacity-0 flex flex-wrap sm:flex-row gap-4 justify-center items-center transition-all ease duration-500 ">
+                        <?php foreach ($hero['btn'] as $i => $btn) : ?>
+
+                            <?php if ($i % 2 === 0): ?>
+                                <a href="<?= base_url($btn['link'] ?? "")  ?>" class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-gray-200 transition-all duration-300">
+                                    <?= esc($btn['label'] ?? "") ?>
+                                </a>
+
+                            <?php else: ?>
+                                <a href="<?= base_url($btn['link'] ?? "")  ?>" class="magnetic-btn border border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-white hover:text-black transition-all duration-300">
+                                    <?= esc($btn['label'] ?? "") ?>
+                                </a>
+                            <?php endif; ?>
+
+
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </div>
         </section>
+
+
 
         <!-- Mission Section -->
         <section class="py-20 bg-gray-900">
@@ -678,10 +707,20 @@
                         // Repeat the loop twice for seamless scrolling
                         for ($repeat = 0; $repeat < 2; $repeat++):
                             foreach ($teamMembers as $member):
+                                $profilePic = $member["profilePic"] ?? "";
+                                $emoji = $member['emoji'] ?? ""
                         ?>
                                 <div class="team-card w-[300px] will-change-transform sm:w-[400px] md:w-[600px] bg-gray-900/50 backdrop-blur-sm rounded-xl p-6 border border-gray-800">
                                     <div class="w-20 h-20 bg-gradient-to-br <?= $member['color'] ?> rounded-full mb-4 mx-auto flex items-center justify-center">
-                                        <span class="text-2xl"><?= $member['emoji'] ?></span>
+                                        <?php
+                                        if (!empty($profilePic) && isset($profilePic)  && file_exists(FCPATH . $profilePic)):
+
+                                        ?>
+                                            <img src="<?= base_url($profilePic) ?>" class="rounded-full w-full h-full rounded-full object-fill">
+
+                                        <?php else: ?>
+                                            <span class="text-2xl"><?= $emoji ?></span>
+                                        <?php endif; ?>
                                     </div>
                                     <h3 class="text-xl font-semibold text-center mb-2"><?= htmlspecialchars($member['name']) ?></h3>
                                     <p class="<?= $member['textColor'] ?> text-center mb-3"><?= htmlspecialchars($member['role']) ?></p>
@@ -698,43 +737,58 @@
         </section>
 
         <!-- IMAGE GALLERY -->
-        <section class="py-20 bg-gray-900">
-            <div class="container">
-                <h2 class="section-title text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-16 opacity-0">Our Journey in Pictures</h2>
-                <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto opacity-0 gallery-subtitle">
-                    A visual story of our growth, achievements, and the memorable moments that define who we are.
-                </p>
 
-                <div class="animated-gallery" id="gallery-grid">
-                    <?php foreach ($galleryItems as $index => $item): ?>
-                        <div
-                            class="gallery-item <?= $item['hidden'] ? 'hidden' : '' ?>"
-                    >
-                            <img
-                                src="<?= $item['img'] ?>"
-                                alt="<?= htmlspecialchars($item['alt']) ?>"
-                                class="gallery-image"
-                                loading="lazy">
-                            <div class="gallery-overlay">
-                                <div class="gallery-text">
-                                    <h3 class="font-semibold mb-2"><?= htmlspecialchars($item['title']) ?></h3>
-                                    <p class="text-sm"><?= htmlspecialchars($item['desc']) ?></p>
-                                </div>
+        <?php
+
+        if (!empty($galleryItems) && is_array($galleryItems) && count($galleryItems) > 0) : ?>
+            <section class="py-20 bg-gray-900">
+                <div class="container">
+                    <h2 class="section-title text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-16 opacity-0">Our Journey in Pictures</h2>
+                    <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto opacity-0 gallery-subtitle">
+                        A visual story of our growth, achievements, and the memorable moments that define who we are.
+                    </p>
+
+                    <div class="animated-gallery" id="gallery-grid">
+                        <?php foreach ($galleryItems as $index => $item): ?>
+                            <div
+                                class="gallery-item <?= $item['hidden'] ? 'hidden' : '' ?>">
+                                <?php foreach ($item['media'] as $indx => $media): ?>
+                                    <?php if ($media["type"] == "image") : ?>
+                                        <img
+                                            src="<?= base_url($media['url'] ?? "") ?>"
+                                            alt="<?= htmlspecialchars($item['alt']) ?>"
+                                            class=" text-center  gallery-image object-fill"
+                                            loading="lazy">
+
+                                    <?php else : ?>
+
+                                        <video class="gallery-image text-center" src="<?= base_url($media['url'] ?? "") ?>" muted autoplay loop></video>
+
+                                    <?php endif; ?>
+
+                                    <div class="gallery-overlay">
+                                        <div class="gallery-text">
+                                            <h3 class="font-semibold mb-2"><?= htmlspecialchars($item['title']) ?></h3>
+                                            <p class="text-sm"><?= htmlspecialchars($item['desc']) ?></p>
+                                        </div>
+                                    </div>
+                                <?php endforeach ?>
+
                             </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+                        <?php endforeach; ?>
+                    </div>
 
-                <div class="text-center mt-12">
-                    <button id="view-more-btn" class="view-more-btn">
-                        <span>View More</span>
-                    </button>
-                    <button id="view-less-btn" class="view-more-btn hidden">
-                        <span>View Less</span>
-                    </button>
+                    <div class="text-center mt-12">
+                        <button id="view-more-btn" class="view-more-btn">
+                            <span>View More</span>
+                        </button>
+                        <button id="view-less-btn" class="view-more-btn hidden">
+                            <span>View Less</span>
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        <?php endif ?>
 
 
 

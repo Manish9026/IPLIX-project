@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Wait for dynamic content to be rendered first
     setTimeout(() => {
         initOurWorkAnimations();
-        animateWorkCards();
+        // animateWorkCards();
     }, 100);
 });
 
@@ -19,7 +19,10 @@ function initOurWorkAnimations() {
         { opacity: 0, y: 50 },
         { opacity: 1, y: 0, duration: 1, ease: 'power3.out' },
         '-=0.8'
-    );
+    ).to('.hero-cta',
+            { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
+            '-=0.3'
+        );
 
     // Animate dynamically generated work cards
     animateWorkCards();

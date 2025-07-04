@@ -1,185 +1,138 @@
 {
-  "timeline": [
-    {
-      "id": 1,
-      "year": "2018",
-      "color": "blue-400",
-      "title": "The Beginning",
-      "description": "Founded with a vision to revolutionize digital marketing"
+    "timeline": [
+        {
+            "gradient": "from-green-400 to-orange-400",
+            "accentColor": "green-400",
+            "tagColor": "green-300",
+            "alterColor": "orange",
+            "baseColor": "green",
+            "id": 1,
+            "year": "2018",
+            "color": "blue-400",
+            "title": "The Beginning",
+            "description": "Founded with a vision to revolutionize digital marketing"
+        },
+        {
+            "gradient": "from-sky-400 to-yellow-400",
+            "accentColor": "sky-400",
+            "tagColor": "sky-300",
+            "alterColor": "yellow",
+            "baseColor": "sky",
+            "id": 2,
+            "year": "2019",
+            "color": "purple-400",
+            "title": "First Major Client",
+            "description": "Landed our first Fortune 500 client and grew the team"
+        },
+        {
+            "gradient": "from-pink-400 to-indigo-400",
+            "accentColor": "pink-400",
+            "tagColor": "pink-300",
+            "alterColor": "indigo",
+            "baseColor": "pink",
+            "id": 3,
+            "year": "2021",
+            "color": "cyan-400",
+            "title": "Global Expansion",
+            "description": "Opened offices in London and Singapore"
+        },
+        {
+            "gradient": "from-emerald-400 to-orange-400",
+            "accentColor": "emerald-400",
+            "tagColor": "emerald-300",
+            "alterColor": "orange",
+            "baseColor": "emerald",
+            "id": 4,
+            "year": "2023",
+            "color": "pink-400",
+            "title": "Award Recognition",
+            "description": "Won Digital Agency of the Year award"
+        },
+        {
+            "gradient": "from-yellow-400 to-teal-400",
+            "accentColor": "yellow-400",
+            "tagColor": "yellow-300",
+            "alterColor": "teal",
+            "baseColor": "yellow",
+            "id": 5,
+            "year": "2024",
+            "color": "green-400",
+            "title": "Sustainability Initiatives",
+            "description": "Launched green marketing practices and reduced carbon footprint"
+        }
+    ],
+    "stats": [
+        {
+            "id": 1,
+            "icon": "👥",
+            "value": "50+",
+            "label": "Team Members"
+        },
+        {
+            "id": 2,
+            "icon": "🏆",
+            "value": "200+",
+            "label": "Projects Completed"
+        },
+        {
+            "id": 3,
+            "icon": "🌍",
+            "value": "15+",
+            "label": "Countries Served"
+        },
+        {
+            "id": 4,
+            "icon": "⏰",
+            "value": "6+",
+            "label": "Years of Excellence"
+        },
+        {
+            "id": 5,
+            "icon": "💕💕💕",
+            "value": "90+",
+            "label": "our teams"
+        }
+    ],
+    "our_mission": {
+        "title": "Our Mission",
+        "description": "To empower businesses with innovative, data-driven digital marketing solutions\nthat fuel measurable growth and foster brand sustainability.\nWe transform challenges into opportunities in an evolving digital landscape.",
+        "image": "https:\/\/images.unsplash.com\/photo-1522202176988-66273c2fd55f?w=600"
     },
-    {
-      "id": 2,
-      "year": "2019",
-      "color": "purple-400",
-      "title": "First Major Client",
-      "description": "Landed our first Fortune 500 client and grew the team"
-    },
-    {
-      "id": 3,
-      "year": "2021",
-      "color": "cyan-400",
-      "title": "Global Expansion",
-      "description": "Opened offices in London and Singapore"
-    },
-    {
-      "id": 4,
-      "year": "2023",
-      "color": "pink-400",
-      "title": "Award Recognition",
-      "description": "Won Digital Agency of the Year award"
-    },
-    {
-      "id": 5,
-      "year": "2024",
-      "color": "green-400",
-      "title": "Sustainability Initiatives",
-      "description": "Launched green marketing practices and reduced carbon footprint"
-    }
-  ],
-  "stats": [
-    {
-      "id": 1,
-      "icon": "👥",
-      "value": "50+",
-      "label": "Team Members"
-    },
-    {
-      "id": 2,
-      "icon": "🏆",
-      "value": "200+",
-      "label": "Projects Completed"
-    },
-    {
-      "id": 3,
-      "icon": "🌍",
-      "value": "15+",
-      "label": "Countries Served"
-    },
-    {
-      "id": 4,
-      "icon": "⏰",
-      "value": "6+",
-      "label": "Years of Excellence"
-    }
-  ],
-  "our_mission": {
-    "title": "Our Mission",
-    "description": "To empower businesses with innovative, data-driven digital marketing solutions\nthat fuel measurable growth and foster brand sustainability.\nWe transform challenges into opportunities in an evolving digital landscape.",
-    "image": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600"
-  },
-  "team_members": [
-    {
-      "name": "Alex Johnson",
-      "role": "Creative Director",
-      "color": "from-blue-400 to-purple-600",
-      "emoji": "👨‍💼",
-      "desc": "Leading creative vision with 10+ years of experience in brand strategy.",
-      "textColor": "text-blue-400"
-    },
-    {
-      "name": "Sarah Chen",
-      "role": "Lead Developer",
-      "color": "from-purple-400 to-pink-600",
-      "emoji": "👩‍💻",
-      "desc": "Full-stack expert specializing in modern web technologies and performance.",
-      "textColor": "text-purple-400"
-    },
-    {
-      "name": "Marcus Williams",
-      "role": "UI/UX Designer",
-      "color": "from-green-400 to-blue-600",
-      "emoji": "👨‍🎨",
-      "desc": "Crafting beautiful and intuitive user experiences that convert.",
-      "textColor": "text-green-400"
-    },
-    {
-      "name": "Emily Rodriguez",
-      "role": "Data Analyst",
-      "color": "from-orange-400 to-red-600",
-      "emoji": "👩‍📊",
-      "desc": "Turning data into actionable insights that drive business growth.",
-      "textColor": "text-orange-400"
-    },
-    {
-      "name": "David Kim",
-      "role": "Project Manager",
-      "color": "from-cyan-400 to-blue-600",
-      "emoji": "👨‍💼",
-      "desc": "Ensuring projects deliver on time, on budget, and exceed expectations.",
-      "textColor": "text-cyan-400"
-    },
-    {
-      "name": "Lisa Thompson",
-      "role": "Marketing Strategist",
-      "color": "from-pink-400 to-purple-600",
-      "emoji": "👩‍🚀",
-      "desc": "Building compelling campaigns that resonate with target audiences.",
-      "textColor": "text-pink-400"
-    }
-  ],
-  "gallery_items": [
-    {
-      "title": "Team Collaboration",
-      "desc": "Working together seamlessly",
-      "img": "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600",
-      "alt": "Team collaboration",
-      "hidden": false
-    },
-    {
-      "title": "Office Culture",
-      "desc": "Creative workspace vibes",
-      "img": "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600",
-      "alt": "Office culture",
-      "hidden": false
-    },
-    {
-      "title": "Innovation Hub",
-      "desc": "Technology meets creativity",
-      "img": "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=600",
-      "alt": "Innovation at work",
-      "hidden": false
-    },
-    {
-      "title": "Strategic Planning",
-      "desc": "Mapping digital excellence",
-      "img": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600",
-      "alt": "Strategic planning",
-      "hidden": false
-    },
-    {
-      "title": "Remote Excellence",
-      "desc": "Global talent connection",
-      "img": "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=600",
-      "alt": "Remote collaboration",
-      "hidden": false
-    },
-    {
-      "title": "Creative Process",
-      "desc": "Concept to reality",
-      "img": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600",
-      "alt": "Creative process",
-      "hidden": false
-    },
-    {
-      "title": "Tech Innovation",
-      "desc": "Cutting-edge solutions",
-      "img": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600",
-      "alt": "Technology innovation",
-      "hidden": true
-    },
-    {
-      "title": "Development",
-      "desc": "Building robust solutions",
-      "img": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600",
-      "alt": "Development process",
-      "hidden": true
-    },
-    {
-      "title": "Design Thinking",
-      "desc": "User-centered approach",
-      "img": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=600",
-      "alt": "Design thinking",
-      "hidden": true
-    }
-  ]
+    "team_members": [
+        {
+            "id": "68656b7b21e8a",
+            "name": "Manish Maurya",
+            "role": "Content Creater",
+            "emoji": "🎶",
+            "desc": "hello ,my name is manish mauryaghf",
+            "profilePic": "uploads\/story\/team\/1751477115_2311247b910034c8bd3a.jpg",
+            "color": "from-purple-400 to-purple-600",
+            "textColor": "text-purple-400"
+        },
+        {
+            "id": "6865706d05259",
+            "name": "sachin",
+            "role": "frontend dev",
+            "emoji": "🤣",
+            "desc": "react,tailwind and many more",
+            "profilePic": null,
+            "color": "from-cyan-400 to-cyan-600",
+            "textColor": "text-cyan-400"
+        }
+    ],
+    "gallery_items": [
+        {
+            "title": "DigiMart (product Selling site)",
+            "desc": "dfgfgh",
+            "alt": "fghhfgh",
+            "hidden": false,
+            "id": "6865a6301b757",
+            "media": [
+                {
+                    "url": "uploads\/story\/gallery\/6865a63019f4f.jpg",
+                    "type": "image"
+                }
+            ]
+        }
+    ]
 }

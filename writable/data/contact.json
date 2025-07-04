@@ -1,0 +1,117 @@
+{
+    "company": {
+        "name": "hello",
+        "subTitle": "dfgdfgdf",
+        "description": "gdgfdfgdfgd",
+        "logo": "uploads\/contact\/company\/logo_1751585869.jpg"
+    },
+    "contact": [
+        {
+            "id": "686727a103dc6",
+            "title": "Email",
+            "icon": "fa-solid fa-envelope-open-text",
+            "value": "manishmaurya11365@gmail.com",
+            "description": "We respond within 24 hours"
+        }
+    ],
+    "social": [
+        {
+            "id": "soc1",
+            "title": "Facebook",
+            "link": "https:\/\/facebook.com\/techcorp",
+            "icons": "fab fa-facebook-f",
+            "color": "#3b5998",
+            "isLink": "0"
+        },
+        {
+            "id": "soc2",
+            "title": "Twitter",
+            "link": "https:\/\/twitter.com\/techcorp",
+            "icons": "fab fa-twitter",
+            "color": "#1DA1F2",
+            "isLink": "1"
+        },
+        {
+            "id": "soc3",
+            "title": "LinkedIn",
+            "link": "https:\/\/linkedin.com\/company\/techcorp",
+            "icons": "fab fa-linkedin-in",
+            "color": "#0077B5",
+            "isLink": "1"
+        },
+        {
+            "id": "soc4",
+            "title": "Instagram",
+            "link": "https:\/\/instagram.com\/techcorp",
+            "icons": "fab fa-instagram",
+            "color": "#E1306C",
+            "isLink": "1"
+        },
+        {
+            "id": "soc5",
+            "title": "YouTube",
+            "link": "https:\/\/youtube.com\/techcorp",
+            "icons": "fab fa-youtube",
+            "color": "#FF0000",
+            "isLink": "1"
+        }
+    ],
+    "clients": [
+        {
+            "id": "6867427caba18",
+            "name": "manish maurya",
+            "email": "manishmaurya11555@gmail.com",
+            "service": "Social Media Marketing",
+            "mobNo": "435346445",
+            "message": "dfgdfgfdgtdfgf"
+        },
+        {
+            "id": "6867455f550e6",
+            "name": "manish maurya",
+            "email": "manishmaurya11555@gmail.com",
+            "service": "DigiMart (product Selling site)",
+            "mobNo": "9026123956",
+            "message": "efghfghgh"
+        },
+        {
+            "id": "6867461a6f6ba",
+            "name": "sachim",
+            "email": "manishmaurya11555@gmail.com",
+            "service": "Social Media Marketing",
+            "mobNo": "9026123956",
+            "message": "hello"
+        },
+        {
+            "id": "686746af82407",
+            "name": "werwere",
+            "email": "manishmaurya11555@gmail.com",
+            "service": "Social Media Marketing",
+            "mobNo": "4234334",
+            "message": "454fdgdfgdf"
+        },
+        {
+            "id": "686746c30d7bd",
+            "name": "ghfgh",
+            "email": "manishmaurya11555@gmail.com",
+            "service": "Social Media Marketing",
+            "mobNo": "345456456",
+            "message": "fgdgf"
+        },
+        {
+            "id": "68674848327dd",
+            "name": "rwerewsdfdsfgd",
+            "email": "manishmaurya11555@gmail.com",
+            "service": "DigiMart (product Selling site)",
+            "mobNo": "4585848777",
+            "message": "dfgdfgdfgf"
+        },
+        {
+            "id": "68674a7193688",
+            "name": "manish maurya",
+            "email": "manishmaurya11555@gmail.com",
+            "service": "Social Media Marketing",
+            "mobNo": "3444334334",
+            "message": "fdffdfddf"
+        }
+    ]
+}

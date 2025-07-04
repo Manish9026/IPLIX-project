@@ -171,30 +171,54 @@
             </div>
 
             <div class="container text-center z-10">
-                <h1 class="hero-title text-2xl sm:text-6xl font-bold leading-tight mb-6 sm:mb-8 opacity-0">
+               
+                
+                    <?php if (!empty($hero['title'])) : ?>
+                    <h1 class="hero-title text-2xl sm:text-6xl font-bold leading-tight mb-6 sm:mb-8 opacity-0">
+                        <?= esc($hero['title'] ?? "about title") ?>
+                        <br />
+                        <?php if (!empty($hero['gradientTitle'])) : ?>
+                            <span class="gradient-text"> <?= esc($hero['gradientTitle'] ?? "gradient content title") ?></span>
+                        <?php endif; ?>
+<br/>
+                         <?php if (!empty($hero['subTitle'])) : ?>
+                             <?= esc($hero['subTitle'] ?? "gradient content title") ?>
+                        <?php endif; ?>
 
-                    <?= $heroContent['title'] ?>
 
-                    <br />
-                    <span class="gradient-text">
-                        <?= $heroContent['gradient_text'] ?>
-                    </span>
-                    <br />
-                    <?= $heroContent['subtitle'] ?>
-                </h1>
+                    </h1>
+                <?php endif; ?>
+     
 
-                <p class="hero-subtitle text-sm sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-8 sm:mb-12 opacity-0 px-4">
-                    <?= $heroContent['description'] ?>
-                </p>
 
-                <div class="hero-cta opacity-0 flex flex-col sm:flex-row gap-4 justify-center items-center px-4">
-                    <a href="mailto:careers@iplix.in" class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-gray-200 transition-all duration-300">
-                        Apply Now
-                    </a>
-                    <a href="#open-positions"  class="scroll-link magnetic-btn border border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:bg-white hover:text-black transition-all duration-300">
-                        View Openings
-                    </a>
-                </div>
+                <?php if (!empty($hero['description'])) : ?>
+                    <p class="hero-subtitle text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto opacity-0 px-4">
+                        <?= esc($hero['description'] ?? "description about page") ?>
+                    </p>
+                <?php endif; ?>
+
+
+
+
+                <?php if (!empty($hero['btn']) && count($hero['btn']) > 0 && is_array($hero['btn'])) : ?>
+<div class="mt-10 sm:gap-4 gap-2 hero-cta opacity-0 flex flex-wrap sm:flex-row gap-4 justify-center items-center transition-all ease duration-500 p-4">
+                    <?php foreach ($hero['btn'] as $i => $btn) : ?>
+
+                        <?php if ($i % 2 === 0): ?>
+                            <a href="<?= base_url($btn['link'] ?? "")  ?>" class="magnetic-btn scroll-link bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-gray-200 transition-all duration-300">
+                                <?= esc($btn['label'] ?? "") ?>
+                            </a>
+
+                        <?php else: ?>
+                            <a href="<?= base_url($btn['link'] ?? "")  ?>" class="magnetic-btn scroll-link border border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-white hover:text-black transition-all duration-300">
+                                <?= esc($btn['label'] ?? "") ?>
+                            </a>
+                        <?php endif; ?>
+
+
+                    <?php endforeach; ?>
+</div>
+                <?php endif; ?>
             </div>
         </section>
 

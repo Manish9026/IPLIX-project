@@ -1,0 +1,84 @@
+{
+    "home": {
+        "id": "6865ba3c67920",
+        "title": "fdsfs",
+        "gradientTitle": "Social Growth Starts Here.",
+        "subTitle": "dsfs",
+        "description": "Your vision, our strategy, achieving digital success together",
+        "btn": [
+            {
+                "label": "Get Started       ",
+                "link": "\/services",
+                "design": "bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition-all duration-200"
+            },
+            {
+                "label": "View our work",
+                "link": "\/work",
+                "design": "border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white font-semibold py-2 px-4 rounded-lg transition-all duration-200"
+            }
+        ]
+    },
+    "story": {
+        "id": "68663005b3a60",
+        "title": "sdgdfgf",
+        "gradientTitle": "dsd",
+        "subTitle": "sds",
+        "description": "dsdsdsfsdfsddsfsdf",
+        "btn": []
+    },
+    "services": {
+        "id": "6866390471279",
+        "title": "welcome Back",
+        "gradientTitle": "services",
+        "subTitle": "enjoy it",
+        "description": "We are a full-service creative agency dedicated to helping brands connect with their audience through innovative strategies and compelling storytelling. Our team of experts combines creativity with data-driven insights to deliver exceptional results. ",
+        "btn": []
+    },
+    "work": {
+        "id": "68663c3f23bf3",
+        "title": "welcome Back",
+        "gradientTitle": "explore our works",
+        "subTitle": "enjoy  it",
+        "description": "Explore our diverse portfolio of innovative projects that showcase our expertise in brand strategy, creative campaigns, and digital growth. Each project reflects our commitment to excellence and our passion for helping brands succeed. ",
+        "btn": [
+            {
+                "label": "dsfdf",
+                "link": "dff",
+                "design": "bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition-all duration-200"
+            }
+        ]
+    },
+    "contact": {
+        "id": "",
+        "title": "Get In Touch",
+        "gradientTitle": "",
+        "subTitle": "",
+        "description": "Let's create something amazing together. We're here to bring your vision to life.",
+        "btn": [
+            {
+                "link": "",
+                "label": "Get Started",
+                "design": ""
+            }
+        ]
+    },
+    "career": {
+        "id": "6866445095cec",
+        "title": "Join the Movement",
+        "gradientTitle": "azz",
+        "subTitle": "Grow With Us ",
+        "description": "Join a team of innovators, creators, and leaders. We're not just building careers—we're shaping the future of digital excellence. ",
+        "btn": [
+            {
+                "label": "Apply Now",
+                "link": "\/careers#open-positions",
+                "design": "bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition-all duration-200"
+            },
+            {
+                "label": "View Openings",
+                "link": "\/careers#open-positions",
+                "design": "bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition-all duration-200"
+            }
+        ]
+    }
+}

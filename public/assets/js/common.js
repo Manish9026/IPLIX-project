@@ -1,82 +1,136 @@
+gsap.registerPlugin(ScrollTrigger);
 
-// Common elements for all pages
-const COMMON_ELEMENTS = {
-    navigation: `
-        <nav id="navbar" class="fixed top-0 left-0 right-0 w-[100vw] z-50 transition-all duration-500">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-center py-4">
-                    <a href="index.html" class="text-2xl font-bold text-white logo">IPLIX</a>
-                    
-                    <div class="hidden md:flex space-x-8">
-                        <a href="/" class="nav-link text-white/80 hover:text-white transition-colors duration-300" data-page="home">Home</a>
-                        <a href="./story" class="nav-link text-white/80 hover:text-white transition-colors duration-300" data-page="story">Our Story</a>
-                        <a href="./services" class="nav-link text-white/80 hover:text-white transition-colors duration-300" data-page="services">What We Do</a>
-                        <a href="./work" class="nav-link text-white/80 hover:text-white transition-colors duration-300" data-page="work">Our Work</a>
-                        <a href="./careers" class="nav-link text-white/80 hover:text-white transition-colors duration-300" data-page="careers">Careers</a>
-                    </div>
+function initAnimations() {
+    // Footer entrance animation
+    gsap.set(".footer-section", { y: 50, opacity: 0 });
+    gsap.set("#social-section", { y: 30, opacity: 0 });
+    gsap.set("#copyright", { y: 20, opacity: 0 });
 
-                    <button id="mobile-menu-btn" class="md:hidden text-white">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            
-            <div id="mobile-menu" class="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-800 hidden">
-                <div class="px-4 py-6 space-y-4">
-                    <a href="./" class="block text-white/80 hover:text-white transition-colors" data-page="home">Home</a>
-                    <a href="./story" class="block text-white/80 hover:text-white transition-colors" data-page="story">Our Story</a>
-                    <a href="./services" class="block text-white/80 hover:text-white transition-colors" data-page="services">What We Do</a>
-                    <a href="./work" class="block text-white/80 hover:text-white transition-colors" data-page="work">Our Work</a>
-                    <a href="./careers" class="block text-white/80 hover:text-white transition-colors" data-page="careers">Careers</a>
-                </div>
-            </div>
-        </nav>
-    `,
     
-    footer: `
-        <footer class="py-12 w-[100vw]  bg-gray-900 border-t border-gray-800">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                    <div class="footer-section" data-footer="1">
-                        <h3 class="text-2xl font-bold mb-4">IPLIX</h3>
-                        <p class="text-gray-400 mb-4">Building digital icons through strategic creativity.</p>
-                    </div>
-                    
-                    <div class="footer-section" data-footer="2">
-                        <h4 class="font-semibold mb-4">Company</h4>
-                        <ul class="space-y-2 text-gray-400">
-                            <li><a href="our-story.html" class="hover:text-white transition-colors">Our Story</a></li>
-                            <li><a href="what-we-do.html" class="hover:text-white transition-colors">What We Do</a></li>
-                            <li><a href="careers.html" class="hover:text-white transition-colors">Careers</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-section" data-footer="3">
-                        <h4 class="font-semibold mb-4">Work</h4>
-                        <ul class="space-y-2 text-gray-400">
-                            <li><a href="our-work.html" class="hover:text-white transition-colors">Our Work</a></li>
-                            <li><a href="case-study.html" class="hover:text-white transition-colors">Case Studies</a></li>
-                        </ul>
-                    </div>
-                    
-                    <div class="footer-section" data-footer="4">
-                        <h4 class="font-semibold mb-4">Connect</h4>
-                        <ul class="space-y-2 text-gray-400">
-                            <li><a href="#" class="hover:text-white transition-colors">hello@iplix.in</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors">+91 98765 43210</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <div class="border-t border-gray-800 pt-8 mt-8 text-center text-gray-400">
-                    <p>&copy; 2024 IPLIX. All rights reserved.</p>
-                </div>
-            </div>
-        </footer>
-    `
-};
+    // Create timeline for footer animations
+    const footerTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: "footer",
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+        }
+    });
+
+    // Animate footer sections
+    footerTl
+        .to(".footer-section", {
+            y: 0,
+            opacity: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out"
+        })
+        .to("#social-section", {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out"
+        }, "-=0.4")
+        .to("#copyright", {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out"
+        }, "-=0.2");
+
+    // Water flow animation
+    gsap.timeline({ repeat: -1 })
+        .to(".water-flow::before", {
+            clipPath: "polygon(0 0, 100% 0, 100% 70%, 90% 85%, 75% 75%, 55% 90%, 35% 80%, 20% 95%, 0 80%)",
+            duration: 3,
+            ease: "power2.inOut"
+        })
+        .to(".water-flow::before", {
+            clipPath: "polygon(0 0, 100% 0, 100% 60%, 85% 80%, 70% 70%, 50% 85%, 30% 75%, 15% 90%, 0 75%)",
+            duration: 3,
+            ease: "power2.inOut"
+        });
+
+    // Social icons hover animation
+    const socialIcons = document.querySelectorAll('.social-icon');
+    socialIcons.forEach(icon => {
+        icon.addEventListener('mouseenter', () => {
+            gsap.to(icon, {
+                rotation: 360,
+                duration: 0.6,
+                ease: "power2.out"
+            });
+        });
+    });
+
+    // Newsletter form animation
+    const newsletterInput = document.querySelector('input[type="email"]');
+    const newsletterBtn = document.querySelector('button');
+    
+    newsletterBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (newsletterInput.value) {
+            gsap.to(newsletterBtn, {
+                scale: 0.95,
+                duration: 0.1,
+                yoyo: true,
+                repeat: 1,
+                onComplete: () => {
+                    // Simulate success
+                    newsletterInput.value = '';
+                    newsletterInput.placeholder = 'Thanks for subscribing!';
+                    setTimeout(() => {
+                        newsletterInput.placeholder = 'Enter your email';
+                    }, 3000);
+                }
+            });
+        }
+    });
+
+    // Floating animation for company logo
+    gsap.to(".fas.fa-code", {
+        y: -10,
+        duration: 2,
+        ease: "power2.inOut",
+        yoyo: true,
+        repeat: -1
+    });
+
+    // Parallax effect for background elements
+    gsap.to(".absolute.top-10", {
+        y: -50,
+        duration: 10,
+        ease: "none",
+        repeat: -1,
+        yoyo: true
+    });
+
+    gsap.to(".absolute.top-32", {
+        x: -30,
+        duration: 8,
+        ease: "none",
+        repeat: -1,
+        yoyo: true
+    });
+
+    // Water flow layer animation
+    gsap.to(".water-layer-1", {
+        y: 5,
+        duration: 4,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true
+    });
+
+    gsap.to(".water-layer-2", {
+        y: -3,
+        duration: 6,
+        ease: "sine.inOut",
+        repeat: -1,
+        yoyo: true
+    });
+}
 
 // Common navigation functionality
 function initCommonNavigation() {
@@ -145,54 +199,53 @@ function initCommonNavigation() {
     });
 }
 
-// Function to set active navigation link
-function setActiveNavLink(currentPage) {
-    // Remove active class from all nav links
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        link.classList.add('text-white/80');
-    });
+function initMagneticButtons() {
+    document.querySelectorAll('.magnetic-btn').forEach(btn => {
+        btn.addEventListener('mouseenter', (e) => {
+            gsap.to(btn, {
+                scale: 1.1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
 
-    // Add active class to current page link
-    document.querySelectorAll(`[data-page="${currentPage}"]`).forEach(link => {
-        link.classList.add('active');
-        link.classList.remove('text-white/80');
-        link.classList.add('text-white');
-    });
-}
+        btn.addEventListener('mouseleave', (e) => {
+            gsap.to(btn, {
+                scale: 1,
+                x: 0,
+                y: 0,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
 
-// Function to render navigation
-function renderNavigation(currentPage = '') {
-    // const navContainer = document.querySelector('body');
-    // navContainer.insertAdjacentHTML('afterbegin', COMMON_ELEMENTS.navigation);
-    
-    // // Set active link after rendering
-    // if (currentPage) {
-    //     setActiveNavLink(currentPage);
-    // }
-    
-    // Initialize navigation functionality
-    initCommonNavigation();
-}
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+            
+            gsap.to(btn, {
+                x: x * 0.3,
+                y: y * 0.3,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+    });}
 
-// Function to render footer
-function renderFooter() {
-    const footerContainer = document.querySelector('body');
-    footerContainer.insertAdjacentHTML('beforeend', COMMON_ELEMENTS.footer);
-}
-
-// Function to initialize common elements
-function initCommonElements(currentPage = '') {
-    renderNavigation(currentPage);
-    renderFooter();
-}
 
 // Export for use in other files
 window.CommonElements = {
-    init: initCommonElements,
-    renderNavigation,
-    renderFooter,
-    setActiveNavLink,
     initCommonNavigation
 };
 
+document.addEventListener('DOMContentLoaded', function() {
+
+    initMagneticButtons();
+    initAnimations()
+    lucide.createIcons({
+        attrs: {
+    class: 'w-8 h-8 '
+  }
+    });
+});

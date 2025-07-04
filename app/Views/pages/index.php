@@ -3,198 +3,198 @@
 
 <?= $this->section('styles') ?>
 
-    <style>
-        /* Fix horizontal scroll issues and ensure full screen coverage */
-        html,
-        body {
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden;
-            margin: 0;
-            padding: 0;
-        }
+<style>
+    /* Fix horizontal scroll issues and ensure full screen coverage */
+    html,
+    body {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+    }
 
-        * {
-            box-sizing: border-box;
-        }
+    * {
+        box-sizing: border-box;
+    }
 
-        /* Main container using flexbox */
-        body {
-            font-family: 'Inter', sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            width: 100%;
-        }
+    /* Main container using flexbox */
+    body {
+        font-family: 'Inter', sans-serif;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        width: 100%;
+    }
 
-        /* Ensure all sections use full width */
-        section {
-            width: 100%;
-            flex-shrink: 0;
-            overflow-x: hidden;
-        }
+    /* Ensure all sections use full width */
+    section {
+        width: 100%;
+        flex-shrink: 0;
+        overflow-x: hidden;
+    }
 
-        /* Container fixes */
+    /* Container fixes */
+    .container {
+        width: 100%;
+        margin: 0 auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    @media (min-width: 640px) {
         .container {
-            width: 100%;
-            margin: 0 auto;
-            padding-left: 1rem;
-            padding-right: 1rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .container {
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .container {
+            max-width: 1280px;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+    }
+
+    .hero-text {
+        overflow: hidden;
+    }
+
+    .char {
+        display: inline-block;
+        background: inherit;
+        -webkit-background-clip: inherit;
+        background-clip: inherit;
+        -webkit-text-fill-color: inherit;
+        color: inherit;
+    }
+
+    .floating {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0px);
         }
 
-        @media (min-width: 640px) {
-            .container {
-                padding-left: 1.5rem;
-                padding-right: 1.5rem;
-            }
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+
+    .gradient-text {
+        background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #3b82f6 100%);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: gradientShift 4s ease infinite;
+        display: inline;
+        position: relative;
+        z-index: 1;
+    }
+
+    .gradient-text .char {
+        background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #3b82f6 100%);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+        animation: gradientShift 4s ease infinite;
+    }
+
+    .gradient-text::-moz-selection,
+    .gradient-text .char::-moz-selection {
+        background: rgba(96, 165, 250, 0.3);
+        -webkit-text-fill-color: white;
+        color: white;
+    }
+
+    .gradient-text::selection,
+    .gradient-text .char::selection {
+        background: rgba(96, 165, 250, 0.3);
+        -webkit-text-fill-color: white;
+        color: white;
+    }
+
+    .gradient-text,
+    .gradient-text .char {
+        transform: translateZ(0);
+        will-change: background-position;
+        backface-visibility: hidden;
+    }
+
+    @keyframes gradientShift {
+
+        0%,
+        100% {
+            background-position: 0% 50%;
         }
 
-        @media (min-width: 1024px) {
-            .container {
-                padding-left: 2rem;
-                padding-right: 2rem;
-            }
+        50% {
+            background-position: 100% 50%;
         }
+    }
 
-        @media (min-width: 1280px) {
-            .container {
-                max-width: 1280px;
-                padding-left: 2rem;
-                padding-right: 2rem;
-            }
-        }
-
-        .hero-text {
-            overflow: hidden;
-        }
-
-        .char {
-            display: inline-block;
-            background: inherit;
-            -webkit-background-clip: inherit;
-            background-clip: inherit;
-            -webkit-text-fill-color: inherit;
-            color: inherit;
-        }
-
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #3b82f6 100%);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            animation: gradientShift 4s ease infinite;
-            display: inline;
-            position: relative;
-            z-index: 1;
-        }
-
-        .gradient-text .char {
-            background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #3b82f6 100%);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            animation: gradientShift 4s ease infinite;
-        }
-
-        .gradient-text::-moz-selection,
-        .gradient-text .char::-moz-selection {
-            background: rgba(96, 165, 250, 0.3);
-            -webkit-text-fill-color: white;
-            color: white;
-        }
-
-        .gradient-text::selection,
-        .gradient-text .char::selection {
-            background: rgba(96, 165, 250, 0.3);
-            -webkit-text-fill-color: white;
-            color: white;
-        }
+    @supports not (-webkit-background-clip: text) {
 
         .gradient-text,
         .gradient-text .char {
-            transform: translateZ(0);
-            will-change: background-position;
-            backface-visibility: hidden;
+            background: none;
+            color: #60a5fa;
+            -webkit-text-fill-color: initial;
         }
+    }
 
-        @keyframes gradientShift {
+    .service-card {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
 
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
+    .magnetic-btn {
+        transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
-            50% {
-                background-position: 100% 50%;
-            }
-        }
+    .work-item {
+        transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
 
-        @supports not (-webkit-background-clip: text) {
+    .work-item:hover {
+        transform: scale(1.05) rotateY(5deg);
+    }
 
-            .gradient-text,
-            .gradient-text .char {
-                background: none;
-                color: #60a5fa;
-                -webkit-text-fill-color: initial;
-            }
-        }
+    .parallax-bg {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 
-        .service-card {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .magnetic-btn {
-            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .work-item {
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .work-item:hover {
-            transform: scale(1.05) rotateY(5deg);
-        }
-
+    @media (min-width: 769px) {
         .parallax-bg {
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
+            background-attachment: fixed;
         }
+    }
 
-        @media (min-width: 769px) {
-            .parallax-bg {
-                background-attachment: fixed;
-            }
-        }
-
-        /* Footer positioning */
-        footer {
-            margin-top: auto;
-            width: 100%;
-        }
-    </style>
+    /* Footer positioning */
+    footer {
+        margin-top: auto;
+        width: 100%;
+    }
+</style>
 <?= $this->endSection() ?>
 
 <?= $this->section('content') ?>
@@ -204,39 +204,54 @@
 
     <div class="flex-1 pt-20">
         <!-- Hero Section -->
-        <section class="min-h-screen flex items-center justify-center relative">
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-black"></div>
-            <div class="absolute inset-0">
-                <div class="floating absolute top-20 left-10 w-4 h-4 bg-blue-400 rounded-full opacity-60"></div>
-                <div class="floating absolute top-40 right-20 w-6 h-6 bg-purple-400 rounded-full opacity-40" style="animation-delay: 2s;"></div>
-                <div class="floating absolute bottom-40 left-1/4 w-3 h-3 bg-cyan-400 rounded-full opacity-50" style="animation-delay: 4s;"></div>
-                <div class="floating absolute bottom-20 right-1/3 w-5 h-5 bg-pink-400 rounded-full opacity-30" style="animation-delay: 1s;"></div>
-            </div>
 
-            <div class="container text-center z-10">
-                <div class="hero-text mb-8">
-                    <h1 class="text-4xl sm:text-6xl md:text-6xl lg:text-7xl font-bold leading-tight">
-                        <span class="block hero-line-1">Crafting the core of</span>
-                        <span class="block hero-line-2 gradient-text">Creators’ Economy.</span>
-                        <!-- <span class="block hero-line-3">Icons</span> -->
-                    </h1>
+        <?php if (!empty($hero) && count($hero) > 0 && isset($hero)) : ?>
+
+
+            <section class="min-h-screen flex items-center justify-center relative">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-black"></div>
+                <div class="absolute inset-0">
+                    <div class="floating absolute top-20 left-10 w-4 h-4 bg-blue-400 rounded-full opacity-60"></div>
+                    <div class="floating absolute top-40 right-20 w-6 h-6 bg-purple-400 rounded-full opacity-40" style="animation-delay: 2s;"></div>
+                    <div class="floating absolute bottom-40 left-1/4 w-3 h-3 bg-cyan-400 rounded-full opacity-50" style="animation-delay: 4s;"></div>
+                    <div class="floating absolute bottom-20 right-1/3 w-5 h-5 bg-pink-400 rounded-full opacity-30" style="animation-delay: 1s;"></div>
                 </div>
 
-                <p class="hero-subtitle text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 opacity-0">
-                    Transforming brands into cultural phenomena through strategic storytelling and innovative campaigns.
-                </p>
+                <div class="container text-center z-10">
 
-                <div class="hero-cta opacity-0 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <button class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-gray-200 transition-all duration-300">
-                        Start Your Journey
-                    </button>
-                    <button class="magnetic-btn border border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-white hover:text-black transition-all duration-300">
-                        View Our Work
-                    </button>
+                    <?php if (!empty($hero['title'])) : ?>
+                        <div class="hero-text mb-8">
+                            <h1 class="text-4xl sm:text-6xl md:text-6xl lg:text-7xl font-bold leading-tight">
+
+                                <span class="block hero-line-1"><?= esc($hero['title']) ?></span>
+                                <?php if (!empty($hero['gradientTitle'])) : ?>
+
+                                    <span class="block hero-line-2 gradient-text"><?= esc($hero['gradientTitle']) ?></span>
+                                <?php endif; ?>
+                                <?php if (!empty($hero['subTitle'])) : ?>
+
+                                    <span class="block hero-line-3"><?= esc($hero['subTitle']) ?></span>
+                                <?php endif; ?>
+                            </h1>
+                        </div>
+                    <?php endif; ?>
+
+
+                    <p class="hero-subtitle text-lg sm:text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-12 opacity-0">
+                        <?= esc($hero['description']) ?>
+                    </p>
+
+                    <div class="hero-cta opacity-0 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="<?= base_url($hero['btn'][0]['link'])  ?>" class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-gray-200 transition-all duration-300">
+                            <?= esc($hero['btn'][0]['label']) ?>
+                        </a>
+                        <a href="<?= base_url($hero['btn'][1]['link'])  ?>" class="magnetic-btn border border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-white hover:text-black transition-all duration-300">
+                            <?= esc($hero['btn'][1]['label']) ?>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        </section>
-
+            </section>
+        <?php endif ?>
         <!-- What We Do Section -->
         <section class="py-16 sm:py-20 bg-gradient-to-b from-black to-gray-900">
             <div class="container">
@@ -366,7 +381,7 @@
     <!-- Footer will be rendered by common.js -->
 
     <!-- Common Elements -->
- 
+
     <script>
         // Initialize common elements for home page
         // CommonElements.init('home');
