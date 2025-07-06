@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initContactAnimations();
     initServiceSeectionAnimation()
     initFormInteractions();
-    initNavigation();
+    // initNavigation();
     initMagneticEffects();
 
     setTimeout(() => {
@@ -203,41 +203,6 @@ function initContactAnimations() {
         }
     );
 
-    // Social section animation
-    gsap.fromTo('.social-section',
-        { opacity: 0, y: 50 },
-        {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-                trigger: '.social-section',
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
-            }
-        }
-    );
-
-    // Social links animation
-    gsap.utils.toArray('.social-link').forEach((link, index) => {
-        gsap.fromTo(link,
-            { opacity: 0, scale: 0, rotation: 180 },
-            {
-                opacity: 1,
-                scale: 1,
-                rotation: 0,
-                duration: 0.6,
-                delay: index * 0.1,
-                ease: 'back.out(1.7)',
-                scrollTrigger: {
-                    trigger: link,
-                    start: 'top 90%',
-                    toggleActions: 'play none none reverse'
-                }
-            }
-        );
-    });
 
 
 }
@@ -455,17 +420,17 @@ function initFormInteractions() {
     });
 }
 
-function initNavigation() {
-    const navbar = document.getElementById('navbar');
+// function initNavigation() {
+//     const navbar = document.getElementById('navbar');
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-}
+//     window.addEventListener('scroll', () => {
+//         if (window.scrollY > 50) {
+//             navbar.classList.add('scrolled');
+//         } else {
+//             navbar.classList.remove('scrolled');
+//         }
+//     });
+// }
 
 function initMagneticEffects() {
     document.querySelectorAll('.magnetic-btn').forEach(btn => {
@@ -510,7 +475,9 @@ function initMagneticEffects() {
             duration: 1,
             repeat: -1,
             yoyo: true,
-            ease: 'power2.inOut'
+            ease: 'power2.inOut',
+            transformOrigin: 'center center' ,
+             
         });
     });
 }

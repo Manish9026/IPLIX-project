@@ -2,11 +2,19 @@
 
 namespace App\Controllers;
 
+require_once APPPATH . 'Helpers/Utils.php';
+
 use function PHPUnit\Framework\isEmpty;
 use App\Helpers\Utils;
+use App\Helpers\WorkService;
 
 class DashboardController extends BaseController
 {
+
+    private static $workFile = "singleWork.json";
+    private static $servicesFile = "services.json";
+    private static $storyFile='story.json';
+    private static $careerFile='career.json';
     public function index()
     {
         return view('dashboard/index');
@@ -14,21 +22,21 @@ class DashboardController extends BaseController
 
     public function home()
     {
-        
-         return view('dashboard/home',);
+
+        return view('dashboard/home',);
     }
     public function story()
     {
 
-    $jsonPath = WRITEPATH . 'data/story.json';
-    $jsonData = [];
+        $jsonPath = WRITEPATH . 'data/story.json';
+        $jsonData = [];
 
-    if (file_exists($jsonPath)) {
-        $content = file_get_contents($jsonPath);
-        $jsonData = json_decode($content, true);
-    }
+        if (file_exists($jsonPath)) {
+            $content = file_get_contents($jsonPath);
+            $jsonData = json_decode($content, true);
+        }
 
-     return view('dashboard/story',['story' => $jsonData]);
+        return view('dashboard/story', ['story' => $jsonData]);
     }
     public function services()
     {
@@ -46,33 +54,34 @@ class DashboardController extends BaseController
     }
     public function ourWork()
     {
-        $filePath = WRITEPATH . 'data/work.json';
-        $servicesPath = WRITEPATH . 'data/services.json';
-        $services = file_exists($servicesPath)
-            ? json_decode(file_get_contents($servicesPath), true)
-            : [];
-        // $services=$services['services'];
-        $data = file_exists($filePath)
-            ? json_decode(file_get_contents($filePath), true)
-            : [];
-                    $result = Utils::getHeroData('home');
-         $hero=!empty($result['data']) && isset($result['data'])?$result["data"]:[];
-        // echo(isEmpty($data['data']));
 
-        return view('dashboard/our-work', ['services' => $services["services"],'projects'=> $data["projects"],'hero'=>$hero]);
-            //   return view('dashboard/our-work', ['projects'=> $data["projects"]]);
+        $workList = Utils::read("singleWork.json");
+        $services = Utils::read("services.json");
+        $projects= WorkService::getMergedData();
+
+        $result = Utils::getHeroData('home');
+        $hero = !empty($result['data']) && isset($result['data']) ? $result["data"] : [];
+
+        return view('dashboard/our-work', ['projects' => $projects,'services'=>$services, 'workList' => $workList, 'hero' => $hero]);
     }
     public function contact()
     {
-         $filePath = WRITEPATH . 'data/contact.json';
-         $data = file_exists($filePath)
+        $filePath = WRITEPATH . 'data/contact.json';
+        $data = file_exists($filePath)
             ? json_decode(file_get_contents($filePath), true)
             : [];
-        return view('dashboard/contact',["info"=>$data]);
+        return view('dashboard/contact', ["info" => $data]);
     }
-    public function hero(){
+    public function hero()
+    {
 
-         return view('dashboard/hero',);
+        return view('dashboard/hero',);
+    }
+    public function manageWork()
+    {
+
+
+        return view('dashboard/singleWork',);
     }
 
 

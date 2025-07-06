@@ -1,11 +1,21 @@
 <?php
 
 namespace App\Controllers;
+require_once APPPATH . 'Helpers/Utils.php';
 
 use App\Helpers\Utils;
+use App\Helpers\WorkService;
+
 
 class Pages extends BaseController
 {
+    private static $workFile = "singleWork.json";
+    private static $servicesFile = "services.json";
+    private static $storyFile='story.json';
+    private static $careerFile='career.json';
+
+
+
     public function heroData($section)
     {
 
@@ -18,20 +28,19 @@ class Pages extends BaseController
 
     public function index(): string
     {
-        return view('pages/index', $this->heroData("home"));
+        $workList=Utils::read(self::$workFile);
+        $services=Utils::read(self::$servicesFile)['services'] ?? [];
+
+        
+        return view('pages/index', array_merge($this->heroData("home"),[
+            'services'=>Utils::getRandomList($services,5,'title'),
+            'workList'=>Utils::getRandomList($workList,5,'id'),
+        ]));
     }
     public function story()
     {
-        $file = WRITEPATH . 'data/story.json';
 
-        if (!file_exists($file)) {
-            throw new \RuntimeException("File not found: $file");
-        }
-
-        $json = file_get_contents($file);
-        $decoded = json_decode($json, true);
-
-        // $data['timeline'] = $decoded['timeline'] ?? [];
+        $decoded = Utils::read(self::$storyFile) ?? [];
         $stats = $decoded['stats'] ?? [];
         $timeline = $decoded['timeline'] ?? [];
         $ourMission = $decoded['our_mission'] ?? [
@@ -55,11 +64,8 @@ class Pages extends BaseController
     public function services()
     {
 
-        $file = WRITEPATH . 'data/services.json';
-        if (!file_exists($file)) {
-            throw new \RuntimeException("File not found: $file");
-        }
-        $decoded = json_decode(file_get_contents($file), true);
+
+        $decoded = Utils::read(self::$servicesFile) ?? [];
 
         $heroContent = $decoded['hero_content'] ?? [
             'title' => 'What We Do',
@@ -72,53 +78,50 @@ class Pages extends BaseController
     }
     public function work()
     {
-        $file = WRITEPATH . 'data/work.json';
-        if (!file_exists($file)) {
-            throw new \RuntimeException("File not found: $file");
-        }
-        $decoded = json_decode(file_get_contents($file), true);
-        $heroContent = $decoded['hero_content'] ?? [
-            'title' => 'Our',
-            'gradient_text' => 'Work',
-            'description' => 'Explore our diverse portfolio of innovative projects that showcase our expertise in brand strategy, creative campaigns, and digital growth. Each project reflects our commitment to excellence and our passion for helping brands succeed.'
-        ];
-        $projects = $decoded['projects'] ?? [];
 
-        return view("pages/our-work", array_merge(compact('projects', 'heroContent'), $this->heroData("work")));
+        $projects=WorkService::getMergedData();
+        return view("pages/our-work", array_merge(compact('projects', ), $this->heroData("work")));
     }
 
     public function careers()
     {
-        $file = WRITEPATH . 'data/career.json';
-
-        if (!file_exists($file)) {
-            throw new \RuntimeException("File not found: $file");
-        }
-
-        $json = file_get_contents($file);
-        $decoded = json_decode($json, true);
-        $heroContent = $decoded['hero_content'] ?? [
-            'title' => 'Your Future Starts Here',
-            'gradient_text' => 'Work',
-            'description' => 'Join a team of innovators, creators, and leaders. We\'re not just building careers—we\'re shaping the future of digital excellence.'
-        ];
-        $perks = $decoded['perks'] ?? [];
-        $openPositions = $decoded['open_positions'] ?? [];
-        return view('pages/careers', array_merge(compact('heroContent', 'perks', 'openPositions'), $this->heroData("career")));
+        $career = Utils::read(self::$careerFile) ?? [];
+        $perks = $career['perks'] ?? [];
+        $openPositions = $career['open_positions'] ?? [];
+        return view('pages/careers', array_merge(compact('perks', 'openPositions'), $this->heroData("career")));
     }
 
     public function contact()
     {
 
-         $file = WRITEPATH . 'data/services.json';
-        if (!file_exists($file)) {
-            throw new \RuntimeException("File not found: $file");
-        }
-        $decoded = json_decode(file_get_contents($file), true);
 
+        $serviceData=Utils::read(self::$servicesFile) ?? [];
+        $contact=Utils::read("contact.json");
         return view('pages/contact',array_merge($this->heroData("contact"),[
-            "services"=> $decoded['services'] ?? []
+            "services"=> $serviceData['services'] ?? [],
+            "info"=>$contact
         ]));
+    }
+    public function workCaseStudy($title=null){
+
+        try{
+            
+            if(!empty($title)){
+                $workList = WorkService::getWorks($title);
+                if(empty($workList) || count($workList)<=0 || !is_array($workList)) throw new \Exception("Something went wrong!");
+
+                return view('pages/singleWork',["workList"=>$workList[0]]);
+            }
+
+
+        }catch (\Throwable $e) {
+            return $this->response->setJSON([
+                'status' => false,
+                'message' => 'Unexpected error',
+                'error' => $e->getMessage()
+            ])->setStatusCode(500);
+        }
+
     }
 
     public function dashboard()

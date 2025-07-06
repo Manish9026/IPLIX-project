@@ -68,6 +68,13 @@
         <span>Contact</span>
     </a>
 
+     <a href="<?= base_url('dashboard/manage-work') ?>" 
+       class="sidebar-item flex items-center space-x-3 p-3 rounded-lg <?= $uri->getSegment(2) === 'manage-work' ? 'active' : '' ?>" 
+       data-page="contact">
+        <i data-lucide="mail" class="w-5 h-5"></i>
+        <span>Manage Project</span>
+    </a>
+
     <a href="<?= base_url('dashboard/case-studies') ?>" 
        class="sidebar-item flex items-center space-x-3 p-3 rounded-lg <?= $uri->getSegment(2) === 'case-studies' ? 'active' : '' ?>" 
        data-page="case-studies">

@@ -60,11 +60,21 @@ $clients = $info['clients'] ?? [];
                 </div>
             </div>
 
+            <div class="flex flex-wrap justify-between w-full items-center">
+
+            
+               <div>
+                <h3 class="font-semibold text-gray-200 mb-2">Company Address</h3>
+                <p id="companyDescription" class="text-gray-300 text-sm leading-relaxed">    <i class="fa-solid fa-location-dot animate-pulse mr-4 text-indigo-600"></i> <?= esc($company['address']) ?></p>
+            </div>
+
             <!-- Description -->
             <div>
-                <h3 class="font-semibold text-gray-700 mb-2">Description</h3>
-                <p id="companyDescription" class="text-gray-600 text-sm leading-relaxed"><?= esc($company['description']) ?></p>
+                <h3 class="font-semibold text-gray-200 mb-2">Description</h3>
+                <p id="companyDescription" class="text-gray-400 text-sm leading-relaxed"><?= esc($company['description']) ?></p>
             </div>
+            </div>
+        
         </section>
     <?php else : ?>
         <span class="glass-card mb-6 p-6 flex items-center justify-center flex-col rounded-xl gap-4">
@@ -183,65 +193,69 @@ $clients = $info['clients'] ?? [];
 
     <!-- Contact Messages -->
 
-     <?php
+    <?php
 
     if (isset($clients) && is_array($clients) && count($clients)): ?>
-    
 
-    <div class="glass-card p-6 rounded-xl">
-        <h4 class="text-lg font-semibold mb-4 text-indigo-400">Recent Messages</h4>
-        <div class="overflow-x-auto">
-            <table class="data-table w-full">
-                <thead>
-                    <tr class="border-b border-gray-700">
-                        <th class="text-left p-3">Name</th>
-                        <th class="text-left p-3">Email</th>
-                        <th class="text-left p-3">Subject</th>
-                        <th class="text-left p-3">Date</th>
-                        <th class="text-left p-3">Status</th>
-                        <th class="text-left p-3">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                     <?php foreach ($clients as $item) : ?>
-                  <tr>
-                        <td class="p-3 font-medium"><?= esc($item['name'] ?? "") ?></td>
-                        <td class="p-3 text-gray-400"><?= esc($item['email'] ?? "") ?></td>
-                        <td class="p-3 min-w-[250px]"><?= esc($item['service'] ?? "") ?></td>
-                        <td class="p-3 text-gray-400">2024-01-15</td>
-                        <td class="p-3">
-                            <span class="px-2 py-1 bg-yellow-400/20 text-yellow-400 rounded-full text-xs">Pending</span>
-                        </td>
-                        <td class="p-3">
-                            <div class="flex space-x-2">
-                                <button onclick="replyMessage(1)" class="action-btn bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded text-xs">
-                                    <i data-lucide="reply" class="w-3 h-3"></i>
-                                </button>
-                                <button onclick="viewItem('message', 1)" class="action-btn bg-green-600 hover:bg-green-700 px-2 py-1 rounded text-xs">
-                                    <i data-lucide="eye" class="w-3 h-3"></i>
-                                </button>
-                                <button 
-                                
-                                onclick="deleteItem('message', 1)" class="action-btn bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-xs">
-                                    <i data-lucide="trash-2" class="w-3 h-3"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
+
+        <div class="glass-card p-6 rounded-xl">
+            <h4 class="text-lg font-semibold mb-4 text-indigo-400">Recent Messages</h4>
+            <div class="overflow-x-auto">
+                <table class="data-table w-full">
+                    <thead>
+                        <tr class="border-b border-gray-700">
+                            <th class="text-left p-3">Name</th>
+                            <th class="text-left p-3">Email</th>
+                            <th class="text-left p-3">Subject</th>
+                            <th class="text-left p-3">Date</th>
+                            <th class="text-left p-3">Status</th>
+                            <th class="text-left p-3">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($clients as $item) : ?>
+                            <tr>
+                                <td class="p-3 font-medium"><?= esc($item['name'] ?? "") ?></td>
+                                <td class="p-3 text-gray-400"><?= esc($item['email'] ?? "") ?></td>
+                                <td class="p-3 min-w-[250px]"><?= esc($item['service'] ?? "") ?></td>
+                                <td class="p-3 text-gray-400">2024-01-15</td>
+                                <td class="p-3">
+                                    <span class="px-2 py-1 border border-yellow-400/60 text-yellow-400 rounded-full text-xs"><?= esc($item['mobNo'] ?? "")?></span>
+                                </td>
+                                <td class="p-3">
+                                    <div class="flex space-x-2">
+                                        <button onclick="replyMessage(1)" class="action-btn bg-blue-600 hover:bg-blue-700 px-2 py-1 rounded text-xs">
+                                            <i data-lucide="reply" class="w-3 h-3"></i>
+                                        </button>
+                                        <button 
+                                          data-client='<?= htmlspecialchars(json_encode($item ?? [], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP)) ?>'
+                                onclick="viewItem('client',JSON.parse(this.dataset.client))"
+                                        
+                                        class="action-btn bg-green-600 hover:bg-green-700 px-2 py-1 rounded text-xs">
+                                            <i data-lucide="eye" class="w-3 h-3"></i>
+                                        </button>
+                                        <button
+
+                                            onclick="onContactDelete('client', '<?=esc($item['id'])?>')" class="action-btn bg-red-600 hover:bg-red-700 px-2 py-1 rounded text-xs">
+                                            <i data-lucide="trash-2" class="w-3 h-3"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
-               
-         
+
+
     <?php else : ?>
         <span class="glass-card capitalize mb-6 p-6 flex items-center justify-center flex-col rounded-xl gap-4">
             <h3>no messages </h3>
 
         </span>
     <?php endif; ?>
-    
+
 </div>
 <?= $this->section('scripts') ?>
 <script src="<?= base_url('assets/js/dashboard/contact.js') ?>"></script>

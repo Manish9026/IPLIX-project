@@ -1,5 +1,16 @@
-<?= $this->extend('layout') ?>
+<?php
+$workList = $workList ?? [];
+function limitToWords(string $text, int $limit = 20): string
+{
+    $words = preg_split('/\s+/', strip_tags($text));
+    if (count($words) > $limit) {
+        return implode(' ', array_slice($words, 0, $limit)) . '...';
+    }
+    return $text;
+}
 
+?>
+<?= $this->extend('layout') ?>
 
 <?= $this->section('styles') ?>
 
@@ -253,102 +264,111 @@
             </section>
         <?php endif ?>
         <!-- What We Do Section -->
-        <section class="py-16 sm:py-20 bg-gradient-to-b from-black to-gray-900">
-            <div class="container">
-                <h2 class="section-title text-3xl sm:text-5xl md:text-7xl font-bold text-center mb-12 sm:mb-16 opacity-0">
-                    What We <span class="gradient-text">Do</span>
-                </h2>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-                    <div class="service-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-service="1">
-                        <div class="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">🎯</div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Brand Strategy</h3>
-                        <p class="text-gray-400 text-sm sm:text-base">Defining your brand's core identity and positioning strategy.</p>
+
+
+        <?php if (!empty($services) && count($services) > 0 && isset($services)) : ?>
+            <section class="py-16 sm:py-20 bg-gradient-to-b from-black to-gray-900">
+                <div class="container">
+                    <h2 class="section-title text-3xl sm:text-5xl md:text-7xl font-bold text-center mb-12 sm:mb-16 opacity-0">
+                        What We <span class="gradient-text">Do</span>
+                    </h2>
+
+                    <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] ">
+
+                        <?php foreach ($services as $i => $service):
+                            $subTitle = "";
+                            if (isset($service['subTitle']) && !empty($service['subTitle'])) {
+                                $subTitle = '<p class="text-gray-400 text-sm sm:text-base">' . esc(limitToWords($service['subTitle'], 15))
+
+                                    . '</p>
+                    ';
+                            } else {
+                                $subTitle = '<p class="text-gray-400 max-h-[200px]  text-sm sm:text-base">' . esc(limitToWords($service['description'], 15))
+
+                                    . '</p>
+                    ';
+                            }
+                        ?>
+                            <div class="service-card sm:m-4 m-2 p-6 max-w-[400px] sm:p-8 rounded-2xl text-center group opacity-0 min-w-[250px]" data-service="<?= esc($i) ?>">
+                                <div class="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300"><?= esc($service['icon'] ?? '🎯') ?></div>
+                                <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4"><?= esc($service['title']) ?></h3>
+                                <p class="text-gray-400 text-sm sm:text-base">
+
+                                    <?= $subTitle ?></p>
+                            </div>
+                        <?php endforeach; ?>
+
+
+
                     </div>
 
-                    <div class="service-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-service="2">
-                        <div class="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">💡</div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Creative Campaigns</h3>
-                        <p class="text-gray-400 text-sm sm:text-base">Innovative campaigns that capture attention and drive engagement.</p>
-                    </div>
-
-                    <div class="service-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-service="3">
-                        <div class="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">📱</div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Social Media</h3>
-                        <p class="text-gray-400 text-sm sm:text-base">Building engaged communities across all major platforms.</p>
-                    </div>
-
-                    <div class="service-card p-6 sm:p-8 rounded-2xl text-center group opacity-0" data-service="4">
-                        <div class="text-3xl sm:text-4xl mb-4 sm:mb-6 group-hover:scale-110 transition-transform duration-300">🚀</div>
-                        <h3 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Digital Growth</h3>
-                        <p class="text-gray-400 text-sm sm:text-base">Data-driven strategies for measurable results.</p>
+                    <div class="text-center mt-8 sm:mt-12">
+                        <a href="./services" class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-200 transition-all duration-300 text-sm sm:text-base">
+                            View All Services
+                        </a>
                     </div>
                 </div>
+            </section>
+        <?php endif ?>
 
-                <div class="text-center mt-8 sm:mt-12">
-                    <a href="./services" class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-200 transition-all duration-300 text-sm sm:text-base">
-                        View All Services
-                    </a>
-                </div>
-            </div>
-        </section>
+
+
 
         <!-- Our Work Section -->
-        <section class="py-16 sm:py-20 bg-gray-900">
-            <div class="container">
-                <h2 class="section-title text-3xl sm:text-5xl md:text-7xl font-bold text-center mb-12 sm:mb-16 opacity-0">
-                    Our <span class="gradient-text">Work</span>
-                </h2>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                    <a href="./case-study" class="work-item block group opacity-0" data-work="1">
-                        <div class="bg-black/50 rounded-2xl border border-gray-800 overflow-hidden">
-                            <div class="aspect-video bg-gradient-to-br from-blue-500 to-purple-600 relative overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600" alt="Tech Burner" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                            </div>
-                            <div class="p-4 sm:p-6">
-                                <div class="text-xs sm:text-sm text-blue-400 mb-2">Technology</div>
-                                <h3 class="text-lg sm:text-xl font-semibold mb-3 group-hover:text-blue-400 transition-colors">Tech Burner</h3>
-                                <p class="text-gray-400 text-sm sm:text-base">Transforming a tech reviewer into a digital icon</p>
-                            </div>
-                        </div>
-                    </a>
+        <?php if (!empty($workList) && count($workList) > 0 && isset($workList)) : ?>
+            <section class="py-16 sm:py-20 bg-gray-900">
+                <div class="container">
+                    <h2 class="section-title text-3xl sm:text-5xl md:text-7xl font-bold text-center mb-12 sm:mb-16 opacity-0">
+                        Our <span class="gradient-text">Work</span>
+                    </h2>
+                    <div class="swiper mySwiper w-full">
+                        <div class="swiper-wrapper">
 
-                    <div class="work-item block group opacity-0" data-work="2">
-                        <div class="bg-black/50 rounded-2xl border border-gray-800 overflow-hidden">
-                            <div class="aspect-video bg-gradient-to-br from-green-500 to-teal-600 relative overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600" alt="Lifestyle Brand" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <div class="p-4 sm:p-6">
-                                <div class="text-xs sm:text-sm text-green-400 mb-2">Fashion</div>
-                                <h3 class="text-lg sm:text-xl font-semibold mb-3 group-hover:text-green-400 transition-colors">Lifestyle Brand</h3>
-                                <p class="text-gray-400 text-sm sm:text-base">Building a sustainable fashion brand from the ground up</p>
-                            </div>
+                            <?php foreach ($workList as $i => $item):
+
+
+                            ?>
+
+                                <a href="./case-study" class="work-item  swiper-slide block group opacity-0 h-[350px] md:h-[400px] " data-work="<?= esc($i) ?>">
+                                    <div class="bg-black/50 min-h-full flex flex-col rounded-2xl border border-gray-800 overflow-hidden">
+                                        <div class="flex-1 max-h-[70%] h-full bg-gradient-to-br from-<?= esc($item['baseColor'] ?? "blue") ?>-500 to-<?= esc($item['alterColor'] ?? "teal") ?>-600 relative overflow-hidden">
+                                            <img src="<?= base_url($item['cardMedia'][0]['url'] ?? "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600") ?>" alt="<?= esc($item['title']) ?>" class="w-full h-full object-fill absolute  group-hover:scale-110 transition-transform duration-500">
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                        </div>
+                                        <div class="p-4 sm:p-6">
+                                            <div class="text-xs sm:text-sm text-<?= esc($item['baseColor'] ?? "blue") ?>-400 mb-2"><?= esc($item['catTitle']) ?></div>
+                                            <h3 class="text-lg sm:text-xl font-semibold mb-3 group-hover:text-<?= esc($item['baseColor'] ?? "blue")  ?>-400 transition-colors"><?= esc($item['title']) ?></h3>
+                                            <p class="text-gray-400 text-sm sm:text-base"><?= esc($item['description']) ?></p>
+                                        </div>
+                                    </div>
+                                </a>
+
+
+                            <?php endforeach; ?>
+
+
+                            <!-- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"> -->
+
+
+
+
+                            <!-- </div> -->
                         </div>
+                        <div class="swiper-pagination bottom-0"></div>
                     </div>
 
-                    <div class="work-item block group opacity-0" data-work="3">
-                        <div class="bg-black/50 rounded-2xl border border-gray-800 overflow-hidden">
-                            <div class="aspect-video bg-gradient-to-br from-orange-500 to-red-600 relative overflow-hidden">
-                                <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600" alt="Food Delivery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <div class="p-4 sm:p-6">
-                                <div class="text-xs sm:text-sm text-orange-400 mb-2">Food & Beverage</div>
-                                <h3 class="text-lg sm:text-xl font-semibold mb-3 group-hover:text-orange-400 transition-colors">Food Delivery App</h3>
-                                <p class="text-gray-400 text-sm sm:text-base">Launching a hyperlocal food delivery platform</p>
-                            </div>
-                        </div>
+                    <div class="text-center mt-8 sm:mt-12">
+                        <a href="./portfolio" class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-200 transition-all duration-300 text-sm sm:text-base">
+                            View All Projects
+                        </a>
                     </div>
-                </div>
+            </section>
+        <?php endif ?>
 
-                <div class="text-center mt-8 sm:mt-12">
-                    <a href="./work" class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-gray-200 transition-all duration-300 text-sm sm:text-base">
-                        View All Projects
-                    </a>
-                </div>
-            </div>
-        </section>
+
+
 
         <!-- Our Story Teaser -->
         <section class="py-16 sm:py-20 bg-black parallax-bg" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200');">

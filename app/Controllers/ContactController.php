@@ -3,7 +3,10 @@
 namespace App\Controllers;
 
 use CodeIgniter\HTTP\ResponseInterface;
+use App\Helpers\Utils;
 use CodeIgniter\Files\File;
+
+use function PHPUnit\Framework\isEmpty;
 
 class ContactController extends BaseController
 {
@@ -46,10 +49,13 @@ class ContactController extends BaseController
                 'name'        => 'required|min_length[2]',
                 'subTitle'    => 'permit_empty|string',
                 'description' => 'required|min_length[10]',
-                'logo'        => 'uploaded[logo]|is_image[logo]|max_size[logo,2048]', // Optional
+                'logo'        => 'permit_empty|uploaded[logo]|is_image[logo]|max_size[logo,2048]', // Optional
             ]);
+              // Load existing JSON
+            $contactData = $this->readJson() ?? [];
 
             // Skip logo validation if not uploaded
+            if(!isEmpty($contactData["company"]))
             if (!$request->getFile('logo')->isValid()) {
                 unset($validation->getRules()['logo']);
             }
@@ -66,13 +72,10 @@ class ContactController extends BaseController
             $name = $request->getPost('name');
             $subTitle = $request->getPost('subTitle') ?? '';
             $description = $request->getPost('description');
+             $address = $request->getPost('address');
             $newLogoPath = null;
 
-            // Load existing JSON
-            $jsonPath = WRITEPATH . 'data/contact.json';
-            $contactData = file_exists($jsonPath)
-                ? json_decode(file_get_contents($jsonPath), true)
-                : [];
+          
 
             if (json_last_error() !== JSON_ERROR_NONE) {
                 return $this->response->setJSON([
@@ -108,11 +111,14 @@ class ContactController extends BaseController
                 'name' => $name,
                 'subTitle' => $subTitle,
                 'description' => $description,
+                'address'=>$address,
                 'logo' => $newLogoPath ?? ($contactData['company']['logo'] ?? '')
             ];
 
             // Save updated JSON
-            file_put_contents($jsonPath, json_encode($contactData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+            // file_put_contents($jsonPath, json_encode($contactData, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+
+            $this->writeJson($contactData);
 
             return $this->response->setJSON([
                 'status' => true,
@@ -127,8 +133,6 @@ class ContactController extends BaseController
             ])->setStatusCode(500);
         }
     }
-
-
 
 
     public function saveContact()
@@ -360,8 +364,6 @@ class ContactController extends BaseController
 
     // client fumctions
 
-
-    // POST: /api/contact/clients/save
     public function saveClient()
     {
         $request = $this->request;
@@ -449,12 +451,10 @@ class ContactController extends BaseController
             ])->setStatusCode(500);
         }
     }
-
-    // DELETE: /api/contact/clients/delete
-    public function deleteClient()
+    public function deleteClient($id=null)
     {
         $request = $this->request;
-        $id = $request->getPost('id');
+        // $id = $request->getPost('id');
 
         if (!$id) {
             return $this->response->setJSON([

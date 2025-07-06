@@ -6,7 +6,7 @@ function initAnimations() {
     gsap.set("#social-section", { y: 30, opacity: 0 });
     gsap.set("#copyright", { y: 20, opacity: 0 });
 
-    
+
     // Create timeline for footer animations
     const footerTl = gsap.timeline({
         scrollTrigger: {
@@ -55,11 +55,39 @@ function initAnimations() {
     // Social icons hover animation
     const socialIcons = document.querySelectorAll('.social-icon');
     socialIcons.forEach(icon => {
-        icon.addEventListener('mouseenter', () => {
+        icon.addEventListener('mouseenter', (e) => {
+
             gsap.to(icon, {
-                rotation: 360,
+
+                y: -5,
+
                 duration: 0.6,
-                ease: "power2.out"
+                ease: "power2.out",
+                onCompelete: () => {
+                    gsap.to(e.target?.firstElementChild, {
+                        y: -4,
+                        duration: 0.6,
+                        ease: "power2.out",
+                    })
+                }
+
+            });
+        });
+
+        icon.addEventListener("mouseleave", (e) => {
+            gsap.to(icon, {
+                rotation: 0,
+
+                y: 0,
+                duration: 0.6,
+                ease: "power2.out",
+                onCompelete: () => {
+                    gsap.to(e.target?.firstElementChild, {
+                        y: 0,
+                        duration: 0.6,
+                        ease: "power2.out",
+                    })
+                }
             });
         });
     });
@@ -67,7 +95,7 @@ function initAnimations() {
     // Newsletter form animation
     const newsletterInput = document.querySelector('input[type="email"]');
     const newsletterBtn = document.querySelector('button');
-    
+
     newsletterBtn.addEventListener('click', (e) => {
         e.preventDefault();
         if (newsletterInput.value) {
@@ -162,18 +190,18 @@ function initCommonNavigation() {
 
     mobileMenuBtn?.addEventListener('click', () => {
         isMenuOpen = !isMenuOpen;
-        
+
         console.log(isMenuOpen);
-        
+
         if (isMenuOpen) {
             mobileMenu.classList.remove('hidden');
             // mobileMenu.classList.add('flex');
 
-            gsap.fromTo(mobileMenu, 
+            gsap.fromTo(mobileMenu,
                 { opacity: 0, y: -20 },
                 { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
             );
-            
+
             // Animate menu icon to X
             gsap.to(mobileMenuBtn.querySelector('svg'), {
                 rotation: 180,
@@ -189,7 +217,7 @@ function initCommonNavigation() {
                     mobileMenu.classList.add('hidden');
                 }
             });
-            
+
             // Animate menu icon back
             gsap.to(mobileMenuBtn.querySelector('svg'), {
                 rotation: 0,
@@ -223,7 +251,7 @@ function initMagneticButtons() {
             const rect = btn.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-            
+
             gsap.to(btn, {
                 x: x * 0.3,
                 y: y * 0.3,
@@ -231,7 +259,8 @@ function initMagneticButtons() {
                 ease: 'power2.out'
             });
         });
-    });}
+    });
+}
 
 
 // Export for use in other files
@@ -239,13 +268,77 @@ window.CommonElements = {
     initCommonNavigation
 };
 
-document.addEventListener('DOMContentLoaded', function() {
+function calculateSlidesPerView(wrapper, cardMinWidth = 300, spacing = 24) {
+    if(!cardMinWidth) return 1
+    const wrapperWidth = wrapper.offsetWidth;
+    const totalCardWidth = cardMinWidth + spacing;
+    const perView = Math.floor(wrapperWidth / totalCardWidth);
+    return Math.max(1, perView);
+}
+
+function initializeProjectCarousels(ele,width,spacing) {
+    const carousels = document.querySelectorAll('.carousel');
+
+    carousels.forEach(carousel => {
+        const wrapper = carousel.closest('.carousel-wrapper');
+        const perView = wrapper ? calculateSlidesPerView(wrapper):1;
+
+        const swiper = new Swiper(carousel, {
+            slidesPerView: perView,
+            spaceBetween: 24,
+            loop: true,
+            autoplay: {
+                delay: 3000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: carousel.querySelector('.swiper-pagination'),
+                clickable: true,
+            },
+            navigation: {
+                nextEl: carousel.querySelector('.swiper-button-next'),
+                prevEl: carousel.querySelector('.swiper-button-prev'),
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            const newPerView = calculateSlidesPerView(wrapper);
+            swiper.params.slidesPerView = newPerView;
+            swiper.update();
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
 
     initMagneticButtons();
     initAnimations()
     lucide.createIcons({
         attrs: {
-    class: 'w-8 h-8 '
-  }
+            class: 'w-8 h-8 '
+        }
+    });
+    initializeProjectCarousels();
+    new Swiper('.mySwiper', {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            640: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+        },
     });
 });

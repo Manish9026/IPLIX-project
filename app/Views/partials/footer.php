@@ -42,8 +42,22 @@
 
 
 
+<?php
+
+use App\Helpers\Utils;
+
+$info = Utils::read("contact.json");
+$serviceData = Utils::read("services.json");
+$services = !empty($serviceData) ? $serviceData['services'] : [];
+$contact = $info['contact'] ?? [];
+$social = $info["social"] ?? [];
+$company = $info["company"] ??[];
+$navLinks = $info['navLinks'] ?? [];
+
+?>
+
 <footer class="bg-slate-900 max-w-[1400px] w-full rounded-[500px] md:mx-auto lg:my-10">
-   
+
 
     <!-- Background Animation Elements -->
 
@@ -63,11 +77,11 @@
                 <h2 class="text-4xl font-bold text-center text-gradient-animated ">Elevate Your Content with Orgix </h2>
                 <h5 class="text-lg">Create. Connect. Convert.</h5>
 
-                <button class="px-8 py-2 mt-8 h-14 text-white rounded-2xl font-semibold 
+                <a href=<?= base_url('/contact') ?> class="px-8 py-2 mt-8 h-14 text-white rounded-2xl font-semibold 
                  bg-gradient-to-r from-violet-500 via-fuchsia-500 to-purple-500 
-                 animated-gradient shadow-lg">
+                 animated-gradient flex items-center shadow-lg">
                     Let Connect
-                </button>
+                </a>
 
             </div>
             <!-- Main Footer Content -->
@@ -76,49 +90,67 @@
                 <!-- Company Info -->
                 <div class="footer-section">
                     <div class="flex items-center mb-6">
-                        <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center mr-3">
-                            <i class="fas fa-code text-blue-600 text-xl"></i>
+                        <div class="size-[50px] bg-white rounded-lg flex items-center justify-center mr-3 overflow-hidden">
+                            <?php if (!empty($company['logo'])) : ?>
+                                <img src="<?= base_url($company['logo']) ?>" alt="" class="w-full h-full object-fill">
+                            <?php else : ?>
+                                <i class="fas fa-code text-blue-600 text-xl"></i>
+                            <?php endif; ?>
+
                         </div>
-                        <h3 class="text-2xl font-bold">TechCorp</h3>
+                        <h3 class="text-2xl font-bold"><?= esc($company['name']) ?? "company name" ?></h3>
                     </div>
                     <p class="text-gray-200 mb-4 leading-relaxed">
-                        Leading the digital transformation with innovative solutions and cutting-edge technology.
+                        <?= esc($company['description']) ?? "Leading the digital transformation with innovative solutions and cutting-edge technology" ?>
+                        .
                     </p>
                     <div class="flex items-center text-gray-200">
                         <i class="fas fa-map-marker-alt mr-2"></i>
-                        <span>123 Tech Street, Innovation City, TC 12345</span>
+                        <span><?= esc($company['address']) ?? "123 Tech Street, Innovation City, TC 12345" ?> </span>
                     </div>
                 </div>
 
                 <!-- Quick Links -->
-                <div class="footer-section">
-                    <h4 class="text-xl font-semibold mb-6 flex items-center">
-                        <i class="fas fa-link mr-2"></i>
-                        Quick Links
-                    </h4>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">About Us</a></li>
-                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Services</a></li>
-                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Portfolio</a></li>
-                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Careers</a></li>
-                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Contact</a></li>
-                    </ul>
-                </div>
+
+                <?php if (!empty($navLinks) && is_array($navLinks) && count($navLinks) > 0): ?>
+
+                    <div class="footer-section">
+                        <h4 class="text-xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-link mr-2"></i>
+                            Quick Links
+                        </h4>
+                        <ul class="space-y-3">
+
+                            <?php
+                            foreach ($navLinks as $nav): ?>
+                                <li><a href="<?= esc($nav['link']) ?>" class="footer-link nav-link text-gray-200 hover:text-white"><?= esc($nav['name']) ?></a></li>
+                            <?php endforeach; ?>
+
+
+                        </ul>
+                    </div>
+
+                <?php endif; ?>
 
                 <!-- Services -->
-                <div class="footer-section">
-                    <h4 class="text-xl font-semibold mb-6 flex items-center">
-                        <i class="fas fa-cogs mr-2"></i>
-                        Services
-                    </h4>
-                    <ul class="space-y-3">
-                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Web Development</a></li>
-                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Mobile Apps</a></li>
-                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Cloud Solutions</a></li>
-                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">AI & ML</a></li>
-                        <li><a href="#" class="footer-link text-gray-200 hover:text-white">Consulting</a></li>
-                    </ul>
-                </div>
+
+                <?php if (!empty($services) && is_array($services) && count($services) > 0): ?>
+                    <div class="footer-section">
+                        <h4 class="text-xl font-semibold mb-6 flex items-center">
+                            <i class="fas fa-cogs mr-2"></i>
+                            Services
+                        </h4>
+                        <ul class="space-y-3">
+
+                            <?php
+
+                            $finalServices = Utils::getRandomList($services, 10, "title");
+                            foreach ($finalServices as $service): ?>
+                                <li><a href="#" class="footer-link nav-link text-gray-200 hover:text-white"><?= esc($service['title']) ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
 
                 <!-- Contact & Newsletter -->
                 <div class="footer-section">
@@ -126,18 +158,25 @@
                         <i class="fas fa-envelope mr-2"></i>
                         Stay Connected
                     </h4>
-                    <div class="space-y-4">
-                        <div class="flex items-center text-gray-200">
-                            <i class="fas fa-phone mr-3"></i>
-                            <span>+1 (555) 123-4567</span>
-                        </div>
-                        <div class="flex items-center text-gray-200">
-                            <i class="fas fa-envelope mr-3"></i>
-                            <span>hello@techcorp.com</span>
-                        </div>
 
 
-                    </div>
+                    <?php if (!empty($contact) && is_array($contact) && count($contact) > 0) : ?>
+                        <div class="space-y-4">
+
+                            <?php foreach ($contact as $item): ?>
+                                <div class="flex items-center text-gray-200">
+                                    <i data-luicde="<?= esc($item['icon'] ?? "") ?>" class="<?= esc($item['icon'] ?? "fas fa-phone") ?>  mr-3"></i>
+                                    <span><?= esc($item['value'] ?? "") ?></span>
+                                </div>
+                            <?php endforeach; ?>
+
+
+
+                        </div>
+                    <?php else : ?>
+                        <h3 class="flex-1 flex p-4">No contacts!</h3>
+                    <?php endif; ?>
+
                 </div>
             </div>
 
@@ -149,26 +188,24 @@
                             <span class="wave mr-2">👋</span>
                             Follow Us
                         </h5>
-                        <div class="flex space-x-4">
-                            <a href="#" class="social-icon w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 hover:scale-110">
-                                <i class="fab fa-facebook-f text-xl"></i>
-                            </a>
-                            <a href="#" class="social-icon w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 hover:scale-110">
-                                <i class="fab fa-twitter text-xl"></i>
-                            </a>
-                            <a href="#" class="social-icon w-12 h-12 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-800 hover:scale-110">
-                                <i class="fab fa-linkedin-in text-xl"></i>
-                            </a>
-                            <a href="#" class="social-icon w-12 h-12 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 hover:scale-110">
-                                <i class="fab fa-instagram text-xl"></i>
-                            </a>
-                            <a href="#" class="social-icon w-12 h-12 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 hover:scale-110">
-                                <i class="fab fa-youtube text-xl"></i>
-                            </a>
-                            <a href="#" class="social-icon w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-gray-900 hover:scale-110">
-                                <i class="fab fa-github text-xl"></i>
-                            </a>
-                        </div>
+
+                        <?php if (isset($social) && count($social) > 0 && is_array($social)): ?>
+
+
+                            <div class="flex space-x-4">
+                                <?php foreach ($social as $item): ?>
+                                    <a href="<?= esc($item['link']) ?>" class="social-icon w-12 h-12 bg-<?= esc($item['color']) ?? "blue" ?>-600 bg-[<?= esc($item['color']) ?? "#3b5998" ?>]
+                                
+                               hover:opacity-80 transition-colors duration-300
+                                 rounded-full flex items-center justify-center hover:scale-110">
+                                        <i data-luicde="<?= esc($item['icons']) ?>" class=" <?= esc($item['icons'] ?? "fab fa-facebook-f") ?>  text-xl"></i>
+                                    </a>
+                                <?php endforeach; ?>
+
+                            </div>
+
+                        <?php endif; ?>
+
                     </div>
 
                     <!-- Awards/Certifications -->
@@ -192,11 +229,11 @@
             <!-- Copyright -->
             <div class="border-t border-white border-opacity-20 mt-8 pt-6 text-center" id="copyright">
                 <div class="flex flex-col md:flex-row justify-between items-center text-gray-200">
-                    <p>&copy; 2024 TechCorp. All rights reserved. Made with <i class="fas fa-heart text-red-400 mx-1"></i> by our amazing team.</p>
+                    <p>&copy; <?= date('Y') ?> <?= esc($company['name']) ?? "company name" ?>. All rights reserved. Made with <i class="fas fa-heart text-red-400 mx-1"></i> by our amazing team.</p>
                     <div class="flex space-x-6 mt-4 md:mt-0">
-                        <a href="#" class="footer-link hover:text-white">Privacy Policy</a>
-                        <a href="#" class="footer-link hover:text-white">Terms of Service</a>
-                        <a href="#" class="footer-link hover:text-white">Sitemap</a>
+                        <a href="#" class="footer-link nav-link hover:text-white">Privacy Policy</a>
+                        <a href="#" class="footer-link nav-link hover:text-white">Terms of Service</a>
+                        <a href="#" class="footer-link nav-link hover:text-white">Sitemap</a>
                     </div>
                 </div>
             </div>

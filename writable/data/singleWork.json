@@ -1,0 +1,291 @@
+[
+    {
+        "id": "68696aad17a54",
+        "title": "new project",
+        "description": "dgdfgfygrtvffff",
+        "catId": "8",
+        "catTitle": "Social Media Marketing",
+        "catDes": "Building engaged communities and meaningful connections with your audience across all major social platforms. We create content that resonates and drives genuine interaction with your brand.",
+        "tags": [
+            "marketing",
+            ""
+        ],
+        "cardMedia": [
+            {
+                "url": "uploads\/workMedia\/1751752370_68699eb2833b4_Screenshot_2025-07-03_at_17-53-21_Contact_Us_-_TechCorp.png",
+                "type": "image\/png"
+            },
+            {
+                "url": "uploads\/workMedia\/1751752370_68699eb284fd3_Screenshot_2025-07-03_at_17-53-21_Contact_Us_-_TechCorp.png",
+                "type": "image\/png"
+            }
+        ],
+        "updated_at": "2025-07-05 21:52:50",
+        "created_at": "2025-07-05 18:10:53",
+        "gradient": "from-fuchsia-400 to-yellow-400",
+        "accentColor": "fuchsia-400",
+        "tagColor": "fuchsia-300",
+        "alterColor": "yellow",
+        "baseColor": "fuchsia"
+    },
+    {
+        "id": "6869750896585",
+        "title": "second project",
+        "description": "asjkdhjshjdhjuernweryuw",
+        "catId": "9",
+        "catTitle": "DigiMart (product Selling site)",
+        "catDes": "helooos",
+        "tags": [
+            "sadd"
+        ],
+        "cardMedia": [],
+        "updated_at": "2025-07-05 18:55:04",
+        "created_at": "2025-07-05 18:55:04",
+        "gradient": "from-teal-400 to-fuchsia-400",
+        "accentColor": "teal-400",
+        "tagColor": "teal-300",
+        "alterColor": "fuchsia",
+        "baseColor": "teal",
+        "result": [
+            {
+                "id": "686975422d676",
+                "icon": "💕💕💕",
+                "value": "220+",
+                "label": "assignments done"
+            }
+        ]
+    },
+    {
+        "id": "7890123456789",
+        "title": "AI Powered Customer Support System",
+        "description": "Developed an intelligent chatbot integrated with a knowledge base to automate customer support inquiries, reducing response times by 60%.",
+        "catId": "8",
+        "catTitle": "Artificial Intelligence & Machine Learning",
+        "catDes": "Projects focusing on AI, machine learning, deep learning, and data science applications.",
+        "tags": [
+            "Python",
+            "Machine Learning",
+            "Natural Language Processing",
+            "Chatbot",
+            "Customer Service",
+            "Flask"
+        ],
+        "cardMedia": [
+            {
+                "url": "uploads\/workMedia\/1751800637_686a5b3dafcbf_card1.jpg",
+                "type": "image\/jpeg"
+            }
+        ],
+        "bannerMedia": [
+            {
+                "url": "uploads\/workMedia\/1751800637_686a5b3db0486_banner2.jpg",
+                "type": "image\/jpeg"
+            },
+            {
+                "url": "uploads\/workMedia\/1751800637_686a5b3db0e2a_banner.jpg",
+                "type": "image\/jpeg"
+            },
+            {
+                "url": "uploads\/workMedia\/1751800637_686a5b3db1683_tech-companies.jpg",
+                "type": "image\/jpeg"
+            }
+        ],
+        "impacts": [
+            {
+                "title": "Enhanced Customer Satisfaction",
+                "subtitle": "Streamlining Support Operations",
+                "description": "The AI-powered system significantly improved the speed and efficiency of customer interactions, leading to higher satisfaction scores.",
+                "points": [
+                    "Reduced average resolution time by 60%",
+                    "Increased first-contact resolution rate",
+                    "24/7 availability for customer queries"
+                ],
+                "media": {
+                    "url": "https://placehold.co/600x400/007bff/ffffff?text=Customer+Satisfaction",
+                    "type": "image"
+                }
+            },
+            {
+                "title": "Operational Cost Savings",
+                "subtitle": "Automating Routine Tasks",
+                "description": "By automating responses to frequently asked questions and routine inquiries, the company saved substantial operational costs.",
+                "points": [
+                    "Decreased need for human intervention in basic queries",
+                    "Optimized resource allocation for complex issues",
+                    "Scalable solution for growing customer base"
+                ],
+                "media": {
+                    "url": "https://placehold.co/600x400/28a745/ffffff?text=Cost+Savings",
+                    "type": "image"
+                }
+            }
+        ],
+        "updated_at": "2025-07-06 11:17:17",
+        "created_at": "2025-06-20 10:00:00",
+        "gradient": "from-blue-500 to-purple-600",
+        "accentColor": "blue-500",
+        "tagColor": "blue-300",
+        "alterColor": "purple",
+        "baseColor": "indigo",
+        "result": [
+            {
+                "id": "7890123456789-metric1",
+                "icon": "🤖",
+                "value": "60%",
+                "label": "reduction in response time"
+            },
+            {
+                "id": "7890123456789-metric2",
+                "icon": "🗣️",
+                "value": "100K+",
+                "label": "conversations handled"
+            },
+            {
+                "id": "686a775834c68",
+                "icon": "💎",
+                "value": "90",
+                "label": "400+ Growth",
+                "title": "Truseted by Users"
+            }
+        ]
+    },
+    {
+        "id": "6869750896585",
+        "title": "second project",
+        "description": "asjkdhjshjdhjuernweryuw",
+        "catId": "9",
+        "catTitle": "DigiMart (product Selling site)",
+        "catDes": "helooos",
+        "tags": [
+            "sadd"
+        ],
+        "cardMedia": [],
+        "updated_at": "2025-07-05 18:55:04",
+        "created_at": "2025-07-05 18:55:04",
+        "gradient": "from-teal-400 to-fuchsia-400",
+        "accentColor": "teal-400",
+        "tagColor": "teal-300",
+        "alterColor": "fuchsia",
+        "baseColor": "teal",
+        "result": [
+            {
+                "id": "686975422d676",
+                "icon": "💕💕💕",
+                "value": "220+",
+                "label": "assignments done"
+            }
+        ]
+    },
+    {
+        "id": "68696aad17a54",
+        "title": "new project",
+        "description": "dgdfgfygrtvffff",
+        "catId": "8",
+        "catTitle": "Social Media Marketing",
+        "catDes": "Building engaged communities and meaningful connections with your audience across all major social platforms. We create content that resonates and drives genuine interaction with your brand.",
+        "tags": [
+            "marketing",
+            ""
+        ],
+        "cardMedia": [
+            {
+                "url": "uploads\/workMedia\/1751752370_68699eb2833b4_Screenshot_2025-07-03_at_17-53-21_Contact_Us_-_TechCorp.png",
+                "type": "image\/png"
+            },
+            {
+                "url": "uploads\/workMedia\/1751752370_68699eb284fd3_Screenshot_2025-07-03_at_17-53-21_Contact_Us_-_TechCorp.png",
+                "type": "image\/png"
+            }
+        ],
+        "updated_at": "2025-07-05 21:52:50",
+        "created_at": "2025-07-05 18:10:53",
+        "gradient": "from-fuchsia-400 to-yellow-400",
+        "accentColor": "fuchsia-400",
+        "tagColor": "fuchsia-300",
+        "alterColor": "yellow",
+        "baseColor": "fuchsia"
+    },
+    {
+        "id": "6869750896585",
+        "title": "second project",
+        "description": "asjkdhjshjdhjuernweryuw",
+        "catId": "9",
+        "catTitle": "DigiMart (product Selling site)",
+        "catDes": "helooos",
+        "tags": [
+            "sadd"
+        ],
+        "cardMedia": [],
+        "updated_at": "2025-07-05 18:55:04",
+        "created_at": "2025-07-05 18:55:04",
+        "gradient": "from-teal-400 to-fuchsia-400",
+        "accentColor": "teal-400",
+        "tagColor": "teal-300",
+        "alterColor": "fuchsia",
+        "baseColor": "teal",
+        "result": [
+            {
+                "id": "686975422d676",
+                "icon": "💕💕💕",
+                "value": "220+",
+                "label": "assignments done"
+            }
+        ]
+    },
+    {
+        "id": "68696aad17a54",
+        "title": "new project",
+        "description": "dgdfgfygrtvffff",
+        "catId": "8",
+        "catTitle": "Social Media Marketing",
+        "catDes": "Building engaged communities and meaningful connections with your audience across all major social platforms. We create content that resonates and drives genuine interaction with your brand.",
+        "tags": [
+            "marketing",
+            ""
+        ],
+        "cardMedia": [
+            {
+                "url": "uploads\/workMedia\/1751752370_68699eb2833b4_Screenshot_2025-07-03_at_17-53-21_Contact_Us_-_TechCorp.png",
+                "type": "image\/png"
+            },
+            {
+                "url": "uploads\/workMedia\/1751752370_68699eb284fd3_Screenshot_2025-07-03_at_17-53-21_Contact_Us_-_TechCorp.png",
+                "type": "image\/png"
+            }
+        ],
+        "updated_at": "2025-07-05 21:52:50",
+        "created_at": "2025-07-05 18:10:53",
+        "gradient": "from-fuchsia-400 to-yellow-400",
+        "accentColor": "fuchsia-400",
+        "tagColor": "fuchsia-300",
+        "alterColor": "yellow",
+        "baseColor": "fuchsia"
+    },
+    {
+        "id": "6869750896585",
+        "title": "second project",
+        "description": "asjkdhjshjdhjuernweryuw",
+        "catId": "9",
+        "catTitle": "DigiMart (product Selling site)",
+        "catDes": "helooos",
+        "tags": [
+            "sadd"
+        ],
+        "cardMedia": [],
+        "updated_at": "2025-07-05 18:55:04",
+        "created_at": "2025-07-05 18:55:04",
+        "gradient": "from-teal-400 to-fuchsia-400",
+        "accentColor": "teal-400",
+        "tagColor": "teal-300",
+        "alterColor": "fuchsia",
+        "baseColor": "teal",
+        "result": [
+            {
+                "id": "686975422d676",
+                "icon": "💕💕💕",
+                "value": "220+",
+                "label": "assignments done"
+            }
+        ]
+    }
+]

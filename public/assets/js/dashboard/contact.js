@@ -46,6 +46,13 @@ const generateAddForm = (formType) => {
       placeholder="Empowering Digital Growth" />
   </div>
 
+    <div>
+    <label for="address" class="block font-medium text-sm ">Company Address <span class="text-red-500">*</span></label>
+    <textarea name="address" id="address" rows="4"
+      class="form-input w-full p-2 mt-1 rounded-md "
+      placeholder="Brief about the company address..." required></textarea>
+  </div>
+
   <!-- Description -->
   <div>
     <label for="description" class="block font-medium text-sm ">Description <span class="text-red-500">*</span></label>
@@ -196,6 +203,13 @@ const generateEditForm = (formType, data) => {
       placeholder="Empowering Digital Growth" />
   </div>
 
+    <div>
+    <label for="address" class="block font-medium text-sm ">Company Address <span class="text-red-500">*</span></label>
+    <textarea name="address" id="address" rows="4"
+      class="form-input w-full p-2 mt-1 rounded-md "
+      placeholder="Brief about the company address..." required>${data?.address ?? ""}</textarea>
+  </div>
+
   <!-- Description -->
   <div>
     <label for="description" class="block font-medium text-sm ">Description <span class="text-red-500">*</span></label>
@@ -297,21 +311,23 @@ const generateEditForm = (formType, data) => {
     return form[formType] || '';
 }
 
-const generateViewContent = (formType, itemId) => {
+const generateViewContent = (formType, data) => {
     const content = {
-        "hero": `<div class="space-y-4">
+        "client": `<div class="space-y-4">
                     <div class="bg-gray-800/50 rounded-lg p-4">
-                        <h4 class="font-medium mb-2">Details for ${formType.charAt(0).toUpperCase() + formType.slice(1)} #${itemId}</h4>
+                        <h4 class="font-medium mb-2">Details for ${formType.charAt(0).toUpperCase() + formType.slice(1)} #${data?.id ?? data}</h4>
                         <div class="space-y-2 text-sm text-gray-300">
-                            <p><strong>Title:</strong> Sample ${formType} title</p>
-                            <p><strong>Status:</strong> <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded-full text-xs">Active</span></p>
+                            <p><strong>Name:</strong>  ${data?.name ?? ""} </p>
+                             <p><strong>Email:</strong>  ${data?.email ?? ""} </p>
+                              <p><strong>Phone No:</strong>  ${data?.mobNo ?? ""} </p>
+                            <p><strong>Request Service:</strong> <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded-full text-xs">${data?.service  ?? ""}</span></p>
                             <p><strong>Created:</strong> ${new Date().toLocaleDateString()}</p>
                             <p><strong>Last Modified:</strong> ${new Date().toLocaleDateString()}</p>
                         </div>
                     </div>
                     <div class="bg-gray-800/50 rounded-lg p-4">
-                        <h4 class="font-medium mb-2">Description</h4>
-                        <p class="text-gray-300 text-sm">This is a sample description for ${formType} #${itemId}. It contains detailed information about the item and its purpose.</p>
+                        <h4 class="font-medium mb-2">Message</h4>
+                        <p class="text-gray-300 text-sm">${data?.message ?? `This is a sample description for ${formType} #${data?.id ?? data}. It contains detailed information about the item and its purpose.`}</p>
                     </div>
                 </div>`,
 
@@ -341,7 +357,7 @@ async function onCompanySave(event) {
   const logoInput = form.logo;
   const logoFile = logoInput?.files?.[0];
 
-  if (!id && !logoFile) errors.push("Logo is required.");
+  // if (!id) errors.push("Id not Selected, Is required.");
 
   if (showValidationErrors(errors)) return;
 
@@ -472,13 +488,15 @@ async function onContactSave(event) {
     form.querySelector("button[type='submit']").disabled = false;
   }
 }
-async function onContactDelete(_,id) {
-  if (!id || !confirm("Are you sure you want to delete this contact?")) return;
+async function onContactDelete(type,id) {
+  if (!id || !deleteItem(type,id)) return;
 
+  console.log(type,id);
+  
   try {
     // setLoading(true);
 
-    const response = await fetch(`../api/contact/delete/${id}`, {
+    const response = await fetch(`../api/contact/clients/delete/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

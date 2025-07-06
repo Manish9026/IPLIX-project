@@ -8,11 +8,13 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Pages::index');
 
 // ✅ Add your custom routes here:
-$routes->get('/story', 'Pages::story');
+$routes->get('/about', 'Pages::story');
 $routes->get('/services', 'Pages::services');
-$routes->get('/work', 'Pages::work');
+$routes->get('/portfolio', 'Pages::work');
 $routes->get('/careers', 'Pages::careers');
 $routes->get('/contact', 'Pages::contact');
+$routes->get('/work/(:segment)', 'Pages::workCaseStudy/$1');
+
 $routes->get('/case-study', 'CaseStudyController::index');
 // $routes->get('/dashboard', 'Pages::dashboard');
 $routes->get('/dashboard/login', 'AuthController::loginPage');
@@ -24,7 +26,9 @@ $routes->group("contact",function($routes){
 $routes->post('clients/save', 'ContactController::saveClient');
 
 });
-    
+$routes->get("work/records", 'WorkController::combineServiceAndWork');
+  $routes->get('work/(:segment)',"WorkCaseStudy::getAllWorks/$1");
+
 });
 
 $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
@@ -37,6 +41,7 @@ $routes->group('dashboard', ['filter' => 'auth'], function ($routes) {
     $routes->get('contact', 'DashboardController::contact'); // public
 
     $routes->get('hero', 'DashboardController::hero'); // public
+    $routes->get('manage-work', 'DashboardController::manageWork'); // public
 
 });
 
@@ -49,10 +54,12 @@ $routes->group('api', ['filter' => 'auth'], function ($routes) {
         $routes->delete('delete/(:segment)', 'Services::delete/$1');
     });
     $routes->group('work', function ($routes) {
+        $routes->get('',"WorkCaseStudy::getAllWorks");
+        $routes->get('dashboard/manage/(:segment)','WorkController::renderWorkDashboard/$1');
         $routes->get("project/(:segment)", 'WorkController::getSingleProject/$1');
-        $routes->post("project/create", 'WorkController::addProject');
+        $routes->post("project/save", 'WorkController::saveWork');
         $routes->post("project/edit/(:segment)", 'WorkController::editProject/$1');
-        $routes->delete("projects/delete/(:segment)", 'WorkController::deleteProject/$1');
+        $routes->delete("projects/delete/(:segment)", 'WorkController::deleteWork/$1');
     });
     $routes->group('story', function ($routes) {
         $routes->post("timeline", 'StoryController::saveTimeline');
@@ -70,6 +77,22 @@ $routes->group('api', ['filter' => 'auth'], function ($routes) {
         // gallery routes saveGallery
         $routes->post("gallery", 'StoryController::saveGallery');
         $routes->delete('gallery/(:any)', 'StoryController::deleteGallery/$1');
+    });
+
+    $routes->group("work/manage",function($routes){
+
+        $routes->post('hero/save',"WorkCaseStudy::saveHero");
+        $routes->post('stats/save',"WorkCaseStudy::saveStatToWork");
+        $routes->post('stats/delete',"WorkCaseStudy::deleteStatFromWork");
+        $routes->post('impact/save',"WorkCaseStudy::saveImpact");
+        $routes->post('impact/delete',"WorkCaseStudy::deleteImpact");
+
+
+        
+        
+
+        // $routes->post('hero',"WorkCaseStudy::saveHero");
+
     });
 
     $routes->group("contact", function ($routes) {

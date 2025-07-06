@@ -1,15 +1,21 @@
 <?php
 
 namespace App\Controllers;
+require_once APPPATH . 'Helpers/Utils.php';
 
 use CodeIgniter\Controller;
+use App\Helpers\Utils;
+use App\Helpers\WorkService;
 
-class WorkController extends Controller
+class WorkController extends BaseController
 {
 
     private $jsonPath;
     protected $session;
     protected $helpers = ['url', 'form'];
+    protected static $servicesPath = 'services.json';
+    protected static $workPath = 'singleWork.json';
+
 
     public function __construct()
     {
@@ -18,301 +24,14 @@ class WorkController extends Controller
     }
 
     public function getSingleProject($projectId)
-{
-    $jsonPath = $this->jsonPath;
-    // Check if file exists
-    if (!file_exists($jsonPath)) {
-        return $this->response->setJSON([
-            'status' => false,
-            'message' => 'Project data file not found'
-        ])->setStatusCode(500);
-    }
-
-    $jsonData = json_decode(file_get_contents($jsonPath), true);
-
-    if (!isset($jsonData['projects']) || !is_array($jsonData['projects'])) {
-        return $this->response->setJSON([
-            'status' => false,
-            'message' => 'Invalid data format'
-        ])->setStatusCode(500);
-    }
-
-    // Search project by ID
-    foreach ($jsonData['projects'] as $category) {
-        if (!isset($category['projects']) || !is_array($category['projects'])) continue;
-
-        foreach ($category['projects'] as $project) {
-            if ($project['id'] === $projectId) {
-                // Include category info if needed
-                $project['category'] = [
-                    'categoryId' => $category['categoryId'] ?? null,
-                    'name'       => $category['name'] ?? null,
-                    'accentColor' => $category['accentColor'] ?? null,
-                    'projectCount'=> $category["projectCount"] ?? 0
-                ];
-
-                return $this->response->setJSON([
-                    'status' => true,
-                    'message' => 'Project found',
-                    'data' => $project
-                ]);
-            }
-        }
-    }
-
-    // Not found
-    return $this->response->setJSON([
-        'status' => false,
-        'message' => 'Project not found'
-    ])->setStatusCode(404);
-}
-
-
-    public function editProject($projectId)
-{
-    $request = \Config\Services::request();
-    $jsonPath = WRITEPATH . 'data/work.json';
-
-    if (!file_exists($jsonPath)) {
-        return $this->response->setJSON([
-            'status' => false,
-            'message' => 'Data file not found'
-        ])->setStatusCode(500);
-    }
-
-    $jsonData = json_decode(file_get_contents($jsonPath), true);
-
-    if (!isset($jsonData['projects']) || !is_array($jsonData['projects'])) {
-        return $this->response->setJSON([
-            'status' => false,
-            'message' => 'Invalid data format'
-        ])->setStatusCode(500);
-    }
-
-    $updatedFields = [];
-    $found = false;
-
-    foreach ($jsonData['projects'] as $catIndex => &$category) {
-        if (!isset($category['projects']) || !is_array($category['projects'])) continue;
-
-        foreach ($category['projects'] as $projIndex => &$project) {
-            if ($project['id'] === $projectId) {
-                $found = true;
-
-                // Compare each field, only update if changed
-                $fieldsToUpdate = ['title', 'description', 'tags'];
-
-                foreach ($fieldsToUpdate as $field) {
-                    $newValue = $request->getPost($field);
-                    if ($newValue !== null) {
-                        if ($field === 'tags') {
-                            $newValueArray = array_map('trim', explode(',', $newValue));
-                            if ($project[$field] !== $newValueArray) {
-                                $project[$field] = $newValueArray;
-                                $updatedFields[$field] = $newValueArray;
-                            }
-                        } else {
-                            if ($project[$field] !== $newValue) {
-                                $project[$field] = $newValue;
-                                $updatedFields[$field] = $newValue;
-                            }
-                        }
-                    }
-                }
-
-                // Update media if new files uploaded
-                $uploadedFiles = $request->getFiles();
-                $mediaPaths = [];
-                $mediaTypes = [];
-
-                if (isset($uploadedFiles['mediaFiles'])) {
-                    foreach ($uploadedFiles['mediaFiles'] as $file) {
-                        if ($file->isValid() && !$file->hasMoved()) {
-                            $newName = $file->getRandomName();
-                            $uploadPath = FCPATH . 'uploads/workMedia/';
-                            $file->move($uploadPath, $newName);
-                            $mediaPaths[] = 'uploads/workMedia/' . $newName;
-                            $mediaTypes[] = $file->getMimeType();
-                        }
-                    }
-
-                    if (!empty($mediaPaths)) {
-                        $project['media'] = $mediaPaths;
-                        $project['mediaType'] = $mediaTypes;
-                        $updatedFields['media'] = $mediaPaths;
-                    }
-                }
-
-                if (!empty($updatedFields)) {
-                    $project['updated_at'] = date('Y-m-d H:i:s');
-                    $updatedFields['updated_at'] = $project['updated_at'];
-                }
-
-                break 2;
-            }
-        }
-    }
-
-    if (!$found) {
-        return $this->response->setJSON([
-            'status' => false,
-            'message' => 'Project not found'
-        ])->setStatusCode(404);
-    }
-
-    if (empty($updatedFields)) {
-        return $this->response->setJSON([
-            'status' => true,
-            'message' => 'No changes detected'
-        ]);
-    }
-
-    // Save changes
-    file_put_contents($jsonPath, json_encode($jsonData, JSON_PRETTY_PRINT));
-
-    return $this->response->setJSON([
-        'status' => true,
-        'message' => 'Project updated successfully',
-        'updated' => $updatedFields
-    ]);
-}
-
-
-    public function addProject()
     {
-        $request = \Config\Services::request();
-        $validation = \Config\Services::validation();
-
-        // Validation
-        $validation->setRules([
-            'title'       => 'required',
-            'description' => 'required',
-            'categoryId'  => 'required',
-            'tags'        => 'required'
-        ]);
-
-        if (!$validation->withRequest($request)->run()) {
-            return $this->response->setJSON([
-                'status' => false,
-                'message' => 'Validation failed',
-                'errors' => $validation->getErrors()
-            ])->setStatusCode(422);
-        }
-
-        // Load JSON
-        $jsonPath = WRITEPATH . 'data/work.json';
-        $jsonData = file_exists($jsonPath) ? json_decode(file_get_contents($jsonPath), true) : [];
-
-        if (!isset($jsonData['projects']) || !is_array($jsonData['projects'])) {
-            $jsonData['projects'] = [];
-        }
-
-        $categoryId = $request->getPost('categoryId');
-        $categoryTitle = $request->getPost('categoryTitle') ?? 'Untitled Category';
-
-        // File upload
-        $uploadedFiles = $request->getFiles();
-        $mediaPaths = [];
-        $mediaTypes = [];
-
-        if (isset($uploadedFiles['mediaFiles'])) {
-            foreach ($uploadedFiles['mediaFiles'] as $file) {
-                if ($file->isValid() && !$file->hasMoved()) {
-                    $newName = $file->getRandomName();
-                    $uploadPath = FCPATH . 'uploads/workMedia/';
-                    $file->move($uploadPath, $newName);
-                    $mediaPaths[] = 'uploads/workMedia/' . $newName;
-                    $mediaTypes[] = $file->getMimeType();
-                }
-            }
-        }
-
-        // Tag processing
-        $tagsArray = array_map('trim', explode(',', $request->getPost('tags')));
-
-        // New project item
-        $newProject = [
-            'id'          => uniqid(),
-            'title'       => $request->getPost('title'),
-            'description' => $request->getPost('description'),
-            'media'       => $mediaPaths,
-            'tags'        => $tagsArray,
-            'mediaType'   => $mediaTypes,
-            'image'=>"",
-            "link"=>"",
-            'created_at'  => date('Y-m-d H:i:s'),
-            'updated_at'  => date('Y-m-d H:i:s'),
-            'isActive'    => true,
-        ];
-
-        // Tailwind color
-        function getRandomTailwindColorSet(): array
-        {
-            $colors = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];
-            $baseColor = $colors[array_rand($colors)];
-            $altColor  = $colors[array_rand($colors)];
-
-            return [
-                'gradient'    => "from-{$baseColor}-400 to-{$altColor}-400",
-                'accentColor' => "{$baseColor}-400",
-                'tagColor'    => "{$baseColor}-300",
-                'alterColor'  => $altColor
-            ];
-        }
-
-        //  Check if category exists
-        $categoryIndex = null;
-        foreach ($jsonData['projects'] as $index => $cat) {
-            if (isset($cat['categoryId']) && $cat['categoryId'] == $categoryId) {
-                $categoryIndex = $index;
-                break;
-            }
-        }
-
-        if ($categoryIndex !== null) {
-            //  Category exists → Push project
-            $jsonData['projects'][$categoryIndex]['projects'][] = $newProject;
-            $jsonData['projects'][$categoryIndex]['projectCount'] = count($jsonData['projects'][$categoryIndex]['projects']);
-            $jsonData['projects'][$categoryIndex]['updated_at'] = date('Y-m-d H:i:s');
-        } else {
-            //  Category doesn't exist → Create structure
-            $newCategory = [
-                'id'            => uniqid(),
-                'categoryId'    => $categoryId,
-                'name'         => $categoryTitle,
-                'description'   =>  $request->getPost('catDes'),
-                'icon'         =>  $request->getPost('catIcon') ?? '',
-                'projects'      => [$newProject],
-                'projectCount' => 1,
-                'created_at'    => date('Y-m-d H:i:s'),
-                'updated_at'    => date('Y-m-d H:i:s'),
-                'isActive'      => true,
-            ];
-
-            $jsonData['projects'][] = array_merge($newCategory, getRandomTailwindColorSet());
-        }
-
-        // Save back to file
-        file_put_contents($jsonPath, json_encode($jsonData, JSON_PRETTY_PRINT));
-
-        return $this->response->setJSON([
-            'status'  => true,
-            'message' => 'Project added successfully',
-            'data'    => $newProject
-        ])->setStatusCode(201);
-    }
-
-
-    public function deleteProject($projectId)
-    {
-
-
-        $jsonPath =$this->jsonPath ;
+        $jsonPath = $this->jsonPath;
+        // Check if file exists
         if (!file_exists($jsonPath)) {
             return $this->response->setJSON([
                 'status' => false,
-                'message' => 'Data file not found.'
-            ])->setStatusCode(404);
+                'message' => 'Project data file not found'
+            ])->setStatusCode(500);
         }
 
         $jsonData = json_decode(file_get_contents($jsonPath), true);
@@ -320,53 +39,309 @@ class WorkController extends Controller
         if (!isset($jsonData['projects']) || !is_array($jsonData['projects'])) {
             return $this->response->setJSON([
                 'status' => false,
-                'message' => 'Invalid project data.'
-            ])->setStatusCode(422);
+                'message' => 'Invalid data format'
+            ])->setStatusCode(500);
         }
 
-        $found = false;
+        // Search project by ID
+        foreach ($jsonData['projects'] as $category) {
+            if (!isset($category['projects']) || !is_array($category['projects'])) continue;
 
-        // Loop through categories
-        foreach ($jsonData['projects'] as &$category) {
-            if (!isset($category['projects']) || !is_array($category['projects'])) {
-                continue;
-            }
-
-            foreach ($category['projects'] as $index => $project) {
+            foreach ($category['projects'] as $project) {
                 if ($project['id'] === $projectId) {
-                    // Remove file if media exists
-                    if (isset($project['media']) && is_array($project['media'])) {
-                        foreach ($project['media'] as $filePath) {
-                            $fullPath = FCPATH . $filePath;
-                            if (file_exists($fullPath)) {
-                                unlink($fullPath);
-                            }
-                        }
-                    }
+                    // Include category info if needed
+                    $project['category'] = [
+                        'categoryId' => $category['categoryId'] ?? null,
+                        'name'       => $category['name'] ?? null,
+                        'accentColor' => $category['accentColor'] ?? null,
+                        'projectCount' => $category["projectCount"] ?? 0
+                    ];
 
-                    // Remove the project
-                    array_splice($category['projects'], $index, 1);
-                    $category['projectCount'] = count($category['projects']);
-                    $category['updated_at'] = date('Y-m-d H:i:s');
-                    $found = true;
-                    break 2;
+                    return $this->response->setJSON([
+                        'status' => true,
+                        'message' => 'Project found',
+                        'data' => $project
+                    ]);
                 }
             }
         }
 
-        if (!$found) {
+        // Not found
+        return $this->response->setJSON([
+            'status' => false,
+            'message' => 'Project not found'
+        ])->setStatusCode(404);
+    }
+
+
+    public function renderWorkDashboard($id)
+    {
+
+        $workList = Utils::read("singleWork.json");
+        if (empty($workList) && !isset($workList)) {
             return $this->response->setJSON([
                 'status' => false,
-                'message' => 'Project not found.'
+                'message' => 'Work data not found.'
             ])->setStatusCode(404);
         }
 
-        // Save updated data
-        file_put_contents($jsonPath, json_encode($jsonData, JSON_PRETTY_PRINT));
+        // echo $workList;
+        $work = null;
+        foreach ($workList as $item) {
+            if ($item['id'] === $id) {
+                $work = $item;
+                break;
+            }
+        }
 
-        return $this->response->setJSON([
-            'status' => true,
-            'message' => 'Project deleted successfully.'
-        ])->setStatusCode(200);
+        if (!$work) {
+            return $this->response->setStatusCode(404)->setBody('Work not found');
+        }
+
+        return view('dashboard/layout/worklayout', ['work' => $work]);
+        //  return view('dashboard/singleWork',);
     }
+
+
+    public function saveWork()
+    {
+        $request = \Config\Services::request();
+        $validation = \Config\Services::validation();
+
+        try {
+            // 1. Validate basic fields
+            $validation->setRules([
+                'title'       => 'required|min_length[2]',
+                'description' => 'required|min_length[10]',
+                'categoryId'       => 'required',
+                'categoryTitle'    => 'required',
+                // 'catDes'      => 'required',
+            ]);
+
+            if (!$validation->withRequest($request)->run()) {
+                return $this->response->setJSON([
+                    'status'  => false,
+                    'message' => 'Validation failed',
+                    'errors'  => $validation->getErrors()
+                ])->setStatusCode(422);
+            }
+
+            // 2. Extract fields
+            $id           = $request->getPost('id') ?: "";
+            $title        = $request->getPost('title');
+            $description  = $request->getPost('description');
+            $catId        = $request->getPost('categoryId');
+            $catTitle     = $request->getPost('categoryTitle');
+            $catDes       = $request->getPost('catDes');
+            $tags         = $request->getPost('tags') ?? [];
+
+
+            $workEntry = [
+                'id'          => $id,
+                'title'       => $title,
+                'description' => $description,
+                'catId'  => $catId,
+                'catTitle'    => $catTitle,
+                'catDes'      => $catDes,
+                'tags'        => is_array($tags) ? $tags : explode(',', $tags),
+                'cardMedia'   => [],
+                'updated_at'  => date('Y-m-d H:i:s'),
+            ];
+
+            $gradientColors = Utils::getRandorColorSet();
+            // 3. Handle Media
+            $cardMedia = $request->getFiles()['Files'] ?? [];
+            foreach ($cardMedia as $media) {
+                if ($media->isValid() && !$media->hasMoved()) {
+                    $result = Utils::uploadMedia($media, 'uploads/workMedia/');
+                    if (isset($result['error'])) {
+                        return $this->response->setJSON([
+                            'status' => false,
+                            'message' => $result['error'],
+                            'error' => $result['error']
+                        ])->setStatusCode(400);
+                    }
+                    $workEntry['cardMedia'][] = $result;
+                }
+            }
+            // 4. Load existing work.json
+            $workData = Utils::read(self::$workPath);
+
+            // 5. Check if the work with this ID already exists
+            $existingIndex = null;
+            if (!empty($id))
+                $existingIndex = array_search($id, array_column($workData, 'id'));
+
+
+
+            if ($existingIndex !== false && !empty($id)) {
+                // Update only changed fields
+                log_message("error", "if part");
+
+                $existingData = $workData[$existingIndex];
+                foreach ($workEntry as $key => $val) {
+                    if (!isset($existingData[$key]) || $existingData[$key] !== $val) {
+                        $workData[$existingIndex][$key] = $val;
+                    }
+                }
+            } else {
+                log_message("error", "elsepart");
+                // Add new entry
+                $workData[] = array_merge($workEntry, ["id" => uniqid(), 'created_at'  => date('Y-m-d H:i:s'),], $gradientColors);
+            }
+
+            // 6. Save updated JSON
+            $saved = Utils::write(self::$workPath, $workData);
+
+            if (!$saved) {
+                return $this->response->setJSON([
+                    'status' => false,
+                    'message' => 'Failed to save JSON file'
+                ])->setStatusCode(500);
+            }
+
+            return $this->response->setJSON([
+                'status' => true,
+                'message' => !empty($id) ? 'Work updated successfully' : 'New work added successfully',
+                'data' => $workEntry
+            ])->setStatusCode(201);
+        } catch (\Throwable $e) {
+            return $this->response->setJSON([
+                'status' => false,
+                'message' => 'Unexpected server error',
+                'error' => $e->getMessage()
+            ])->setStatusCode(500);
+        }
+    }
+
+    public function deleteWork($workId=null)
+    {
+        $request = \Config\Services::request();
+
+        try {
+            // $workId = $request->getPost('id');
+
+            if (!$workId) {
+                return $this->response->setJSON([
+                    'status' => false,
+                    'message' => 'Missing work ID',
+                ])->setStatusCode(400);
+            }
+
+            $workData = Utils::read(self::$workPath);
+
+            if (!is_array($workData)) {
+                return $this->response->setJSON([
+                    'status' => false,
+                    'message' => 'Invalid JSON format'
+                ])->setStatusCode(500);
+            }
+
+            $initialCount = count($workData);
+            $deletedMedia = [];
+
+            $workData = array_filter($workData, function ($item) use ($workId, &$deletedMedia) {
+                if ($item['id'] === $workId) {
+
+                    // 🧹 Delete media from cardMedia
+                    if (!empty($item['cardMedia'])) {
+                        foreach ($item['cardMedia'] as $media) {
+                            if (!empty($media['url']) && file_exists($media['url'])) {
+                                unlink($media['url']);
+                                $deletedMedia[] = $media['url'];
+                            }
+                        }
+                    }
+
+                    // 🧹 Delete media from bannerMedia
+                    if (!empty($item['bannerMedia'])) {
+                        foreach ($item['bannerMedia'] as $media) {
+                            if (!empty($media['url']) && file_exists($media['url'])) {
+                                unlink($media['url']);
+                                $deletedMedia[] = $media['url'];
+                            }
+                        }
+                    }
+
+                    // 🧹 Delete images/videos from impacts[].media
+                    if (!empty($item['impacts']) && is_array($item['impacts'])) {
+                        foreach ($item['impacts'] as $impact) {
+                            if (!empty($impact['media'])) {
+                                foreach ($impact['media'] as $media) {
+                                    if (!empty($media['url']) && file_exists($media['url'])) {
+                                        unlink($media['url']);
+                                        $deletedMedia[] = $media['url'];
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // 🧹 Delete icons from result[].icon (if icon is a local file path)
+                    if (!empty($item['result']) && is_array($item['result'])) {
+                        foreach ($item['result'] as $res) {
+                            if (!empty($res['icon']) && file_exists($res['icon'])) {
+                                unlink($res['icon']);
+                                $deletedMedia[] = $res['icon'];
+                            }
+                        }
+                    }
+
+                    // 🧹 Delete single hero image (if exists)
+                    if (!empty($item['image']) && file_exists($item['image'])) {
+                        unlink($item['image']);
+                        $deletedMedia[] = $item['image'];
+                    }
+
+                    return false; // remove this item
+                }
+                return true;
+            });
+
+            $workData = array_values($workData); // reindex
+
+            if (count($workData) === $initialCount) {
+                return $this->response->setJSON([
+                    'status' => false,
+                    'message' => 'Work not found or already deleted'
+                ])->setStatusCode(404);
+            }
+
+            $saved = Utils::write(self::$workPath, $workData);
+
+            if (!$saved) {
+                return $this->response->setJSON([
+                    'status' => false,
+                    'message' => 'Failed to update work file'
+                ])->setStatusCode(500);
+            }
+
+            return $this->response->setJSON([
+                'status' => true,
+                'message' => 'Work and associated media deleted',
+                'deletedMedia' => $deletedMedia
+            ])->setStatusCode(200);
+        } catch (\Throwable $e) {
+            return $this->response->setJSON([
+                'status' => false,
+                'message' => 'Unexpected error',
+                'error' => $e->getMessage()
+            ])->setStatusCode(500);
+        }
+    }
+
+
+
+
+
+    public function combineServiceAndWork()
+    {
+
+        // return 'hello';
+    $projects=WorkService::getMergedData();
+
+        return $this->response->setJSON($projects);
+    }
+
+
 }

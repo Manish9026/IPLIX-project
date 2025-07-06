@@ -1,8 +1,9 @@
 {
     "company": {
-        "name": "hello",
+        "name": "Orgix Media",
         "subTitle": "dfgdfgdf",
         "description": "gdgfdfgdfgd",
+        "address": "dsfdgdfg",
         "logo": "uploads\/contact\/company\/logo_1751585869.jpg"
     },
     "contact": [
@@ -96,22 +97,50 @@
             "service": "Social Media Marketing",
             "mobNo": "345456456",
             "message": "fgdgf"
+        }
+    ],
+    "navLinks": [
+        {
+            "name": "Home",
+            "link": "\/",
+            "isClick": true,
+            "icon": "fa-solid fa-house",
+            "slug": ""
         },
         {
-            "id": "68674848327dd",
-            "name": "rwerewsdfdsfgd",
-            "email": "manishmaurya11555@gmail.com",
-            "service": "DigiMart (product Selling site)",
-            "mobNo": "4585848777",
-            "message": "dfgdfgdfgf"
+            "name": "About",
+            "link": "\/about",
+            "isClick": true,
+            "icon": "fa-solid fa-user",
+            "slug": "about"
         },
         {
-            "id": "68674a7193688",
-            "name": "manish maurya",
-            "email": "manishmaurya11555@gmail.com",
-            "service": "Social Media Marketing",
-            "mobNo": "3444334334",
-            "message": "fdffdfddf"
+            "name": "Services",
+            "link": "\/services",
+            "isClick": true,
+            "icon": "fa-solid fa-cogs",
+            "slug": "services"
+        },
+        {
+            "name": "Portfolio",
+            "link": "\/portfolio",
+            "isClick": true,
+            "icon": "fa-solid fa-briefcase",
+            "slug": "portfolio"
+        },
+        {
+            "name": "Contact Us",
+            "link": "\/contact",
+            "isClick": true,
+            "icon": "fa-solid fa-envelope",
+            "slug": "contact"
+        },
+        {
+            "name": "Careers",
+            "link": "\/careers",
+            "isClick": true,
+            "icon": "fa-solid fa-users",
+            "slug": "careers"
         }
     ]
 }

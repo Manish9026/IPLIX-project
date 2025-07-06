@@ -3,7 +3,7 @@ const generateAddForm = (formType) => {
 
     const form = {
         "project": `<form id="projectForm"
-      onsubmit="handleProjectSubmit(event)"
+      onsubmit="saveWorkHandler(event)"
       class="p-8 rounded-2xl   space-y-6 animate-fade-in w-full max-w-2xl mx-auto">
 
   <h2 class="text-2xl font-bold flex items-center gap-2 text-blue-600 dark:text-blue-400">
@@ -34,7 +34,7 @@ const generateAddForm = (formType) => {
       <option disabled selected value="">Select a category</option>
       ${servicesData && Array.isArray(servicesData) && servicesData?.map((item) => {
 
-            return `<option class="capitalize" data-category="${item?.title?.toLowerCase()}" value="${item?.id}">${item?.title?.toLowerCase()}</option>`
+            return `<option class="capitalize" data-cat-des="${item?.description}" data-cat-title="${item?.title}" value="${item?.id}">${item?.title?.toLowerCase()}</option>`
         })
             }
      
@@ -92,22 +92,24 @@ const generateAddForm = (formType) => {
     }
     return form[formType] || '';
 }
-const generateEditForm = async (formType, itemId) => {
+const generateEditForm = async (formType, data) => {
 
-window.editingProjectId = itemId; 
-    const response = await fetch(`../api/work/project/${itemId}`, {
-        method: "GET",
-    });
-    if (!response.ok) throw new Error("Not found");
-    const data =  (await response.json())?.data;
+window.editingProjectId = data?.id ?? data; 
+    // const response = await fetch(`../api/work/project/${itemId}`, {
+    //     method: "GET",
+    // });
+    // if (!response.ok) throw new Error("Not found");
+    // const data =  (await response.json())?.data;
 
     console.log(data,data?.title );
 
     const form = {
         "project": `<form id="projectEditForm"
-      onsubmit="handleProjectEdit(event)"
+      onsubmit="saveWorkHandler(event)"
       class="p-8 rounded-2xl   space-y-6 animate-fade-in w-full max-w-2xl mx-auto">
 
+
+      <input type="hidden" value="${data?.id}" name="id" id="id class="hidden"/>
   <h2 class="text-2xl font-bold flex items-center gap-2 text-blue-600 dark:text-blue-400">
     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
@@ -133,7 +135,7 @@ window.editingProjectId = itemId;
   <div>
     <label class="block mb-2 text-sm font-medium">Category</label>
     <select onchange="hello(event)"  id="categorySelect" name="categoryId" class="form-input bg-slate-800 w-full p-3 rounded-lg" required>
-      <option disabled selected value="${data?.category?.categoryId}">${data?.category?.name}</option>
+      <option disabled data-cat-des="${data?.catDes}" data-cat-title="${data?.catTitle}" selected value="${data?.catId}">${data?.catTitle}</option>
 
      
     </select>
@@ -191,22 +193,17 @@ window.editingProjectId = itemId;
     return form[formType] || '';
 }
 
-const generateViewContent = async(formType, itemId) => {
-      const response = await fetch(`../api/work/project/${itemId}`, {
-        method: "GET",
-    });
-    if (!response.ok) throw new Error("Not found");
-    const data =  (await response.json())?.data;
+const generateViewContent = async(formType, data) => {
+
     const content = {
        "project": `
         <div class="space-y-4">
           <div class="bg-gray-800/50 rounded-lg p-4">
-            <h4 class="font-medium mb-2">Details for ${formType.charAt(0).toUpperCase() + formType.slice(1)} #${itemId}</h4>
+            <h4 class="font-medium mb-2">Details for ${formType.charAt(0).toUpperCase() + formType.slice(1)} #${data?.id ?? data}</h4>
             <div class="space-y-2 text-sm text-gray-300">
               <p><strong>Title:</strong> ${data?.title ?? 'No title'}</p>
-               <p><strong>Category:</strong> ${data?.category?.name ?? 'No category'}</p>
+               <p><strong>Category:</strong> ${data?.catTitle ?? 'No category'}</p>
                <p><strong>Tags:</strong> ${(Array?.isArray(data?.tags) && data?.tags?.join(",")) ?? 'No title'}</p>
-               <p><strong>Total Projects:</strong> ${data?.category?.projectCount}</p>
               <p><strong>Status:</strong> <span class="px-2 py-1 bg-green-500/20 text-green-400 rounded-full text-xs">Active</span></p>
               <p><strong>Created:</strong> ${ data?.created_at	?? new Date().toLocaleDateString()}</p>
               <p><strong>Last Modified:</strong> ${data?.updated_at	?? new Date().toLocaleDateString()}</p>
@@ -423,6 +420,70 @@ async function handleProjectSubmit(e) {
 
         console.error("❌ Error:", err);
         showSuccessToast("❌ Something went wrong", "error");
+    }
+}
+
+async function saveWorkHandler(event) {
+    event.preventDefault();
+    const form = event.target;
+    const formData = new FormData(form);
+
+
+    const title = form.title?.value?.trim();
+    const description = form.description?.value?.trim();
+    const categoryId = form.categoryId?.value?.trim();
+    const categorySelect = document.getElementById("categorySelect");
+    const selectedOption = categorySelect?.selectedOptions[0]?.dataset;
+
+    const errors = [];
+    if (!title) errors.push("Title is required.");
+    if (!description) errors.push("Description is required.");
+    if (!categoryId) errors.push("Category is required.");
+
+    if (showValidationErrors(errors)) return;
+
+    // Add extra metadata from dataset or service lookup
+    // const newData = servicesData?.find(i => i?.id == categoryId);
+    formData.append("categoryTitle", selectedOption?.catTitle || "");
+    formData.append("catDes", selectedOption?.catDes || "");
+    formData.append("categoryId",categoryId ?? "")
+   if (Array.isArray(selectedFiles) && selectedFiles?.length > 0) {
+        for (let file of selectedFiles) {
+            formData.append("Files[]", file);
+        }
+    }
+
+
+
+    try {
+        // Disable submit button & show loader
+        form.querySelector("button[type='submit']").disabled = true;
+        setLoading(true);
+
+        const res = await fetch("../api/work/project/save", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await res.json();
+
+        if (!res.ok || !data.status) {
+            showValidationErrors([data.message || "Failed to submit"]);
+            showSuccessToast("❌ " + (data.message || "Something went wrong"), "error");
+        } else {
+            showSuccessToast(data.message || "Project submitted successfully!", "success");
+            form.reset();
+            // Clear previews if needed
+            document.getElementById("mediaPreviewImage")?.classList.add("hidden");
+            document.getElementById("mediaPreviewVideo")?.classList.add("hidden");
+            window.location.reload();
+        }
+    } catch (err) {
+        console.error("Project submission error:", err);
+        showSuccessToast("❌ Something went wrong", "error");
+    } finally {
+        setLoading(false);
+        form.querySelector("button[type='submit']").disabled = false;
     }
 }
 

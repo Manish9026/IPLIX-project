@@ -1,5 +1,10 @@
 <?= $this->extend('layout') ?>
+<?php
 
+use function PHPUnit\Framework\isEmpty;
+
+$contact = $info["contact"] ?? []
+?>
 
 <?= $this->section('styles') ?>
 <style>
@@ -784,7 +789,7 @@
                 <div class="form-group">
                     <label for="mobNo">Contact No.</label>
                     <div class="input-with-icon">
-                        <input type="number"  name="mobNo"  id="mobNo" class="form-control" placeholder="Ex.. +91 7346723747" required>
+                        <input type="number" name="mobNo" id="mobNo" class="form-control" placeholder="Ex.. +91 7346723747" required>
                         <i class="input-icon fa-solid fa-phone"></i>
                     </div>
                 </div>
@@ -819,7 +824,7 @@
                 </div>
 
                 <button type="submit" class="submit-btn magnetic-btn">
-                    
+
                     <i class="fas fa-paper-plane"></i>
                     Send Message
                 </button>
@@ -827,57 +832,36 @@
         </div>
     </div>
     <!-- Contact Information -->
-    <div class="contact-info ">
-        <h2>Let's Talk</h2>
 
-        <div class="flex flex-wrap flex-1 w-full gap-2 sm:gap-4">
+    <?php if (isset($contact) && is_array($contact) && count($contact)>0) : ?>
+        <div class="contact-info ">
+            <h2>Let's Talk</h2>
 
-            <div class="contact-item flex-1 " data-contact="email">
-                <div class="contact-item-icon">
-                    <i class="fas fa-envelope pulse-animation"></i>
-                </div>
-                <div class="contact-item-content">
-                    <h3>Email Us</h3>
-                    <p>hello@iplix.com</p>
-                    <small>We respond within 24 hours</small>
-                </div>
+            <div class="flex flex-wrap flex-1 w-full gap-2 sm:gap-4">
+
+                <?php foreach ($contact as $item) : ?>
+                    <div class="contact-item flex-1 " data-contact="<?= esc($item['title']) ?>">
+                        <div class="will-change-transform  contact-item-icon will-change-transform">
+                            <i data-lucide="<?= esc($item['icon']) ?>" class=" <?= esc($item['icon'])  ?? "fas fa-envelope" ?>   pulse-animation  inline-block will-change-transform"></i>
+                        </div>
+                        <div class="contact-item-content">
+                            <h3><?= esc($item['title']) ?></h3>
+                            <p><?= esc($item['value']) ?></p>
+                            <small><?= esc($item['description']) ?></small>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+
+
+
             </div>
 
-            <div class="contact-item flex-1" data-contact="phone">
-                <div class="contact-item-icon">
-                    <i class="fas fa-phone pulse-animation"></i>
-                </div>
-                <div class="contact-item-content">
-                    <h3>Call Us</h3>
-                    <p>+1 (555) 123-4567</p>
-                    <small>Mon-Fri 9AM-6PM EST</small>
-                </div>
-            </div>
-
-            <div class="contact-item flex-1" data-contact="location">
-                <div class="contact-item-icon">
-                    <i class="fas fa-map-marker-alt pulse-animation"></i>
-                </div>
-                <div class="contact-item-content">
-                    <h3>Visit Us</h3>
-                    <p>New York, NY</p>
-                    <small>Schedule an appointment</small>
-                </div>
-            </div>
-
-            <div class="contact-item flex-1" data-contact="hours">
-                <div class="contact-item-icon">
-                    <i class="fas fa-clock pulse-animation"></i>
-                </div>
-                <div class="contact-item-content">
-                    <h3>Business Hours</h3>
-                    <p>Monday - Friday</p>
-                    <small>9:00 AM - 6:00 PM EST</small>
-                </div>
-            </div>
         </div>
+    <?php else : ?>
 
-    </div>
+    <?php endif; ?>
+
+
     <!-- Map Section -->
     <div class="map-section">
         <div class="map-container">
@@ -889,27 +873,7 @@
         </div>
     </div>
 
-    <!-- Social Links -->
-    <div class="social-section">
-        <h3>Connect With Us</h3>
-        <div class="social-links">
-            <a href="#" class="social-link magnetic-btn">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" class="social-link magnetic-btn">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="#" class="social-link magnetic-btn">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="#" class="social-link magnetic-btn">
-                <i class="fab fa-dribbble"></i>
-            </a>
-            <a href="#" class="social-link magnetic-btn">
-                <i class="fab fa-behance"></i>
-            </a>
-        </div>
-    </div>
+
 </section>
 <?= $this->section('scripts') ?>
 <script src="<?= base_url('assets/js/contact.js') ?>"></script>

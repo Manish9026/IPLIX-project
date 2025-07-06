@@ -1,6 +1,3 @@
-
-
-
 <?= $this->extend('layout') ?>
 
 
@@ -37,12 +34,34 @@
 
 <body class="bg-black text-white overflow-x-hidden">
     <!-- Navigation -->
-
-
     <div class="pt-20">
         <!-- Hero Section -->
-        <section class="py-20 bg-gradient-to-b from-black to-gray-900 parallax-bg" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200');">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- <section 
+        class="py-20 bg-gradient-to-b from-black to-gray-900 parallax-bg" 
+        style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200');"> -->
+        <section class="relative h-[calc(100vh-80px)] z-10  w-full">
+            <div class="swiper carousel h-full">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide py-20 bg-gradient-to-b from-black to-gray-900 parallax-bg" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200');">
+
+
+
+                    </div>
+                    <div class="swiper-slide py-20 bg-gradient-to-b from-black to-gray-900 parallax-bg" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://www.theforage.com/blog/wp-content/uploads/2022/09/tech-companies.jpg');">
+
+
+
+                    </div>
+
+
+                    <!-- Add more slides as needed -->
+                </div>
+
+                <!-- Pagination -->
+                <div class="swiper-pagination mt-4"></div>
+            </div>
+
+            <div class="max-w-7xl absolute w-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div class="story-content opacity-0">
                         <div class="text-blue-400 text-lg mb-4 category">Technology</div>
@@ -67,37 +86,6 @@
             </div>
         </section>
 
-        <!-- Challenge Section -->
-        <section class="py-20 bg-gray-900">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="section-title text-4xl font-bold mb-8 opacity-0">The Challenge</h2>
-                <p class="challenge-text text-lg text-gray-400 max-w-4xl opacity-0">
-                    Tech Burner needed to scale beyond YouTube reviews and establish himself as a trusted tech authority across multiple platforms while building a sustainable business model. The challenge was to maintain authenticity while expanding reach and revenue streams.
-                </p>
-            </div>
-        </section>
-
-        <!-- Strategy Section -->
-        <section class="py-20 bg-black">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="section-title text-4xl font-bold mb-8 opacity-0">Our Strategy</h2>
-                <p class="strategy-text text-lg text-gray-400 max-w-4xl mb-12 opacity-0">
-                    We developed a comprehensive brand strategy focusing on authenticity, expertise, and community building. Our approach included content diversification, strategic partnerships, and merchandise development.
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="strategy-image opacity-0" data-strategy="1">
-                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600" alt="Strategy 1" class="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="strategy-image opacity-0" data-strategy="2">
-                        <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=600" alt="Strategy 2" class="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="strategy-image opacity-0" data-strategy="3">
-                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600" alt="Strategy 3" class="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500">
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Results Section -->
         <section class="py-20 bg-gradient-to-r from-gray-900 to-black">
@@ -143,7 +131,6 @@
                 </div>
             </div>
         </section>
-
         <!-- Impact Section -->
         <section class="py-20 bg-gray-900">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -180,6 +167,41 @@
                 </div>
             </div>
         </section>
+        <!-- Challenge Section -->
+        <section class="py-20 bg-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title text-4xl font-bold mb-8 opacity-0">The Challenge</h2>
+                <p class="challenge-text text-lg text-gray-400 max-w-4xl opacity-0">
+                    Tech Burner needed to scale beyond YouTube reviews and establish himself as a trusted tech authority across multiple platforms while building a sustainable business model. The challenge was to maintain authenticity while expanding reach and revenue streams.
+                </p>
+            </div>
+        </section>
+
+        <!-- Strategy Section -->
+        <section class="py-20 bg-black">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="section-title text-4xl font-bold mb-8 opacity-0">Our Strategy</h2>
+                <p class="strategy-text text-lg text-gray-400 max-w-4xl mb-12 opacity-0">
+                    We developed a comprehensive brand strategy focusing on authenticity, expertise, and community building. Our approach included content diversification, strategic partnerships, and merchandise development.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="strategy-image opacity-0" data-strategy="1">
+                        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600" alt="Strategy 1" class="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="strategy-image opacity-0" data-strategy="2">
+                        <img src="https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=600" alt="Strategy 2" class="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="strategy-image opacity-0" data-strategy="3">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600" alt="Strategy 3" class="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-500">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
 
         <!-- CTA Section -->
         <section class="py-20 bg-black">
@@ -198,6 +220,34 @@
 </body>
 
 <?= $this->section('scripts') ?>
+<script>
+    const swiper = new Swiper('.mySwiper', {
+        loop: true,
+        grabCursor: true,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            640: {
+                slidesPerView: 1
+            },
+            768: {
+                slidesPerView: 2
+            },
+            1024: {
+                slidesPerView: 3
+            },
+        },
+    });
+</script>
+
 <script src="<?= base_url('assets/js/case-study.js') ?>"></script>
 <?= $this->endSection() ?>
 <?= $this->endSection() ?>

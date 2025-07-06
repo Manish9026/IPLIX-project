@@ -1,3 +1,12 @@
+<?php
+
+use App\Helpers\Utils;
+
+require_once APPPATH . 'Helpers/Utils.php';
+
+?>
+
+
 <?= $this->extend('layout') ?>
 <?= $this->section('headScripts') ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -221,21 +230,21 @@
                 <div class="floating absolute bottom-40 left-1/4 w-3 h-3 bg-cyan-400 rounded-full opacity-50" style="animation-delay: 4s;"></div>
             </div>
 
-            
-
-             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 ">
 
 
-                    <?php if (!empty($hero['title'])) : ?>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 ">
+
+
+                <?php if (!empty($hero['title'])) : ?>
                     <h1 class="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-bold mb-6 opacity-0">
                         <?= esc($hero['title'] ?? "about title") ?>
                         <br />
                         <?php if (!empty($hero['gradientTitle'])) : ?>
                             <span class="gradient-text"> <?= esc($hero['gradientTitle'] ?? "gradient content title") ?></span>
                         <?php endif; ?>
-                        <br/>
-                         <?php if (!empty($hero['subTitle'])) : ?>
-                             <?= esc($hero['subTitle'] ?? "gradient content title") ?>
+                        <br />
+                        <?php if (!empty($hero['subTitle'])) : ?>
+                            <?= esc($hero['subTitle'] ?? "gradient content title") ?>
                         <?php endif; ?>
 
                     </h1>
@@ -252,23 +261,23 @@
 
 
                 <?php if (!empty($hero['btn']) && count($hero['btn']) > 0 && is_array($hero['btn'])) : ?>
-<div class="mt-10 sm:gap-4 gap-2 hero-cta opacity-0 flex flex-wrap sm:flex-row gap-4 justify-center items-center transition-all ease duration-500 ">
-                    <?php foreach ($hero['btn'] as $i => $btn) : ?>
+                    <div class="mt-10 sm:gap-4 gap-2 hero-cta opacity-0 flex flex-wrap sm:flex-row gap-4 justify-center items-center transition-all ease duration-500 ">
+                        <?php foreach ($hero['btn'] as $i => $btn) : ?>
 
-                        <?php if ($i % 2 === 0): ?>
-                            <a href="<?= base_url($btn['link'] ?? "")  ?>" class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-gray-200 transition-all duration-300">
-                                <?= esc($btn['label'] ?? "") ?>
-                            </a>
+                            <?php if ($i % 2 === 0): ?>
+                                <a href="<?= base_url($btn['link'] ?? "")  ?>" class="magnetic-btn bg-white text-black px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-gray-200 transition-all duration-300">
+                                    <?= esc($btn['label'] ?? "") ?>
+                                </a>
 
-                        <?php else: ?>
-                            <a href="<?= base_url($btn['link'] ?? "")  ?>" class="magnetic-btn border border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-white hover:text-black transition-all duration-300">
-                                <?= esc($btn['label'] ?? "") ?>
-                            </a>
-                        <?php endif; ?>
+                            <?php else: ?>
+                                <a href="<?= base_url($btn['link'] ?? "")  ?>" class="magnetic-btn border border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-white hover:text-black transition-all duration-300">
+                                    <?= esc($btn['label'] ?? "") ?>
+                                </a>
+                            <?php endif; ?>
 
 
-                    <?php endforeach; ?>
-</div>
+                        <?php endforeach; ?>
+                    </div>
                 <?php endif; ?>
             </div>
         </section>
@@ -278,100 +287,107 @@
         <div id="categories-container">
             <div class="max-w-7xl pt-10 mx-auto px-4 sm:px-6 lg:px-8">
                 <?php foreach ($projects as $category): ?>
-                    <div class="mb-20">
-                        <!-- Category Header -->
-                        <div class="category-header">
-                            <div class="flex items-center justify-between">
-                                <div>
-                                    <div class="flex items-center gap-3 mb-3">
-                                        <span class="text-4xl"><?= $category['icon'] ?></span>
-                                        <h2 class="text-3xl font-bold bg-gradient-to-r <?= $category['gradient'] ?> bg-clip-text text-transparent">
-                                            <?= $category['name'] ?>
-                                        </h2>
+                    <?php if (isset($category) && is_array($category['projects']) && count($category['projects']) > 0): ?>
+                        <div class="mb-20">
+                            <!-- Category Header -->
+                            <div class="category-header">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <span class="text-4xl"><?= $category['icon'] ?></span>
+                                            <h2 class="text-3xl font-bold bg-gradient-to-r <?= $category['gradient'] ?> bg-clip-text text-transparent">
+                                                <?= $category['name'] ?>
+                                            </h2>
+                                        </div>
+                                        <p class="text-gray-400 text-lg hidden md:block"><?= $category['description'] ?></p>
                                     </div>
-                                    <p class="text-gray-400 text-lg"><?= $category['description'] ?></p>
-                                </div>
-                                <div class="text-right">
-                                    <div class="text-2xl font-bold text-<?= $category['accentColor'] ?>">
-                                        <?= $category['projectCount'] ?>
+                                    <div class="text-right">
+                                        <div class="text-2xl font-bold text-<?= $category['accentColor'] ?>">
+                                            <?= $category['projectCount'] ?>
+                                        </div>
+                                        <div class="text-sm text-gray-400">Projects</div>
                                     </div>
-                                    <div class="text-sm text-gray-400">Projects</div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- Project Carousel -->
-                        <div class="swiper category-carousel" data-category="<?= $category['id'] ?>">
-                            <div class="swiper-wrapper">
-                                <?php foreach ($category['projects'] as $project):
+                            <!-- Project Carousel -->
+                            <div class="card-carousel-wrapper  w-full">
+                                <div class="swiper category-carousel sm:px-8" data-category="<?= $category['id'] ?>">
+                                    <div class="swiper-wrapper">
+                                        <?php foreach ($category['projects'] as $project):
 
-                                    $media = $project["media"] ?? [];
-                                    $image = $project['image'] ?? "";
-                                ?>
+                                            $media = $project["media"] ?? [];
+                                            $image = $project['image'] ?? "";
+                                        ?>
 
 
-                                    <div class="swiper-slide p-6 md:p-0">
-                                        <a href="<?= $project['link'] ?>" class="work-card block group"
-                                            data-work="<?= $project['id'] ?>"
-                                            data-category="<?= $category['name'] ?>">
+                                            <div class="swiper-slide  p-6 md:p-0 h-[400px] flex md:justify-start justify-center">
+                                                <a href="<?= isset($project['title']) ?esc(base_url("/work/". Utils::slugify($project['title']))):"" ?>" class="work-card flex flex-col card-carousel-wrapper  h-full mx-2 sm:mx-4 w-full min-w-[250px] w-full sm:max-w-[300px] group"
+                                                    data-work="<?= $project['id'] ?>"
+                                                    data-category="<?= $category['name'] ?>">
 
-                                            <!-- Image -->
-                                            <div class="card-image  overflow-hidden relative aspect-[4/3]">
-                                                <?php
+                                                    <!-- Image -->
+                                                    <div class="card-image max-h-[70%]  overflow-hidden relative aspect-[4/3]">
+                                                        <?php
 
-                                                if (count($media) > 0 && is_array($media) && !empty($media)): ?>
-                                                    <img src="<?= base_url($media[0]) ?>"
-                                                        alt="<?= $project['title'] ?>"
-                                                        class="w-full h-full object-fill transition-transform duration-500">
-                                                <?php else : ?>
-                                                    <img src="<?= $image ?>"
-                                                        alt="<?= $project['title'] ?>"
-                                                        class="w-full h-full object-cover transition-transform duration-500">
+                                                        if (count($media) > 0 && is_array($media) && !empty($media)): ?>
+                                                            <img src="<?= base_url($media[0]['url']) ?>"
+                                                                alt="<?= $project['title'] ?>"
+                                                                class="w-full absolute h-full object-fill transition-transform duration-500">
+                                                        <?php else : ?>
+                                                            <img src="<?= $image ?>"
+                                                                alt="<?= $project['title'] ?>"
+                                                                class="w-full h-full object-cover transition-transform duration-500">
 
-                                                <?php endif ?>
+                                                        <?php endif ?>
 
-                                                <div class="card-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                                                    <div class="p-4 w-full">
-                                                        <div class="flex justify-between items-center">
-                                                            <span class="text-white font-medium">
-                                                                <?= ($project['link'] === '#') ? 'View Project' : 'View Case Study' ?>
-                                                            </span>
-                                                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                                                            </svg>
+                                                        <div class="card-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                                                            <div class="p-4 w-full">
+                                                                <div class="flex justify-between items-center">
+                                                                    <span class="text-white font-medium">
+
+                                                                        <?= isset($project['link']) ? "View Project" : 'View Case Study' ?>
+
+                                                                    </span>
+                                                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                                                                    </svg>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </div>
 
-                                            <!-- Project Content -->
-                                            <div class="p-6">
-                                                <div class="category-tag text-xs font-semibold mb-3 px-3 py-1 rounded-full inline-block text-<?= $category['tagColor'] ?>">
-                                                    <?= $category['name'] ?>
-                                                </div>
-                                                <h3 class="text-xl font-bold mb-3 group-hover:text-<?= $category['accentColor'] ?> transition-colors">
-                                                    <?= $project['title'] ?>
-                                                </h3>
-                                                <p class="text-gray-400 mb-4 text-sm leading-relaxed">
-                                                    <?= $project['description'] ?>
-                                                </p>
-                                                <div class="flex flex-wrap gap-2">
-                                                    <?php foreach ($project['tags'] as $tag): ?>
-                                                        <span class="tag-pill px-3 py-1 text-xs rounded-full text-gray-300"><?= $tag ?></span>
-                                                    <?php endforeach; ?>
-                                                </div>
-                                            </div>
+                                                    <!-- Project Content -->
+                                                    <div class="p-6">
+                                                        <div class="category-tag text-xs font-semibold mb-3 px-3 py-1 rounded-full inline-block text-<?= $category['tagColor'] ?>">
+                                                            <?= $category['name'] ?>
+                                                        </div>
+                                                        <h3 class="text-xl font-bold mb-3 group-hover:text-<?= $category['accentColor'] ?> transition-colors">
+                                                            <?= $project['title'] ?>
+                                                        </h3>
+                                                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">
+                                                            <?= $project['description'] ?>
+                                                        </p>
+                                                        <div class="flex flex-wrap gap-2">
+                                                            <?php foreach ($project['tags'] as $tag): ?>
+                                                                <span class="tag-pill px-3 py-1 text-xs rounded-full text-gray-300"><?= $tag ?></span>
+                                                            <?php endforeach; ?>
+                                                        </div>
+                                                    </div>
 
-                                        </a>
+                                                </a>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                <?php endforeach; ?>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-pagination"></div>
+                                </div>
                             </div>
-                            <div class="swiper-button-next"></div>
-                            <div class="swiper-button-prev"></div>
-                            <div class="swiper-pagination"></div>
                         </div>
-                    </div>
+                    <?php endif; ?>
+
                 <?php endforeach; ?>
             </div>
         </div>
@@ -383,9 +399,9 @@
                 <p class="text-xl text-gray-400 mb-8 max-w-2xl mx-auto">
                     Let's discuss how we can help transform your brand and achieve remarkable results together.
                 </p>
-                <button class="cta-button bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-200 transition-colors transform hover:scale-105">
+                <a href="/contact" class="cta-button bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-gray-200 transition-colors transform hover:scale-105">
                     Start Your Project
-                </button>
+                </a>
             </div>
         </section>
     </div>
@@ -394,271 +410,23 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
-        // DYNAMIC DATA CONFIGURATION
-        // Add new categories and projects here - no need to modify HTML/CSS
-        const portfolioData = {
-            categories: [{
-                    id: 'technology',
-                    name: 'Technology',
-                    description: 'Digital innovation and tech solutions that drive the future',
-                    icon: '💻',
-                    projectCount: 12,
-                    gradient: 'from-blue-400 to-cyan-400',
-                    accentColor: 'blue-400',
-                    tagColor: 'blue-300',
-                    projects: [{
-                            id: 'tech-burner',
-                            title: 'Tech Burner',
-                            description: 'Transforming a tech reviewer into a digital icon with strategic brand development',
-                            image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600',
-                            tags: ['Brand Strategy', 'Content Marketing'],
-                            link: './case-study'
-                        },
-                        {
-                            id: 'ai-platform',
-                            title: 'AI Platform Launch',
-                            description: 'Building the next generation of AI-powered solutions for enterprises',
-                            image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600',
-                            tags: ['Product Launch', 'AI/ML'],
-                            link: '#'
-                        },
-                        {
-                            id: 'saas-platform',
-                            title: 'SaaS Platform',
-                            description: 'Scaling a B2B software solution to enterprise level with strategic growth',
-                            image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600',
-                            tags: ['B2B Marketing', 'Lead Generation'],
-                            link: '#'
-                        }
-                    ]
-                },
-                {
-                    id: 'fashion',
-                    name: 'Fashion',
-                    description: 'Style and lifestyle brands that define trends',
-                    icon: '👗',
-                    projectCount: 8,
-                    gradient: 'from-purple-400 to-pink-400',
-                    accentColor: 'purple-400',
-                    tagColor: 'purple-300',
-                    projects: [{
-                            id: 'lifestyle-brand',
-                            title: 'Lifestyle Brand',
-                            description: 'Building a sustainable fashion brand from the ground up with conscious values',
-                            image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600',
-                            tags: ['Brand Identity', 'E-commerce'],
-                            link: '#'
-                        },
-                        {
-                            id: 'luxury-fashion',
-                            title: 'Luxury Accessories',
-                            description: 'Elevating a premium accessories brand to global recognition and prestige',
-                            image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600',
-                            tags: ['Luxury Branding', 'Global Expansion'],
-                            link: '#'
-                        }
-                    ]
-                },
-                {
-                    id: 'food-beverage',
-                    name: 'Food & Beverage',
-                    description: 'Culinary and restaurant brands that delight customers',
-                    icon: '🍽️',
-                    projectCount: 15,
-                    gradient: 'from-orange-400 to-red-400',
-                    accentColor: 'orange-400',
-                    tagColor: 'orange-300',
-                    projects: [{
-                            id: 'food-delivery',
-                            title: 'Food Delivery App',
-                            description: 'Launching a hyperlocal food delivery platform with seamless UX',
-                            image: 'https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=600',
-                            tags: ['Digital Marketing', 'App Marketing'],
-                            link: '#'
-                        },
-                        {
-                            id: 'restaurant-chain',
-                            title: 'Restaurant Chain',
-                            description: 'Scaling a local restaurant to nationwide franchise with brand consistency',
-                            image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600',
-                            tags: ['Franchise Marketing', 'Brand Expansion'],
-                            link: '#'
-                        },
-                        {
-                            id: 'craft-brewery',
-                            title: 'Craft Brewery',
-                            description: 'Building a premium craft beer brand from scratch with authentic storytelling',
-                            image: 'https://images.unsplash.com/photo-1544148103-0773bf10d330?w=600',
-                            tags: ['Premium Branding', 'Local Marketing'],
-                            link: '#'
-                        }
-                    ]
-                },
-                {
-                    id: 'health-wellness',
-                    name: 'Health & Wellness',
-                    description: 'Fitness and healthcare solutions that empower lives',
-                    icon: '🏃‍♂️',
-                    projectCount: 10,
-                    gradient: 'from-green-400 to-emerald-400',
-                    accentColor: 'green-400',
-                    tagColor: 'green-300',
-                    projects: [{
-                            id: 'fitness-app',
-                            title: 'Fitness Revolution',
-                            description: 'Creating a community-driven fitness platform for lasting impact',
-                            image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600',
-                            tags: ['Community Building', 'Content Strategy'],
-                            link: '#'
-                        },
-                        {
-                            id: 'wellness-products',
-                            title: 'Wellness Products',
-                            description: 'Launching a holistic wellness product line with care',
-                            image: 'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600',
-                            tags: ['Product Launch', 'Wellness Marketing'],
-                            link: '#'
-                        }
-                    ]
-                },
-                {
-                    id: 'fintech',
-                    name: 'Financial Technology',
-                    description: 'FinTech and banking solutions that innovate finance',
-                    icon: '💳',
-                    projectCount: 6,
-                    gradient: 'from-yellow-400 to-amber-400',
-                    accentColor: 'yellow-400',
-                    tagColor: 'yellow-300',
-                    projects: [{
-                            id: 'fintech-startup',
-                            title: 'FinTech Startup',
-                            description: 'Positioning a fintech startup as the future of banking',
-                            image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600',
-                            tags: ['Brand Positioning', 'Thought Leadership'],
-                            link: '#'
-                        },
-                        {
-                            id: 'digital-banking',
-                            title: 'Digital Banking',
-                            description: 'Revolutionizing traditional banking with digital solutions',
-                            image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600',
-                            tags: ['Digital Transformation', 'User Experience'],
-                            link: '#'
-                        }
-                    ]
-                },
-                {
-                    id: 'sustainability',
-                    name: 'Sustainability',
-                    description: 'Eco-friendly and green initiatives that inspire change',
-                    icon: '🌱',
-                    projectCount: 9,
-                    gradient: 'from-teal-400 to-green-500',
-                    accentColor: 'teal-400',
-                    tagColor: 'teal-300',
-                    projects: [{
-                            id: 'eco-products',
-                            title: 'Eco-Friendly Products',
-                            description: 'Championing environmental consciousness through brand storytelling',
-                            image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600',
-                            tags: ['Purpose Marketing', 'Sustainability'],
-                            link: '#'
-                        },
-                        {
-                            id: 'green-energy',
-                            title: 'Green Energy Solutions',
-                            description: 'Promoting renewable energy adoption through strategic campaigns',
-                            image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=600',
-                            tags: ['Renewable Energy', 'Advocacy'],
-                            link: '#'
-                        }
-                    ]
-                }
-            ]
-        };
-
-        // DYNAMIC RENDERING FUNCTIONS
-        function renderCategories() {
-            const container = document.getElementById('categories-container').querySelector('.max-w-7xl');
-
-            portfolioData.categories.forEach(category => {
-                const categorySection = createCategorySection(category);
-                container.appendChild(categorySection);
-            });
+        function calculateSlidesPerView(wrapper, cardMinWidth = 300, spacing = 24) {
+            const wrapperWidth = wrapper.offsetWidth;
+            const totalCardWidth = cardMinWidth + spacing;
+            const perView = Math.floor(wrapperWidth / totalCardWidth);
+            return Math.max(1, perView);
         }
 
-        function createCategorySection(category) {
-            const section = document.createElement('div');
-            section.className = 'mb-20';
-
-            section.innerHTML = `
-                <div class="category-header">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="text-4xl">${category.icon}</span>
-                                <h2 class="text-3xl font-bold bg-gradient-to-r ${category.gradient} bg-clip-text text-transparent">${category.name}</h2>
-                            </div>
-                            <p class="text-gray-400 text-lg">${category.description}</p>
-                        </div>
-                        <div class="text-right">
-                            <div class="text-2xl font-bold text-${category.accentColor}">${category.projectCount}</div>
-                            <div class="text-sm text-gray-400">Projects</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="swiper category-carousel" data-category="${category.id}">
-                    <div class="swiper-wrapper">
-                        ${category.projects.map(project => createProjectCard(project, category)).join('')}
-                    </div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            `;
-
-            return section;
-        }
-
-        function createProjectCard(project, category) {
-            return `
-                <div class="swiper-slide">
-                    <a href="${project.link}" class="work-card block group" data-work="${project.id}" data-category="${category.name}">
-                        <div class="card-image aspect-video overflow-hidden relative">
-                            <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover transition-transform duration-500">
-                            <div class="card-overlay absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                                <div class="p-4 w-full">
-                                    <div class="flex justify-between items-center">
-                                        <span class="text-white font-medium">${project.link === '#' ? 'View Project' : 'View Case Study'}</span>
-                                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <div class="category-tag text-xs font-semibold mb-3 px-3 py-1 rounded-full inline-block text-${category.tagColor}">${category.name}</div>
-                            <h3 class="text-xl font-bold mb-3 group-hover:text-${category.accentColor} transition-colors">${project.title}</h3>
-                            <p class="text-gray-400 mb-4 text-sm leading-relaxed">${project.description}</p>
-                            <div class="flex flex-wrap gap-2">
-                                ${project.tags.map(tag => `<span class="tag-pill px-3 py-1 text-xs rounded-full text-gray-300">${tag}</span>`).join('')}
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            `;
-        }
-
-        function initializeCarousels() {
+        function initializeProjectCarousels() {
             const carousels = document.querySelectorAll('.category-carousel');
 
             carousels.forEach(carousel => {
-                new Swiper(carousel, {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
+                const wrapper = carousel.closest('.card-carousel-wrapper');
+                const perView = calculateSlidesPerView(wrapper);
+
+                const swiper = new Swiper(carousel, {
+                    slidesPerView: perView,
+                    spaceBetween: 24,
                     loop: true,
                     autoplay: {
                         delay: 3000,
@@ -671,30 +439,18 @@
                     navigation: {
                         nextEl: carousel.querySelector('.swiper-button-next'),
                         prevEl: carousel.querySelector('.swiper-button-prev'),
-                    },
-                    breakpoints: {
-                        640: {
-                            slidesPerView: 2,
-                            spaceBetween: 20,
-                        },
-                        1024: {
-                            slidesPerView: 3,
-                            spaceBetween: 30,
-                        },
                     }
+                });
+
+                window.addEventListener('resize', () => {
+                    const newPerView = calculateSlidesPerView(wrapper);
+                    swiper.params.slidesPerView = newPerView;
+                    swiper.update();
                 });
             });
         }
 
-        // Initialize everything when DOM is loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize common elements (navigation and footer)
-            // CommonElements.init('work');
-
-            // Initialize page-specific content
-            // renderCategories();
-            initializeCarousels();
-        });
+        document.addEventListener('DOMContentLoaded', initializeProjectCarousels);
     </script>
 </body>
 
